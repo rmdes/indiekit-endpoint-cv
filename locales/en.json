@@ -1,0 +1,85 @@
+{
+  "cv": {
+    "title": "CV Editor",
+    "description": "Manage your CV/resume data. This data can be displayed on your homepage via the Homepage Builder plugin.",
+    "saved": "CV data saved successfully.",
+    "save": "Save Changes",
+    "lastUpdated": "Last updated",
+    "noData": "No data yet. Start adding entries below.",
+    "experience": {
+      "title": "Experience",
+      "description": "Work history and professional roles.",
+      "add": "Add Experience",
+      "jobTitle": "Job Title",
+      "company": "Company",
+      "location": "Location",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "current": "Current position",
+      "type": "Type",
+      "typeOptions": {
+        "full-time": "Full-time",
+        "part-time": "Part-time",
+        "contract": "Contract",
+        "freelance": "Freelance",
+        "volunteer": "Volunteer",
+        "internship": "Internship"
+      },
+      "descriptionField": "Description",
+      "highlights": "Highlights (one per line)"
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Personal and professional projects.",
+      "add": "Add Project",
+      "name": "Name",
+      "url": "URL",
+      "descriptionField": "Description",
+      "technologies": "Technologies (comma-separated)",
+      "status": "Status",
+      "statusOptions": {
+        "active": "Active",
+        "maintained": "Maintained",
+        "archived": "Archived",
+        "completed": "Completed"
+      }
+    },
+    "skills": {
+      "title": "Skills",
+      "description": "Technical and professional skills grouped by category.",
+      "add": "Add Category",
+      "category": "Category Name",
+      "items": "Skills (comma-separated)"
+    },
+    "education": {
+      "title": "Education",
+      "description": "Academic background and certifications.",
+      "add": "Add Education",
+      "degree": "Degree / Certificate",
+      "institution": "Institution",
+      "location": "Location",
+      "year": "Year(s)",
+      "descriptionField": "Description"
+    },
+    "languages": {
+      "title": "Languages",
+      "description": "Languages you speak.",
+      "add": "Add Language",
+      "name": "Language",
+      "level": "Level",
+      "levelOptions": {
+        "native": "Native",
+        "fluent": "Fluent",
+        "advanced": "Advanced",
+        "intermediate": "Intermediate",
+        "basic": "Basic"
+      }
+    },
+    "interests": {
+      "title": "Interests",
+      "description": "Topics and hobbies you're passionate about.",
+      "add": "Add Interest",
+      "placeholder": "Comma-separated interests"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "@rmdes/indiekit-endpoint-cv",
+  "version": "1.0.0",
+  "description": "CV/Resume editor endpoint for Indiekit. Manage work experience, projects, skills, education, and interests from the admin UI.",
+  "keywords": [
+    "indiekit",
+    "indiekit-plugin",
+    "indieweb",
+    "cv",
+    "resume",
+    "portfolio"
+  ],
+  "homepage": "https://github.com/rmdes/indiekit-endpoint-cv",
+  "bugs": {
+    "url": "https://github.com/rmdes/indiekit-endpoint-cv/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmdes/indiekit-endpoint-cv.git"
+  },
+  "author": {
+    "name": "Ricardo Mendes",
+    "url": "https://rmendes.net"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "lib",
+    "locales",
+    "views",
+    "index.js"
+  ],
+  "dependencies": {
+    "@indiekit/error": "^1.0.0-beta.25",
+    "@indiekit/frontend": "^1.0.0-beta.25",
+    "express": "^5.0.0"
+  },
+  "peerDependencies": {
+    "@indiekit/indiekit": ">=1.0.0-beta.25"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
