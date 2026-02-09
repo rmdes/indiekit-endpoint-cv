@@ -183,5 +183,21 @@ export default class CvEndpoint {
 
     // Store database getter for controller access
     Indiekit.config.application.getCvDb = () => Indiekit.database;
+
+    // Write CV data file for Eleventy on startup
+    // Deferred so database connection is established first
+    const app = Indiekit.config.application;
+    setTimeout(async () => {
+      try {
+        const { getCvData, getDefaultCvData, writeCvFile } = await import(
+          "./lib/storage/cv.js"
+        );
+        const data = (await getCvData(app)) || getDefaultCvData();
+        writeCvFile(app, data);
+        console.log("[CV] Initial data file written for Eleventy");
+      } catch (error) {
+        console.log("[CV] Deferred file write:", error.message);
+      }
+    }, 2000);
   }
 }
