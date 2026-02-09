@@ -158,6 +158,9 @@ export default class CvEndpoint {
     protectedRouter.post("/skills/add", dashboardController.addSkillCategory);
     protectedRouter.post("/skills/:category/delete", dashboardController.deleteSkillCategory);
 
+    // Generic move (reorder) for any array section
+    protectedRouter.post("/:section/:index/:direction(up|down)", dashboardController.move);
+
     return protectedRouter;
   }
 
