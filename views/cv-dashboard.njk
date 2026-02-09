@@ -8,6 +8,26 @@
     gap: var(--space-l, 1.5rem);
   }
 
+  .cv-save-banner {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-primary-container, #e6f0ff);
+    border: 2px solid var(--color-primary, #0066cc);
+    border-radius: var(--border-radius-small, 0.25rem);
+    padding: var(--space-s, 0.75rem) var(--space-m, 1rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-s, 0.75rem);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .cv-save-banner__text {
+    font: var(--font-body, 0.875rem/1.4 sans-serif);
+    font-weight: 600;
+  }
+
   .cv-accordion {
     background: var(--color-offset, #f5f5f5);
     border-radius: var(--border-radius-small, 0.5rem);
@@ -51,6 +71,29 @@
     color: var(--color-on-offset, #666);
     font: var(--font-body, 0.875rem/1.5 sans-serif);
     margin-block-end: var(--space-s, 0.75rem);
+  }
+
+  .cv-sortable-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cv-sortable-item {
+    transition: opacity 0.15s;
+  }
+
+  .cv-sortable-ghost {
+    opacity: 0.3;
+    background: var(--color-primary-container, #e6f0ff);
+    border-radius: var(--border-radius-small, 0.25rem);
+  }
+
+  .cv-sortable-ghost .cv-edit-details {
+    display: none;
+  }
+
+  .cv-sortable-chosen {
+    opacity: 0.9;
   }
 
   .cv-item {
@@ -110,39 +153,22 @@
     flex-wrap: wrap;
   }
 
-  .cv-move-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
-
-  .cv-move-buttons form {
-    margin: 0;
-  }
-
-  .cv-move-btn {
+  .drag-handle {
+    cursor: grab;
+    color: var(--color-on-offset, #999);
+    padding: 0.25rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 16px;
-    padding: 0;
-    border: 1px solid var(--color-outline-variant, #ccc);
-    background: var(--color-background, #fff);
-    cursor: pointer;
-    border-radius: 2px;
-    color: var(--color-on-surface, #333);
-    font-size: 10px;
-    line-height: 1;
+    flex-shrink: 0;
+    touch-action: none;
   }
 
-  .cv-move-btn:hover {
-    background: var(--color-primary-container, #e6f0ff);
+  .drag-handle:hover {
+    color: var(--color-primary, #0066cc);
   }
 
-  .cv-move-btn:disabled {
-    opacity: 0.3;
-    cursor: default;
+  .drag-handle:active {
+    cursor: grabbing;
   }
 
   .cv-edit-details {
@@ -269,6 +295,22 @@
 <p class="cv-accordion__desc">{{ __("cv.lastUpdated") }}: {{ cv.lastUpdated }}</p>
 {% endif %}
 
+{# Hidden save form for drag-drop reordering - shown when order changes #}
+<form method="post" action="{{ cvEndpoint }}/save" id="cv-save-form" style="display:none">
+  <input type="hidden" name="experience" id="experience-json" value='{{ cv.experience | dump | safe }}'>
+  <input type="hidden" name="projects" id="projects-json" value='{{ cv.projects | dump | safe }}'>
+  <input type="hidden" name="education" id="education-json" value='{{ cv.education | dump | safe }}'>
+  <input type="hidden" name="languages" id="languages-json" value='{{ cv.languages | dump | safe }}'>
+  {% for category, items in cv.skills | dictsort %}
+  <input type="hidden" name="skills[{{ category }}]" value="{{ items | join(', ') }}">
+  {% endfor %}
+  <input type="hidden" name="interests" value="{{ cv.interests | join(', ') }}">
+  <div class="cv-save-banner">
+    <span class="cv-save-banner__text">Order changed — drag more or save now</span>
+    <button type="submit" class="button button--primary">Save All Changes</button>
+  </div>
+</form>
+
 <div class="cv-dashboard">
 
   {# ===== EXPERIENCE ===== #}
@@ -281,92 +323,95 @@
       <p class="cv-accordion__desc">{{ __("cv.experience.description") }}</p>
 
       {% if cv.experience.length %}
+      <div class="cv-sortable-list" id="experience-sortable">
         {% for item in cv.experience %}
-        <div class="cv-item cv-item--has-edit">
-          <div class="cv-move-buttons">
-            <form method="post" action="{{ cvEndpoint }}/experience/{{ loop.index0 }}/up"><button type="submit" class="cv-move-btn" title="Move up" {% if loop.first %}disabled{% endif %}>&#9650;</button></form>
-            <form method="post" action="{{ cvEndpoint }}/experience/{{ loop.index0 }}/down"><button type="submit" class="cv-move-btn" title="Move down" {% if loop.last %}disabled{% endif %}>&#9660;</button></form>
-          </div>
-          <div class="cv-item__info">
-            <div class="cv-item__title">{{ item.title }}</div>
-            <div class="cv-item__sub">
-              {{ item.company }}{% if item.location %} &middot; {{ item.location }}{% endif %}
-              {% if item.startDate %} &middot; {{ item.startDate }}{% if item.endDate %} – {{ item.endDate }}{% else %} – Present{% endif %}{% endif %}
-              {% if item.type %} &middot; {{ item.type }}{% endif %}
+        <div class="cv-sortable-item" data-index="{{ loop.index0 }}">
+          <div class="cv-item cv-item--has-edit">
+            <span class="drag-handle" title="Drag to reorder">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm8-16a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+            </span>
+            <div class="cv-item__info">
+              <div class="cv-item__title">{{ item.title }}</div>
+              <div class="cv-item__sub">
+                {{ item.company }}{% if item.location %} &middot; {{ item.location }}{% endif %}
+                {% if item.startDate %} &middot; {{ item.startDate }}{% if item.endDate %} – {{ item.endDate }}{% else %} – Present{% endif %}{% endif %}
+                {% if item.type %} &middot; {{ item.type }}{% endif %}
+              </div>
+              {% if item.description %}
+              <div class="cv-item__sub" style="margin-top:0.25rem">{{ item.description }}</div>
+              {% endif %}
+              {% if item.highlights and item.highlights.length %}
+              <div class="cv-item__tags">
+                {% for h in item.highlights %}<span class="cv-tag">{{ h }}</span>{% endfor %}
+              </div>
+              {% endif %}
             </div>
-            {% if item.description %}
-            <div class="cv-item__sub" style="margin-top:0.25rem">{{ item.description }}</div>
-            {% endif %}
-            {% if item.highlights and item.highlights.length %}
-            <div class="cv-item__tags">
-              {% for h in item.highlights %}<span class="cv-tag">{{ h }}</span>{% endfor %}
+            <div class="cv-item__actions">
+              <button type="button" class="button button--small" onclick="var d=this.closest('.cv-sortable-item').querySelector('.cv-edit-details');d.open=!d.open">{{ __("cv.experience.edit") }}</button>
+              <form method="post" action="{{ cvEndpoint }}/experience/{{ loop.index0 }}/delete" style="margin:0">
+                <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
+              </form>
             </div>
-            {% endif %}
           </div>
-          <div class="cv-item__actions">
-            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">{{ __("cv.experience.edit") }}</button>
-            <form method="post" action="{{ cvEndpoint }}/experience/{{ loop.index0 }}/delete" style="margin:0">
-              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
-            </form>
-          </div>
+          <details class="cv-edit-details">
+            <summary></summary>
+            <div class="cv-form">
+              <form method="post" action="{{ cvEndpoint }}/experience/{{ loop.index0 }}/edit">
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.experience.jobTitle") }}</label>
+                    <input class="field__input" type="text" name="title" value="{{ item.title }}" required>
+                  </div>
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.experience.company") }}</label>
+                    <input class="field__input" type="text" name="company" value="{{ item.company }}" required>
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.experience.location") }}</label>
+                    <input class="field__input" type="text" name="location" value="{{ item.location }}">
+                  </div>
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.experience.type") }}</label>
+                    <select class="field__input" name="type">
+                      <option value="full-time" {% if item.type == "full-time" %}selected{% endif %}>Full-time</option>
+                      <option value="part-time" {% if item.type == "part-time" %}selected{% endif %}>Part-time</option>
+                      <option value="contract" {% if item.type == "contract" %}selected{% endif %}>Contract</option>
+                      <option value="freelance" {% if item.type == "freelance" %}selected{% endif %}>Freelance</option>
+                      <option value="volunteer" {% if item.type == "volunteer" %}selected{% endif %}>Volunteer</option>
+                      <option value="internship" {% if item.type == "internship" %}selected{% endif %}>Internship</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.experience.startDate") }}</label>
+                    <input class="field__input" type="month" name="startDate" value="{{ item.startDate }}">
+                  </div>
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.experience.endDate") }}</label>
+                    <input class="field__input" type="month" name="endDate" value="{{ item.endDate }}">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.experience.descriptionField") }}</label>
+                  <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.experience.highlights") }}</label>
+                  <textarea class="field__input" name="highlights" rows="3" placeholder="One highlight per line">{{ item.highlights | join("\n") if item.highlights }}</textarea>
+                </div>
+                <div class="cv-form__buttons">
+                  <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                  <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </details>
         </div>
-        <details class="cv-edit-details">
-          <summary></summary>
-          <div class="cv-form">
-            <form method="post" action="{{ cvEndpoint }}/experience/{{ loop.index0 }}/edit">
-              <div class="field-row">
-                <div class="field">
-                  <label class="field__label">{{ __("cv.experience.jobTitle") }}</label>
-                  <input class="field__input" type="text" name="title" value="{{ item.title }}" required>
-                </div>
-                <div class="field">
-                  <label class="field__label">{{ __("cv.experience.company") }}</label>
-                  <input class="field__input" type="text" name="company" value="{{ item.company }}" required>
-                </div>
-              </div>
-              <div class="field-row">
-                <div class="field">
-                  <label class="field__label">{{ __("cv.experience.location") }}</label>
-                  <input class="field__input" type="text" name="location" value="{{ item.location }}">
-                </div>
-                <div class="field">
-                  <label class="field__label">{{ __("cv.experience.type") }}</label>
-                  <select class="field__input" name="type">
-                    <option value="full-time" {% if item.type == "full-time" %}selected{% endif %}>Full-time</option>
-                    <option value="part-time" {% if item.type == "part-time" %}selected{% endif %}>Part-time</option>
-                    <option value="contract" {% if item.type == "contract" %}selected{% endif %}>Contract</option>
-                    <option value="freelance" {% if item.type == "freelance" %}selected{% endif %}>Freelance</option>
-                    <option value="volunteer" {% if item.type == "volunteer" %}selected{% endif %}>Volunteer</option>
-                    <option value="internship" {% if item.type == "internship" %}selected{% endif %}>Internship</option>
-                  </select>
-                </div>
-              </div>
-              <div class="field-row">
-                <div class="field">
-                  <label class="field__label">{{ __("cv.experience.startDate") }}</label>
-                  <input class="field__input" type="month" name="startDate" value="{{ item.startDate }}">
-                </div>
-                <div class="field">
-                  <label class="field__label">{{ __("cv.experience.endDate") }}</label>
-                  <input class="field__input" type="month" name="endDate" value="{{ item.endDate }}">
-                </div>
-              </div>
-              <div class="field">
-                <label class="field__label">{{ __("cv.experience.descriptionField") }}</label>
-                <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
-              </div>
-              <div class="field">
-                <label class="field__label">{{ __("cv.experience.highlights") }}</label>
-                <textarea class="field__input" name="highlights" rows="3" placeholder="One highlight per line">{{ item.highlights | join("\n") if item.highlights }}</textarea>
-              </div>
-              <div class="cv-form__buttons">
-                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
-                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
-              </div>
-            </form>
-          </div>
-        </details>
         {% endfor %}
+      </div>
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
       {% endif %}
@@ -435,85 +480,88 @@
       <p class="cv-accordion__desc">{{ __("cv.projects.description") }}</p>
 
       {% if cv.projects.length %}
+      <div class="cv-sortable-list" id="projects-sortable">
         {% for item in cv.projects %}
-        <div class="cv-item cv-item--has-edit">
-          <div class="cv-move-buttons">
-            <form method="post" action="{{ cvEndpoint }}/projects/{{ loop.index0 }}/up"><button type="submit" class="cv-move-btn" title="Move up" {% if loop.first %}disabled{% endif %}>&#9650;</button></form>
-            <form method="post" action="{{ cvEndpoint }}/projects/{{ loop.index0 }}/down"><button type="submit" class="cv-move-btn" title="Move down" {% if loop.last %}disabled{% endif %}>&#9660;</button></form>
-          </div>
-          <div class="cv-item__info">
-            <div class="cv-item__title">
-              {% if item.url %}<a href="{{ item.url }}">{{ item.name }}</a>{% else %}{{ item.name }}{% endif %}
+        <div class="cv-sortable-item" data-index="{{ loop.index0 }}">
+          <div class="cv-item cv-item--has-edit">
+            <span class="drag-handle" title="Drag to reorder">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm8-16a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+            </span>
+            <div class="cv-item__info">
+              <div class="cv-item__title">
+                {% if item.url %}<a href="{{ item.url }}">{{ item.name }}</a>{% else %}{{ item.name }}{% endif %}
+              </div>
+              <div class="cv-item__sub">
+                {% if item.status %}<span class="cv-tag">{{ item.status }}</span>{% endif %}
+                {% if item.startDate %} &middot; {{ item.startDate }}{% if item.endDate %} – {{ item.endDate }}{% else %} – Present{% endif %}{% endif %}
+                {% if item.description %} {{ item.description }}{% endif %}
+              </div>
+              {% if item.technologies and item.technologies.length %}
+              <div class="cv-item__tags">
+                {% for t in item.technologies %}<span class="cv-tag">{{ t }}</span>{% endfor %}
+              </div>
+              {% endif %}
             </div>
-            <div class="cv-item__sub">
-              {% if item.status %}<span class="cv-tag">{{ item.status }}</span>{% endif %}
-              {% if item.startDate %} &middot; {{ item.startDate }}{% if item.endDate %} – {{ item.endDate }}{% else %} – Present{% endif %}{% endif %}
-              {% if item.description %} {{ item.description }}{% endif %}
+            <div class="cv-item__actions">
+              <button type="button" class="button button--small" onclick="var d=this.closest('.cv-sortable-item').querySelector('.cv-edit-details');d.open=!d.open">{{ __("cv.projects.edit") }}</button>
+              <form method="post" action="{{ cvEndpoint }}/projects/{{ loop.index0 }}/delete" style="margin:0">
+                <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
+              </form>
             </div>
-            {% if item.technologies and item.technologies.length %}
-            <div class="cv-item__tags">
-              {% for t in item.technologies %}<span class="cv-tag">{{ t }}</span>{% endfor %}
+          </div>
+          <details class="cv-edit-details">
+            <summary></summary>
+            <div class="cv-form">
+              <form method="post" action="{{ cvEndpoint }}/projects/{{ loop.index0 }}/edit">
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.projects.name") }}</label>
+                    <input class="field__input" type="text" name="name" value="{{ item.name }}" required>
+                  </div>
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.projects.url") }}</label>
+                    <input class="field__input" type="url" name="url" value="{{ item.url }}" placeholder="https://...">
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.experience.startDate") }}</label>
+                    <input class="field__input" type="month" name="startDate" value="{{ item.startDate }}">
+                  </div>
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.experience.endDate") }}</label>
+                    <input class="field__input" type="month" name="endDate" value="{{ item.endDate }}">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.projects.descriptionField") }}</label>
+                  <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.projects.tags") }}</label>
+                    <input class="field__input" type="text" name="tags" value="{{ item.technologies | join(', ') if item.technologies }}" placeholder="Docker, Node.js, Python">
+                  </div>
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.projects.status") }}</label>
+                    <select class="field__input" name="status">
+                      <option value="active" {% if item.status == "active" %}selected{% endif %}>Active</option>
+                      <option value="maintained" {% if item.status == "maintained" %}selected{% endif %}>Maintained</option>
+                      <option value="archived" {% if item.status == "archived" %}selected{% endif %}>Archived</option>
+                      <option value="completed" {% if item.status == "completed" %}selected{% endif %}>Completed</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="cv-form__buttons">
+                  <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                  <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+                </div>
+              </form>
             </div>
-            {% endif %}
-          </div>
-          <div class="cv-item__actions">
-            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">{{ __("cv.projects.edit") }}</button>
-            <form method="post" action="{{ cvEndpoint }}/projects/{{ loop.index0 }}/delete" style="margin:0">
-              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
-            </form>
-          </div>
+          </details>
         </div>
-        <details class="cv-edit-details">
-          <summary></summary>
-          <div class="cv-form">
-            <form method="post" action="{{ cvEndpoint }}/projects/{{ loop.index0 }}/edit">
-              <div class="field-row">
-                <div class="field">
-                  <label class="field__label">{{ __("cv.projects.name") }}</label>
-                  <input class="field__input" type="text" name="name" value="{{ item.name }}" required>
-                </div>
-                <div class="field">
-                  <label class="field__label">{{ __("cv.projects.url") }}</label>
-                  <input class="field__input" type="url" name="url" value="{{ item.url }}" placeholder="https://...">
-                </div>
-              </div>
-              <div class="field-row">
-                <div class="field">
-                  <label class="field__label">{{ __("cv.experience.startDate") }}</label>
-                  <input class="field__input" type="month" name="startDate" value="{{ item.startDate }}">
-                </div>
-                <div class="field">
-                  <label class="field__label">{{ __("cv.experience.endDate") }}</label>
-                  <input class="field__input" type="month" name="endDate" value="{{ item.endDate }}">
-                </div>
-              </div>
-              <div class="field">
-                <label class="field__label">{{ __("cv.projects.descriptionField") }}</label>
-                <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
-              </div>
-              <div class="field-row">
-                <div class="field">
-                  <label class="field__label">{{ __("cv.projects.tags") }}</label>
-                  <input class="field__input" type="text" name="tags" value="{{ item.technologies | join(', ') if item.technologies }}" placeholder="Docker, Node.js, Python">
-                </div>
-                <div class="field">
-                  <label class="field__label">{{ __("cv.projects.status") }}</label>
-                  <select class="field__input" name="status">
-                    <option value="active" {% if item.status == "active" %}selected{% endif %}>Active</option>
-                    <option value="maintained" {% if item.status == "maintained" %}selected{% endif %}>Maintained</option>
-                    <option value="archived" {% if item.status == "archived" %}selected{% endif %}>Archived</option>
-                    <option value="completed" {% if item.status == "completed" %}selected{% endif %}>Completed</option>
-                  </select>
-                </div>
-              </div>
-              <div class="cv-form__buttons">
-                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
-                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
-              </div>
-            </form>
-          </div>
-        </details>
         {% endfor %}
+      </div>
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
       {% endif %}
@@ -622,71 +670,74 @@
       <p class="cv-accordion__desc">{{ __("cv.education.description") }}</p>
 
       {% if cv.education.length %}
+      <div class="cv-sortable-list" id="education-sortable">
         {% for item in cv.education %}
-        <div class="cv-item cv-item--has-edit">
-          <div class="cv-move-buttons">
-            <form method="post" action="{{ cvEndpoint }}/education/{{ loop.index0 }}/up"><button type="submit" class="cv-move-btn" title="Move up" {% if loop.first %}disabled{% endif %}>&#9650;</button></form>
-            <form method="post" action="{{ cvEndpoint }}/education/{{ loop.index0 }}/down"><button type="submit" class="cv-move-btn" title="Move down" {% if loop.last %}disabled{% endif %}>&#9660;</button></form>
-          </div>
-          <div class="cv-item__info">
-            <div class="cv-item__title">{{ item.degree }}</div>
-            <div class="cv-item__sub">
-              {{ item.institution }}{% if item.location %} &middot; {{ item.location }}{% endif %}
-              {% if item.startDate %} &middot; {{ item.startDate }}{% if item.endDate %} – {{ item.endDate }}{% else %} – Present{% endif %}{% elif item.year %} &middot; {{ item.year }}{% endif %}
+        <div class="cv-sortable-item" data-index="{{ loop.index0 }}">
+          <div class="cv-item cv-item--has-edit">
+            <span class="drag-handle" title="Drag to reorder">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm8-16a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+            </span>
+            <div class="cv-item__info">
+              <div class="cv-item__title">{{ item.degree }}</div>
+              <div class="cv-item__sub">
+                {{ item.institution }}{% if item.location %} &middot; {{ item.location }}{% endif %}
+                {% if item.startDate %} &middot; {{ item.startDate }}{% if item.endDate %} – {{ item.endDate }}{% else %} – Present{% endif %}{% elif item.year %} &middot; {{ item.year }}{% endif %}
+              </div>
+              {% if item.description %}
+              <div class="cv-item__sub" style="margin-top:0.25rem">{{ item.description }}</div>
+              {% endif %}
             </div>
-            {% if item.description %}
-            <div class="cv-item__sub" style="margin-top:0.25rem">{{ item.description }}</div>
-            {% endif %}
+            <div class="cv-item__actions">
+              <button type="button" class="button button--small" onclick="var d=this.closest('.cv-sortable-item').querySelector('.cv-edit-details');d.open=!d.open">{{ __("cv.education.edit") }}</button>
+              <form method="post" action="{{ cvEndpoint }}/education/{{ loop.index0 }}/delete" style="margin:0">
+                <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
+              </form>
+            </div>
           </div>
-          <div class="cv-item__actions">
-            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">{{ __("cv.education.edit") }}</button>
-            <form method="post" action="{{ cvEndpoint }}/education/{{ loop.index0 }}/delete" style="margin:0">
-              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
-            </form>
-          </div>
+          <details class="cv-edit-details">
+            <summary></summary>
+            <div class="cv-form">
+              <form method="post" action="{{ cvEndpoint }}/education/{{ loop.index0 }}/edit">
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.education.degree") }}</label>
+                    <input class="field__input" type="text" name="degree" value="{{ item.degree }}" required>
+                  </div>
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.education.institution") }}</label>
+                    <input class="field__input" type="text" name="institution" value="{{ item.institution }}" required>
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.education.location") }}</label>
+                    <input class="field__input" type="text" name="location" value="{{ item.location }}">
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.experience.startDate") }}</label>
+                    <input class="field__input" type="month" name="startDate" value="{{ item.startDate }}">
+                  </div>
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.experience.endDate") }}</label>
+                    <input class="field__input" type="month" name="endDate" value="{{ item.endDate }}">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.education.descriptionField") }}</label>
+                  <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
+                </div>
+                <div class="cv-form__buttons">
+                  <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                  <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </details>
         </div>
-        <details class="cv-edit-details">
-          <summary></summary>
-          <div class="cv-form">
-            <form method="post" action="{{ cvEndpoint }}/education/{{ loop.index0 }}/edit">
-              <div class="field-row">
-                <div class="field">
-                  <label class="field__label">{{ __("cv.education.degree") }}</label>
-                  <input class="field__input" type="text" name="degree" value="{{ item.degree }}" required>
-                </div>
-                <div class="field">
-                  <label class="field__label">{{ __("cv.education.institution") }}</label>
-                  <input class="field__input" type="text" name="institution" value="{{ item.institution }}" required>
-                </div>
-              </div>
-              <div class="field-row">
-                <div class="field">
-                  <label class="field__label">{{ __("cv.education.location") }}</label>
-                  <input class="field__input" type="text" name="location" value="{{ item.location }}">
-                </div>
-              </div>
-              <div class="field-row">
-                <div class="field">
-                  <label class="field__label">{{ __("cv.experience.startDate") }}</label>
-                  <input class="field__input" type="month" name="startDate" value="{{ item.startDate }}">
-                </div>
-                <div class="field">
-                  <label class="field__label">{{ __("cv.experience.endDate") }}</label>
-                  <input class="field__input" type="month" name="endDate" value="{{ item.endDate }}">
-                </div>
-              </div>
-              <div class="field">
-                <label class="field__label">{{ __("cv.education.descriptionField") }}</label>
-                <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
-              </div>
-              <div class="cv-form__buttons">
-                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
-                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
-              </div>
-            </form>
-          </div>
-        </details>
         {% endfor %}
+      </div>
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
       {% endif %}
@@ -738,51 +789,54 @@
       <p class="cv-accordion__desc">{{ __("cv.languages.description") }}</p>
 
       {% if cv.languages.length %}
+      <div class="cv-sortable-list" id="languages-sortable">
         {% for item in cv.languages %}
-        <div class="cv-item cv-item--has-edit">
-          <div class="cv-move-buttons">
-            <form method="post" action="{{ cvEndpoint }}/languages/{{ loop.index0 }}/up"><button type="submit" class="cv-move-btn" title="Move up" {% if loop.first %}disabled{% endif %}>&#9650;</button></form>
-            <form method="post" action="{{ cvEndpoint }}/languages/{{ loop.index0 }}/down"><button type="submit" class="cv-move-btn" title="Move down" {% if loop.last %}disabled{% endif %}>&#9660;</button></form>
+        <div class="cv-sortable-item" data-index="{{ loop.index0 }}">
+          <div class="cv-item cv-item--has-edit">
+            <span class="drag-handle" title="Drag to reorder">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm8-16a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+            </span>
+            <div class="cv-item__info">
+              <div class="cv-item__title">{{ item.name }}</div>
+              <div class="cv-item__sub">{{ item.level }}</div>
+            </div>
+            <div class="cv-item__actions">
+              <button type="button" class="button button--small" onclick="var d=this.closest('.cv-sortable-item').querySelector('.cv-edit-details');d.open=!d.open">{{ __("cv.languages.edit") }}</button>
+              <form method="post" action="{{ cvEndpoint }}/languages/{{ loop.index0 }}/delete" style="margin:0">
+                <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
+              </form>
+            </div>
           </div>
-          <div class="cv-item__info">
-            <div class="cv-item__title">{{ item.name }}</div>
-            <div class="cv-item__sub">{{ item.level }}</div>
-          </div>
-          <div class="cv-item__actions">
-            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">{{ __("cv.languages.edit") }}</button>
-            <form method="post" action="{{ cvEndpoint }}/languages/{{ loop.index0 }}/delete" style="margin:0">
-              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
-            </form>
-          </div>
+          <details class="cv-edit-details">
+            <summary></summary>
+            <div class="cv-form">
+              <form method="post" action="{{ cvEndpoint }}/languages/{{ loop.index0 }}/edit">
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.languages.name") }}</label>
+                    <input class="field__input" type="text" name="name" value="{{ item.name }}" required>
+                  </div>
+                  <div class="field">
+                    <label class="field__label">{{ __("cv.languages.level") }}</label>
+                    <select class="field__input" name="level">
+                      <option value="native" {% if item.level == "native" %}selected{% endif %}>Native</option>
+                      <option value="fluent" {% if item.level == "fluent" %}selected{% endif %}>Fluent</option>
+                      <option value="advanced" {% if item.level == "advanced" %}selected{% endif %}>Advanced</option>
+                      <option value="intermediate" {% if item.level == "intermediate" %}selected{% endif %}>Intermediate</option>
+                      <option value="basic" {% if item.level == "basic" %}selected{% endif %}>Basic</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="cv-form__buttons">
+                  <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                  <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </details>
         </div>
-        <details class="cv-edit-details">
-          <summary></summary>
-          <div class="cv-form">
-            <form method="post" action="{{ cvEndpoint }}/languages/{{ loop.index0 }}/edit">
-              <div class="field-row">
-                <div class="field">
-                  <label class="field__label">{{ __("cv.languages.name") }}</label>
-                  <input class="field__input" type="text" name="name" value="{{ item.name }}" required>
-                </div>
-                <div class="field">
-                  <label class="field__label">{{ __("cv.languages.level") }}</label>
-                  <select class="field__input" name="level">
-                    <option value="native" {% if item.level == "native" %}selected{% endif %}>Native</option>
-                    <option value="fluent" {% if item.level == "fluent" %}selected{% endif %}>Fluent</option>
-                    <option value="advanced" {% if item.level == "advanced" %}selected{% endif %}>Advanced</option>
-                    <option value="intermediate" {% if item.level == "intermediate" %}selected{% endif %}>Intermediate</option>
-                    <option value="basic" {% if item.level == "basic" %}selected{% endif %}>Basic</option>
-                  </select>
-                </div>
-              </div>
-              <div class="cv-form__buttons">
-                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
-                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
-              </div>
-            </form>
-          </div>
-        </details>
         {% endfor %}
+      </div>
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
       {% endif %}
@@ -854,4 +908,61 @@
   </details>
 
 </div>
+
+<script>
+(function() {
+  var cvData = {
+    experience: JSON.parse(document.getElementById('experience-json').value || '[]'),
+    projects: JSON.parse(document.getElementById('projects-json').value || '[]'),
+    education: JSON.parse(document.getElementById('education-json').value || '[]'),
+    languages: JSON.parse(document.getElementById('languages-json').value || '[]')
+  };
+
+  var saveForm = document.getElementById('cv-save-form');
+  var dirty = false;
+
+  function showSaveBanner() {
+    if (!dirty) {
+      dirty = true;
+      saveForm.style.display = '';
+    }
+  }
+
+  function syncSection(sectionName) {
+    var list = document.getElementById(sectionName + '-sortable');
+    if (!list) return;
+    var items = list.querySelectorAll('.cv-sortable-item');
+    var data = cvData[sectionName];
+    var ordered = [];
+    items.forEach(function(el) {
+      var idx = parseInt(el.dataset.index, 10);
+      if (data[idx]) ordered.push(data[idx]);
+    });
+    cvData[sectionName] = ordered;
+    // Reset indices to sequential for next drag
+    items.forEach(function(el, i) { el.dataset.index = i; });
+    document.getElementById(sectionName + '-json').value = JSON.stringify(ordered);
+    showSaveBanner();
+  }
+
+  // Load SortableJS from CDN
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js';
+  script.onload = function() {
+    ['experience', 'projects', 'education', 'languages'].forEach(function(section) {
+      var el = document.getElementById(section + '-sortable');
+      if (!el || !el.children.length) return;
+      new Sortable(el, {
+        handle: '.drag-handle',
+        animation: 150,
+        ghostClass: 'cv-sortable-ghost',
+        chosenClass: 'cv-sortable-chosen',
+        draggable: '.cv-sortable-item',
+        onEnd: function() { syncSection(section); }
+      });
+    });
+  };
+  document.head.appendChild(script);
+})();
+</script>
 {% endblock %}

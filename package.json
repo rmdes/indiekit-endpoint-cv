@@ -1,6 +1,6 @@
 {
   "name": "@rmdes/indiekit-endpoint-cv",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "CV/Resume editor endpoint for Indiekit. Manage work experience, projects, skills, education, and interests from the admin UI.",
   "keywords": [
     "indiekit",
