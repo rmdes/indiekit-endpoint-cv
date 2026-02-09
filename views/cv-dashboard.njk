@@ -625,17 +625,41 @@
 
       {% if cv.skills and (cv.skills | dictsort | length) %}
         {% for category, items in cv.skills | dictsort %}
-        <div class="cv-item">
+        <div class="cv-item cv-item--has-edit">
           <div class="cv-item__info">
             <div class="cv-item__title">{{ category }}</div>
             <div class="cv-item__tags">
               {% for skill in items %}<span class="cv-tag">{{ skill }}</span>{% endfor %}
             </div>
           </div>
-          <form method="post" action="{{ cvEndpoint }}/skills/{{ category | urlencode }}/delete" style="margin:0">
-            <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this category?')">Delete</button>
-          </form>
+          <div class="cv-item__actions">
+            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">Edit</button>
+            <form method="post" action="{{ cvEndpoint }}/skills/{{ category | urlencode }}/delete" style="margin:0">
+              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this category?')">Delete</button>
+            </form>
+          </div>
         </div>
+        <details class="cv-edit-details">
+          <summary></summary>
+          <div class="cv-form">
+            <form method="post" action="{{ cvEndpoint }}/skills/{{ category | urlencode }}/edit">
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label">{{ __("cv.skills.category") }}</label>
+                  <input class="field__input" type="text" name="category" value="{{ category }}" required>
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.skills.items") }}</label>
+                  <input class="field__input" type="text" name="items" value="{{ items | join(', ') }}" required placeholder="Python, JavaScript, Go">
+                </div>
+              </div>
+              <div class="cv-form__buttons">
+                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </details>
         {% endfor %}
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
