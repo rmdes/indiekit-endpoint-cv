@@ -140,34 +140,23 @@ export default class CvEndpoint {
 
     // CRUD for individual sections
     protectedRouter.post("/experience/add", dashboardController.addExperience);
-    protectedRouter.post(
-      "/experience/:index/delete",
-      dashboardController.deleteExperience,
-    );
+    protectedRouter.post("/experience/:index/edit", dashboardController.editExperience);
+    protectedRouter.post("/experience/:index/delete", dashboardController.deleteExperience);
 
     protectedRouter.post("/projects/add", dashboardController.addProject);
-    protectedRouter.post(
-      "/projects/:index/delete",
-      dashboardController.deleteProject,
-    );
+    protectedRouter.post("/projects/:index/edit", dashboardController.editProject);
+    protectedRouter.post("/projects/:index/delete", dashboardController.deleteProject);
 
     protectedRouter.post("/education/add", dashboardController.addEducation);
-    protectedRouter.post(
-      "/education/:index/delete",
-      dashboardController.deleteEducation,
-    );
+    protectedRouter.post("/education/:index/edit", dashboardController.editEducation);
+    protectedRouter.post("/education/:index/delete", dashboardController.deleteEducation);
 
     protectedRouter.post("/languages/add", dashboardController.addLanguage);
-    protectedRouter.post(
-      "/languages/:index/delete",
-      dashboardController.deleteLanguage,
-    );
+    protectedRouter.post("/languages/:index/edit", dashboardController.editLanguage);
+    protectedRouter.post("/languages/:index/delete", dashboardController.deleteLanguage);
 
     protectedRouter.post("/skills/add", dashboardController.addSkillCategory);
-    protectedRouter.post(
-      "/skills/:category/delete",
-      dashboardController.deleteSkillCategory,
-    );
+    protectedRouter.post("/skills/:category/delete", dashboardController.deleteSkillCategory);
 
     return protectedRouter;
   }

@@ -65,6 +65,12 @@
     gap: var(--space-s, 0.75rem);
   }
 
+  .cv-item--has-edit {
+    margin-block-end: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
   .cv-item__info {
     flex: 1;
     min-width: 0;
@@ -94,6 +100,30 @@
     font: var(--font-caption, 0.75rem/1.2 sans-serif);
     padding: 0.125rem 0.5rem;
     border-radius: 999px;
+  }
+
+  .cv-item__actions {
+    display: flex;
+    gap: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .cv-edit-details {
+    margin-block-end: var(--space-xs, 0.5rem);
+  }
+
+  .cv-edit-details summary {
+    display: none;
+  }
+
+  .cv-edit-details .cv-form {
+    margin-block-start: 0;
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-color: var(--color-primary, #0066cc);
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
   }
 
   .cv-form {
@@ -149,6 +179,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-xs, 0.5rem);
+  }
+
+  .cv-form__buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-block-start: var(--space-xs, 0.5rem);
   }
 
   .cv-empty {
@@ -209,7 +245,7 @@
 
       {% if cv.experience.length %}
         {% for item in cv.experience %}
-        <div class="cv-item">
+        <div class="cv-item cv-item--has-edit">
           <div class="cv-item__info">
             <div class="cv-item__title">{{ item.title }}</div>
             <div class="cv-item__sub">
@@ -226,10 +262,69 @@
             </div>
             {% endif %}
           </div>
-          <form method="post" action="{{ cvEndpoint }}/experience/{{ loop.index0 }}/delete" style="margin:0">
-            <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
-          </form>
+          <div class="cv-item__actions">
+            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">{{ __("cv.experience.edit") }}</button>
+            <form method="post" action="{{ cvEndpoint }}/experience/{{ loop.index0 }}/delete" style="margin:0">
+              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
+            </form>
+          </div>
         </div>
+        <details class="cv-edit-details">
+          <summary></summary>
+          <div class="cv-form">
+            <form method="post" action="{{ cvEndpoint }}/experience/{{ loop.index0 }}/edit">
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label">{{ __("cv.experience.jobTitle") }}</label>
+                  <input class="field__input" type="text" name="title" value="{{ item.title }}" required>
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.experience.company") }}</label>
+                  <input class="field__input" type="text" name="company" value="{{ item.company }}" required>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label">{{ __("cv.experience.location") }}</label>
+                  <input class="field__input" type="text" name="location" value="{{ item.location }}">
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.experience.type") }}</label>
+                  <select class="field__input" name="type">
+                    <option value="full-time" {% if item.type == "full-time" %}selected{% endif %}>Full-time</option>
+                    <option value="part-time" {% if item.type == "part-time" %}selected{% endif %}>Part-time</option>
+                    <option value="contract" {% if item.type == "contract" %}selected{% endif %}>Contract</option>
+                    <option value="freelance" {% if item.type == "freelance" %}selected{% endif %}>Freelance</option>
+                    <option value="volunteer" {% if item.type == "volunteer" %}selected{% endif %}>Volunteer</option>
+                    <option value="internship" {% if item.type == "internship" %}selected{% endif %}>Internship</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label">{{ __("cv.experience.startDate") }}</label>
+                  <input class="field__input" type="month" name="startDate" value="{{ item.startDate }}">
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.experience.endDate") }}</label>
+                  <input class="field__input" type="month" name="endDate" value="{{ item.endDate }}">
+                </div>
+              </div>
+              <div class="field">
+                <label class="field__label">{{ __("cv.experience.descriptionField") }}</label>
+                <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
+              </div>
+              <div class="field">
+                <label class="field__label">{{ __("cv.experience.highlights") }}</label>
+                <textarea class="field__input" name="highlights" rows="3" placeholder="One highlight per line">{{ item.highlights | join("\n") if item.highlights }}</textarea>
+              </div>
+              <div class="cv-form__buttons">
+                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </details>
         {% endfor %}
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
@@ -300,7 +395,7 @@
 
       {% if cv.projects.length %}
         {% for item in cv.projects %}
-        <div class="cv-item">
+        <div class="cv-item cv-item--has-edit">
           <div class="cv-item__info">
             <div class="cv-item__title">
               {% if item.url %}<a href="{{ item.url }}">{{ item.name }}</a>{% else %}{{ item.name }}{% endif %}
@@ -315,10 +410,53 @@
             </div>
             {% endif %}
           </div>
-          <form method="post" action="{{ cvEndpoint }}/projects/{{ loop.index0 }}/delete" style="margin:0">
-            <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
-          </form>
+          <div class="cv-item__actions">
+            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">{{ __("cv.projects.edit") }}</button>
+            <form method="post" action="{{ cvEndpoint }}/projects/{{ loop.index0 }}/delete" style="margin:0">
+              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
+            </form>
+          </div>
         </div>
+        <details class="cv-edit-details">
+          <summary></summary>
+          <div class="cv-form">
+            <form method="post" action="{{ cvEndpoint }}/projects/{{ loop.index0 }}/edit">
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label">{{ __("cv.projects.name") }}</label>
+                  <input class="field__input" type="text" name="name" value="{{ item.name }}" required>
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.projects.url") }}</label>
+                  <input class="field__input" type="url" name="url" value="{{ item.url }}" placeholder="https://...">
+                </div>
+              </div>
+              <div class="field">
+                <label class="field__label">{{ __("cv.projects.descriptionField") }}</label>
+                <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label">{{ __("cv.projects.tags") }}</label>
+                  <input class="field__input" type="text" name="tags" value="{{ item.technologies | join(', ') if item.technologies }}" placeholder="Docker, Node.js, Python">
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.projects.status") }}</label>
+                  <select class="field__input" name="status">
+                    <option value="active" {% if item.status == "active" %}selected{% endif %}>Active</option>
+                    <option value="maintained" {% if item.status == "maintained" %}selected{% endif %}>Maintained</option>
+                    <option value="archived" {% if item.status == "archived" %}selected{% endif %}>Archived</option>
+                    <option value="completed" {% if item.status == "completed" %}selected{% endif %}>Completed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="cv-form__buttons">
+                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </details>
         {% endfor %}
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
@@ -343,8 +481,8 @@
           </div>
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="proj-tech">{{ __("cv.projects.technologies") }}</label>
-              <input class="field__input" type="text" id="proj-tech" name="technologies" placeholder="Docker, Node.js, Python">
+              <label class="field__label" for="proj-tags">{{ __("cv.projects.tags") }}</label>
+              <input class="field__input" type="text" id="proj-tags" name="tags" placeholder="Docker, Node.js, Python">
             </div>
             <div class="field">
               <label class="field__label" for="proj-status">{{ __("cv.projects.status") }}</label>
@@ -419,7 +557,7 @@
 
       {% if cv.education.length %}
         {% for item in cv.education %}
-        <div class="cv-item">
+        <div class="cv-item cv-item--has-edit">
           <div class="cv-item__info">
             <div class="cv-item__title">{{ item.degree }}</div>
             <div class="cv-item__sub">
@@ -429,10 +567,48 @@
             <div class="cv-item__sub" style="margin-top:0.25rem">{{ item.description }}</div>
             {% endif %}
           </div>
-          <form method="post" action="{{ cvEndpoint }}/education/{{ loop.index0 }}/delete" style="margin:0">
-            <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
-          </form>
+          <div class="cv-item__actions">
+            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">{{ __("cv.education.edit") }}</button>
+            <form method="post" action="{{ cvEndpoint }}/education/{{ loop.index0 }}/delete" style="margin:0">
+              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
+            </form>
+          </div>
         </div>
+        <details class="cv-edit-details">
+          <summary></summary>
+          <div class="cv-form">
+            <form method="post" action="{{ cvEndpoint }}/education/{{ loop.index0 }}/edit">
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label">{{ __("cv.education.degree") }}</label>
+                  <input class="field__input" type="text" name="degree" value="{{ item.degree }}" required>
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.education.institution") }}</label>
+                  <input class="field__input" type="text" name="institution" value="{{ item.institution }}" required>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label">{{ __("cv.education.location") }}</label>
+                  <input class="field__input" type="text" name="location" value="{{ item.location }}">
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.education.year") }}</label>
+                  <input class="field__input" type="text" name="year" value="{{ item.year }}" placeholder="2020-2024">
+                </div>
+              </div>
+              <div class="field">
+                <label class="field__label">{{ __("cv.education.descriptionField") }}</label>
+                <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
+              </div>
+              <div class="cv-form__buttons">
+                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </details>
         {% endfor %}
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
@@ -482,15 +658,45 @@
 
       {% if cv.languages.length %}
         {% for item in cv.languages %}
-        <div class="cv-item">
+        <div class="cv-item cv-item--has-edit">
           <div class="cv-item__info">
             <div class="cv-item__title">{{ item.name }}</div>
             <div class="cv-item__sub">{{ item.level }}</div>
           </div>
-          <form method="post" action="{{ cvEndpoint }}/languages/{{ loop.index0 }}/delete" style="margin:0">
-            <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
-          </form>
+          <div class="cv-item__actions">
+            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">{{ __("cv.languages.edit") }}</button>
+            <form method="post" action="{{ cvEndpoint }}/languages/{{ loop.index0 }}/delete" style="margin:0">
+              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this entry?')">Delete</button>
+            </form>
+          </div>
         </div>
+        <details class="cv-edit-details">
+          <summary></summary>
+          <div class="cv-form">
+            <form method="post" action="{{ cvEndpoint }}/languages/{{ loop.index0 }}/edit">
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label">{{ __("cv.languages.name") }}</label>
+                  <input class="field__input" type="text" name="name" value="{{ item.name }}" required>
+                </div>
+                <div class="field">
+                  <label class="field__label">{{ __("cv.languages.level") }}</label>
+                  <select class="field__input" name="level">
+                    <option value="native" {% if item.level == "native" %}selected{% endif %}>Native</option>
+                    <option value="fluent" {% if item.level == "fluent" %}selected{% endif %}>Fluent</option>
+                    <option value="advanced" {% if item.level == "advanced" %}selected{% endif %}>Advanced</option>
+                    <option value="intermediate" {% if item.level == "intermediate" %}selected{% endif %}>Intermediate</option>
+                    <option value="basic" {% if item.level == "basic" %}selected{% endif %}>Basic</option>
+                  </select>
+                </div>
+              </div>
+              <div class="cv-form__buttons">
+                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </details>
         {% endfor %}
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
