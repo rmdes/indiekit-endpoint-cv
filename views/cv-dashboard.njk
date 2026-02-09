@@ -297,10 +297,10 @@
 
 {# Hidden save form for drag-drop reordering - shown when order changes #}
 <form method="post" action="{{ cvEndpoint }}/save" id="cv-save-form" style="display:none">
-  <input type="hidden" name="experience" id="experience-json" value='{{ cv.experience | dump | safe }}'>
-  <input type="hidden" name="projects" id="projects-json" value='{{ cv.projects | dump | safe }}'>
-  <input type="hidden" name="education" id="education-json" value='{{ cv.education | dump | safe }}'>
-  <input type="hidden" name="languages" id="languages-json" value='{{ cv.languages | dump | safe }}'>
+  <input type="hidden" name="experience" id="experience-json" value="{{ cv.experience | dump | e }}">
+  <input type="hidden" name="projects" id="projects-json" value="{{ cv.projects | dump | e }}">
+  <input type="hidden" name="education" id="education-json" value="{{ cv.education | dump | e }}">
+  <input type="hidden" name="languages" id="languages-json" value="{{ cv.languages | dump | e }}">
   {% for category, items in cv.skills | dictsort %}
   <input type="hidden" name="skills[{{ category }}]" value="{{ items | join(', ') }}">
   {% endfor %}
@@ -889,10 +889,10 @@
         <h4>{{ __("cv.interests.add") }}</h4>
         <form method="post" action="{{ cvEndpoint }}/save">
           {# Pass through all existing data to preserve it #}
-          <input type="hidden" name="experience" value='{{ cv.experience | dump | safe }}'>
-          <input type="hidden" name="projects" value='{{ cv.projects | dump | safe }}'>
-          <input type="hidden" name="education" value='{{ cv.education | dump | safe }}'>
-          <input type="hidden" name="languages" value='{{ cv.languages | dump | safe }}'>
+          <input type="hidden" name="experience" value="{{ cv.experience | dump | e }}">
+          <input type="hidden" name="projects" value="{{ cv.projects | dump | e }}">
+          <input type="hidden" name="education" value="{{ cv.education | dump | e }}">
+          <input type="hidden" name="languages" value="{{ cv.languages | dump | e }}">
           {# Skills need special handling - pass as JSON #}
           {% for category, items in cv.skills | dictsort %}
           <input type="hidden" name="skills[{{ category }}]" value="{{ items | join(', ') }}">
