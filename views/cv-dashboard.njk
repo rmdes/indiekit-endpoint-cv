@@ -206,34 +206,13 @@
     margin-block-end: var(--space-xs, 0.5rem);
   }
 
-  .cv-form .field__label {
-    display: block;
+  .cv-form .label {
     font: var(--font-caption, 0.75rem/1.4 sans-serif);
     font-weight: 600;
     margin-block-end: 0.25rem;
   }
 
-  .cv-form .field__input {
-    width: 100%;
-    padding: var(--space-2xs, 0.375rem) var(--space-xs, 0.5rem);
-    border: 1px solid var(--color-outline-variant, #ccc);
-    border-radius: var(--border-radius-small, 0.25rem);
-    font: var(--font-body, 0.875rem/1.5 sans-serif);
-    background: var(--color-background, #fff);
-    color: var(--color-on-surface, inherit);
-  }
-
-  .cv-form .field__input:focus {
-    border-color: var(--color-primary, #0066cc);
-    outline: 2px solid var(--color-primary, #0066cc);
-    outline-offset: -2px;
-  }
-
-  .cv-form select.field__input {
-    appearance: auto;
-  }
-
-  .cv-form textarea.field__input {
+  .cv-form .textarea {
     resize: vertical;
     min-height: 4rem;
   }
@@ -359,22 +338,22 @@
               <form method="post" action="{{ cvEndpoint }}/experience/{{ loop.index0 }}/edit">
                 <div class="field-row">
                   <div class="field">
-                    <label class="field__label">{{ __("cv.experience.jobTitle") }}</label>
-                    <input class="field__input" type="text" name="title" value="{{ item.title }}" required>
+                    <label class="label">{{ __("cv.experience.jobTitle") }}</label>
+                    <input class="input" type="text" name="title" value="{{ item.title }}" required>
                   </div>
                   <div class="field">
-                    <label class="field__label">{{ __("cv.experience.company") }}</label>
-                    <input class="field__input" type="text" name="company" value="{{ item.company }}" required>
+                    <label class="label">{{ __("cv.experience.company") }}</label>
+                    <input class="input" type="text" name="company" value="{{ item.company }}" required>
                   </div>
                 </div>
                 <div class="field-row">
                   <div class="field">
-                    <label class="field__label">{{ __("cv.experience.location") }}</label>
-                    <input class="field__input" type="text" name="location" value="{{ item.location }}">
+                    <label class="label">{{ __("cv.experience.location") }}</label>
+                    <input class="input" type="text" name="location" value="{{ item.location }}">
                   </div>
                   <div class="field">
-                    <label class="field__label">{{ __("cv.experience.type") }}</label>
-                    <select class="field__input" name="type">
+                    <label class="label">{{ __("cv.experience.type") }}</label>
+                    <select class="select" name="type">
                       <option value="full-time" {% if item.type == "full-time" %}selected{% endif %}>Full-time</option>
                       <option value="part-time" {% if item.type == "part-time" %}selected{% endif %}>Part-time</option>
                       <option value="contract" {% if item.type == "contract" %}selected{% endif %}>Contract</option>
@@ -386,21 +365,21 @@
                 </div>
                 <div class="field-row">
                   <div class="field">
-                    <label class="field__label">{{ __("cv.experience.startDate") }}</label>
-                    <input class="field__input" type="month" name="startDate" value="{{ item.startDate }}">
+                    <label class="label">{{ __("cv.experience.startDate") }}</label>
+                    <input class="input" type="month" name="startDate" value="{{ item.startDate }}">
                   </div>
                   <div class="field">
-                    <label class="field__label">{{ __("cv.experience.endDate") }}</label>
-                    <input class="field__input" type="month" name="endDate" value="{{ item.endDate }}">
+                    <label class="label">{{ __("cv.experience.endDate") }}</label>
+                    <input class="input" type="month" name="endDate" value="{{ item.endDate }}">
                   </div>
                 </div>
                 <div class="field">
-                  <label class="field__label">{{ __("cv.experience.descriptionField") }}</label>
-                  <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
+                  <label class="label">{{ __("cv.experience.descriptionField") }}</label>
+                  <textarea class="textarea" name="description" rows="2">{{ item.description }}</textarea>
                 </div>
                 <div class="field">
-                  <label class="field__label">{{ __("cv.experience.highlights") }}</label>
-                  <textarea class="field__input" name="highlights" rows="3" placeholder="One highlight per line">{{ item.highlights | join("\n") if item.highlights }}</textarea>
+                  <label class="label">{{ __("cv.experience.highlights") }}</label>
+                  <textarea class="textarea" name="highlights" rows="3" placeholder="One highlight per line">{{ item.highlights | join("\n") if item.highlights }}</textarea>
                 </div>
                 <div class="cv-form__buttons">
                   <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
@@ -421,22 +400,22 @@
         <form method="post" action="{{ cvEndpoint }}/experience/add">
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="exp-title">{{ __("cv.experience.jobTitle") }}</label>
-              <input class="field__input" type="text" id="exp-title" name="title" required>
+              <label class="label" for="exp-title">{{ __("cv.experience.jobTitle") }}</label>
+              <input class="input" type="text" id="exp-title" name="title" required>
             </div>
             <div class="field">
-              <label class="field__label" for="exp-company">{{ __("cv.experience.company") }}</label>
-              <input class="field__input" type="text" id="exp-company" name="company" required>
+              <label class="label" for="exp-company">{{ __("cv.experience.company") }}</label>
+              <input class="input" type="text" id="exp-company" name="company" required>
             </div>
           </div>
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="exp-location">{{ __("cv.experience.location") }}</label>
-              <input class="field__input" type="text" id="exp-location" name="location">
+              <label class="label" for="exp-location">{{ __("cv.experience.location") }}</label>
+              <input class="input" type="text" id="exp-location" name="location">
             </div>
             <div class="field">
-              <label class="field__label" for="exp-type">{{ __("cv.experience.type") }}</label>
-              <select class="field__input" id="exp-type" name="type">
+              <label class="label" for="exp-type">{{ __("cv.experience.type") }}</label>
+              <select class="select" id="exp-type" name="type">
                 <option value="full-time">Full-time</option>
                 <option value="part-time">Part-time</option>
                 <option value="contract">Contract</option>
@@ -448,21 +427,21 @@
           </div>
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="exp-start">{{ __("cv.experience.startDate") }}</label>
-              <input class="field__input" type="month" id="exp-start" name="startDate">
+              <label class="label" for="exp-start">{{ __("cv.experience.startDate") }}</label>
+              <input class="input" type="month" id="exp-start" name="startDate">
             </div>
             <div class="field">
-              <label class="field__label" for="exp-end">{{ __("cv.experience.endDate") }}</label>
-              <input class="field__input" type="month" id="exp-end" name="endDate">
+              <label class="label" for="exp-end">{{ __("cv.experience.endDate") }}</label>
+              <input class="input" type="month" id="exp-end" name="endDate">
             </div>
           </div>
           <div class="field">
-            <label class="field__label" for="exp-desc">{{ __("cv.experience.descriptionField") }}</label>
-            <textarea class="field__input" id="exp-desc" name="description" rows="2"></textarea>
+            <label class="label" for="exp-desc">{{ __("cv.experience.descriptionField") }}</label>
+            <textarea class="textarea" id="exp-desc" name="description" rows="2"></textarea>
           </div>
           <div class="field">
-            <label class="field__label" for="exp-highlights">{{ __("cv.experience.highlights") }}</label>
-            <textarea class="field__input" id="exp-highlights" name="highlights" rows="3" placeholder="One highlight per line"></textarea>
+            <label class="label" for="exp-highlights">{{ __("cv.experience.highlights") }}</label>
+            <textarea class="textarea" id="exp-highlights" name="highlights" rows="3" placeholder="One highlight per line"></textarea>
           </div>
           <button type="submit" class="button button--primary button--small">{{ __("cv.experience.add") }}</button>
         </form>
@@ -515,36 +494,36 @@
               <form method="post" action="{{ cvEndpoint }}/projects/{{ loop.index0 }}/edit">
                 <div class="field-row">
                   <div class="field">
-                    <label class="field__label">{{ __("cv.projects.name") }}</label>
-                    <input class="field__input" type="text" name="name" value="{{ item.name }}" required>
+                    <label class="label">{{ __("cv.projects.name") }}</label>
+                    <input class="input" type="text" name="name" value="{{ item.name }}" required>
                   </div>
                   <div class="field">
-                    <label class="field__label">{{ __("cv.projects.url") }}</label>
-                    <input class="field__input" type="url" name="url" value="{{ item.url }}" placeholder="https://...">
+                    <label class="label">{{ __("cv.projects.url") }}</label>
+                    <input class="input" type="url" name="url" value="{{ item.url }}" placeholder="https://...">
                   </div>
                 </div>
                 <div class="field-row">
                   <div class="field">
-                    <label class="field__label">{{ __("cv.experience.startDate") }}</label>
-                    <input class="field__input" type="month" name="startDate" value="{{ item.startDate }}">
+                    <label class="label">{{ __("cv.experience.startDate") }}</label>
+                    <input class="input" type="month" name="startDate" value="{{ item.startDate }}">
                   </div>
                   <div class="field">
-                    <label class="field__label">{{ __("cv.experience.endDate") }}</label>
-                    <input class="field__input" type="month" name="endDate" value="{{ item.endDate }}">
+                    <label class="label">{{ __("cv.experience.endDate") }}</label>
+                    <input class="input" type="month" name="endDate" value="{{ item.endDate }}">
                   </div>
                 </div>
                 <div class="field">
-                  <label class="field__label">{{ __("cv.projects.descriptionField") }}</label>
-                  <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
+                  <label class="label">{{ __("cv.projects.descriptionField") }}</label>
+                  <textarea class="textarea" name="description" rows="2">{{ item.description }}</textarea>
                 </div>
                 <div class="field-row">
                   <div class="field">
-                    <label class="field__label">{{ __("cv.projects.tags") }}</label>
-                    <input class="field__input" type="text" name="tags" value="{{ item.technologies | join(', ') if item.technologies }}" placeholder="Docker, Node.js, Python">
+                    <label class="label">{{ __("cv.projects.tags") }}</label>
+                    <input class="input" type="text" name="tags" value="{{ item.technologies | join(', ') if item.technologies }}" placeholder="Docker, Node.js, Python">
                   </div>
                   <div class="field">
-                    <label class="field__label">{{ __("cv.projects.status") }}</label>
-                    <select class="field__input" name="status">
+                    <label class="label">{{ __("cv.projects.status") }}</label>
+                    <select class="select" name="status">
                       <option value="active" {% if item.status == "active" %}selected{% endif %}>Active</option>
                       <option value="maintained" {% if item.status == "maintained" %}selected{% endif %}>Maintained</option>
                       <option value="archived" {% if item.status == "archived" %}selected{% endif %}>Archived</option>
@@ -571,36 +550,36 @@
         <form method="post" action="{{ cvEndpoint }}/projects/add">
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="proj-name">{{ __("cv.projects.name") }}</label>
-              <input class="field__input" type="text" id="proj-name" name="name" required>
+              <label class="label" for="proj-name">{{ __("cv.projects.name") }}</label>
+              <input class="input" type="text" id="proj-name" name="name" required>
             </div>
             <div class="field">
-              <label class="field__label" for="proj-url">{{ __("cv.projects.url") }}</label>
-              <input class="field__input" type="url" id="proj-url" name="url" placeholder="https://...">
+              <label class="label" for="proj-url">{{ __("cv.projects.url") }}</label>
+              <input class="input" type="url" id="proj-url" name="url" placeholder="https://...">
             </div>
           </div>
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="proj-start">{{ __("cv.experience.startDate") }}</label>
-              <input class="field__input" type="month" id="proj-start" name="startDate">
+              <label class="label" for="proj-start">{{ __("cv.experience.startDate") }}</label>
+              <input class="input" type="month" id="proj-start" name="startDate">
             </div>
             <div class="field">
-              <label class="field__label" for="proj-end">{{ __("cv.experience.endDate") }}</label>
-              <input class="field__input" type="month" id="proj-end" name="endDate">
+              <label class="label" for="proj-end">{{ __("cv.experience.endDate") }}</label>
+              <input class="input" type="month" id="proj-end" name="endDate">
             </div>
           </div>
           <div class="field">
-            <label class="field__label" for="proj-desc">{{ __("cv.projects.descriptionField") }}</label>
-            <textarea class="field__input" id="proj-desc" name="description" rows="2"></textarea>
+            <label class="label" for="proj-desc">{{ __("cv.projects.descriptionField") }}</label>
+            <textarea class="textarea" id="proj-desc" name="description" rows="2"></textarea>
           </div>
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="proj-tags">{{ __("cv.projects.tags") }}</label>
-              <input class="field__input" type="text" id="proj-tags" name="tags" placeholder="Docker, Node.js, Python">
+              <label class="label" for="proj-tags">{{ __("cv.projects.tags") }}</label>
+              <input class="input" type="text" id="proj-tags" name="tags" placeholder="Docker, Node.js, Python">
             </div>
             <div class="field">
-              <label class="field__label" for="proj-status">{{ __("cv.projects.status") }}</label>
-              <select class="field__input" id="proj-status" name="status">
+              <label class="label" for="proj-status">{{ __("cv.projects.status") }}</label>
+              <select class="select" id="proj-status" name="status">
                 <option value="active">Active</option>
                 <option value="maintained">Maintained</option>
                 <option value="archived">Archived</option>
@@ -645,12 +624,12 @@
             <form method="post" action="{{ cvEndpoint }}/skills/{{ category | urlencode }}/edit">
               <div class="field-row">
                 <div class="field">
-                  <label class="field__label">{{ __("cv.skills.category") }}</label>
-                  <input class="field__input" type="text" name="category" value="{{ category }}" required>
+                  <label class="label">{{ __("cv.skills.category") }}</label>
+                  <input class="input" type="text" name="category" value="{{ category }}" required>
                 </div>
                 <div class="field">
-                  <label class="field__label">{{ __("cv.skills.items") }}</label>
-                  <input class="field__input" type="text" name="items" value="{{ items | join(', ') }}" required placeholder="Python, JavaScript, Go">
+                  <label class="label">{{ __("cv.skills.items") }}</label>
+                  <input class="input" type="text" name="items" value="{{ items | join(', ') }}" required placeholder="Python, JavaScript, Go">
                 </div>
               </div>
               <div class="cv-form__buttons">
@@ -670,12 +649,12 @@
         <form method="post" action="{{ cvEndpoint }}/skills/add">
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="skill-cat">{{ __("cv.skills.category") }}</label>
-              <input class="field__input" type="text" id="skill-cat" name="category" required placeholder="e.g. Programming Languages">
+              <label class="label" for="skill-cat">{{ __("cv.skills.category") }}</label>
+              <input class="input" type="text" id="skill-cat" name="category" required placeholder="e.g. Programming Languages">
             </div>
             <div class="field">
-              <label class="field__label" for="skill-items">{{ __("cv.skills.items") }}</label>
-              <input class="field__input" type="text" id="skill-items" name="items" required placeholder="Python, JavaScript, Go">
+              <label class="label" for="skill-items">{{ __("cv.skills.items") }}</label>
+              <input class="input" type="text" id="skill-items" name="items" required placeholder="Python, JavaScript, Go">
             </div>
           </div>
           <button type="submit" class="button button--primary button--small">{{ __("cv.skills.add") }}</button>
@@ -724,33 +703,33 @@
               <form method="post" action="{{ cvEndpoint }}/education/{{ loop.index0 }}/edit">
                 <div class="field-row">
                   <div class="field">
-                    <label class="field__label">{{ __("cv.education.degree") }}</label>
-                    <input class="field__input" type="text" name="degree" value="{{ item.degree }}" required>
+                    <label class="label">{{ __("cv.education.degree") }}</label>
+                    <input class="input" type="text" name="degree" value="{{ item.degree }}" required>
                   </div>
                   <div class="field">
-                    <label class="field__label">{{ __("cv.education.institution") }}</label>
-                    <input class="field__input" type="text" name="institution" value="{{ item.institution }}" required>
-                  </div>
-                </div>
-                <div class="field-row">
-                  <div class="field">
-                    <label class="field__label">{{ __("cv.education.location") }}</label>
-                    <input class="field__input" type="text" name="location" value="{{ item.location }}">
+                    <label class="label">{{ __("cv.education.institution") }}</label>
+                    <input class="input" type="text" name="institution" value="{{ item.institution }}" required>
                   </div>
                 </div>
                 <div class="field-row">
                   <div class="field">
-                    <label class="field__label">{{ __("cv.experience.startDate") }}</label>
-                    <input class="field__input" type="month" name="startDate" value="{{ item.startDate }}">
+                    <label class="label">{{ __("cv.education.location") }}</label>
+                    <input class="input" type="text" name="location" value="{{ item.location }}">
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label class="label">{{ __("cv.experience.startDate") }}</label>
+                    <input class="input" type="month" name="startDate" value="{{ item.startDate }}">
                   </div>
                   <div class="field">
-                    <label class="field__label">{{ __("cv.experience.endDate") }}</label>
-                    <input class="field__input" type="month" name="endDate" value="{{ item.endDate }}">
+                    <label class="label">{{ __("cv.experience.endDate") }}</label>
+                    <input class="input" type="month" name="endDate" value="{{ item.endDate }}">
                   </div>
                 </div>
                 <div class="field">
-                  <label class="field__label">{{ __("cv.education.descriptionField") }}</label>
-                  <textarea class="field__input" name="description" rows="2">{{ item.description }}</textarea>
+                  <label class="label">{{ __("cv.education.descriptionField") }}</label>
+                  <textarea class="textarea" name="description" rows="2">{{ item.description }}</textarea>
                 </div>
                 <div class="cv-form__buttons">
                   <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
@@ -771,31 +750,31 @@
         <form method="post" action="{{ cvEndpoint }}/education/add">
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="edu-degree">{{ __("cv.education.degree") }}</label>
-              <input class="field__input" type="text" id="edu-degree" name="degree" required>
+              <label class="label" for="edu-degree">{{ __("cv.education.degree") }}</label>
+              <input class="input" type="text" id="edu-degree" name="degree" required>
             </div>
             <div class="field">
-              <label class="field__label" for="edu-inst">{{ __("cv.education.institution") }}</label>
-              <input class="field__input" type="text" id="edu-inst" name="institution" required>
+              <label class="label" for="edu-inst">{{ __("cv.education.institution") }}</label>
+              <input class="input" type="text" id="edu-inst" name="institution" required>
             </div>
           </div>
           <div class="field">
-            <label class="field__label" for="edu-location">{{ __("cv.education.location") }}</label>
-            <input class="field__input" type="text" id="edu-location" name="location">
+            <label class="label" for="edu-location">{{ __("cv.education.location") }}</label>
+            <input class="input" type="text" id="edu-location" name="location">
           </div>
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="edu-start">{{ __("cv.experience.startDate") }}</label>
-              <input class="field__input" type="month" id="edu-start" name="startDate">
+              <label class="label" for="edu-start">{{ __("cv.experience.startDate") }}</label>
+              <input class="input" type="month" id="edu-start" name="startDate">
             </div>
             <div class="field">
-              <label class="field__label" for="edu-end">{{ __("cv.experience.endDate") }}</label>
-              <input class="field__input" type="month" id="edu-end" name="endDate">
+              <label class="label" for="edu-end">{{ __("cv.experience.endDate") }}</label>
+              <input class="input" type="month" id="edu-end" name="endDate">
             </div>
           </div>
           <div class="field">
-            <label class="field__label" for="edu-desc">{{ __("cv.education.descriptionField") }}</label>
-            <textarea class="field__input" id="edu-desc" name="description" rows="2"></textarea>
+            <label class="label" for="edu-desc">{{ __("cv.education.descriptionField") }}</label>
+            <textarea class="textarea" id="edu-desc" name="description" rows="2"></textarea>
           </div>
           <button type="submit" class="button button--primary button--small">{{ __("cv.education.add") }}</button>
         </form>
@@ -837,12 +816,12 @@
               <form method="post" action="{{ cvEndpoint }}/languages/{{ loop.index0 }}/edit">
                 <div class="field-row">
                   <div class="field">
-                    <label class="field__label">{{ __("cv.languages.name") }}</label>
-                    <input class="field__input" type="text" name="name" value="{{ item.name }}" required>
+                    <label class="label">{{ __("cv.languages.name") }}</label>
+                    <input class="input" type="text" name="name" value="{{ item.name }}" required>
                   </div>
                   <div class="field">
-                    <label class="field__label">{{ __("cv.languages.level") }}</label>
-                    <select class="field__input" name="level">
+                    <label class="label">{{ __("cv.languages.level") }}</label>
+                    <select class="select" name="level">
                       <option value="native" {% if item.level == "native" %}selected{% endif %}>Native</option>
                       <option value="fluent" {% if item.level == "fluent" %}selected{% endif %}>Fluent</option>
                       <option value="advanced" {% if item.level == "advanced" %}selected{% endif %}>Advanced</option>
@@ -870,12 +849,12 @@
         <form method="post" action="{{ cvEndpoint }}/languages/add">
           <div class="field-row">
             <div class="field">
-              <label class="field__label" for="lang-name">{{ __("cv.languages.name") }}</label>
-              <input class="field__input" type="text" id="lang-name" name="name" required>
+              <label class="label" for="lang-name">{{ __("cv.languages.name") }}</label>
+              <input class="input" type="text" id="lang-name" name="name" required>
             </div>
             <div class="field">
-              <label class="field__label" for="lang-level">{{ __("cv.languages.level") }}</label>
-              <select class="field__input" id="lang-level" name="level">
+              <label class="label" for="lang-level">{{ __("cv.languages.level") }}</label>
+              <select class="select" id="lang-level" name="level">
                 <option value="native">Native</option>
                 <option value="fluent">Fluent</option>
                 <option value="advanced">Advanced</option>
@@ -922,8 +901,8 @@
           <input type="hidden" name="skills[{{ category }}]" value="{{ items | join(', ') }}">
           {% endfor %}
           <div class="field">
-            <label class="field__label" for="interests-input">{{ __("cv.interests.placeholder") }}</label>
-            <input class="field__input" type="text" id="interests-input" name="interests" value="{{ cv.interests | join(', ') }}" placeholder="Open Source, IndieWeb, Music">
+            <label class="label" for="interests-input">{{ __("cv.interests.placeholder") }}</label>
+            <input class="input" type="text" id="interests-input" name="interests" value="{{ cv.interests | join(', ') }}" placeholder="Open Source, IndieWeb, Music">
           </div>
           <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
         </form>
