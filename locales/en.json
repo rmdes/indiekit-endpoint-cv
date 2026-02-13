@@ -44,6 +44,11 @@
         "maintained": "Maintained",
         "archived": "Archived",
         "completed": "Completed"
+      },
+      "projectType": "Type",
+      "projectTypeOptions": {
+        "personal": "Personal",
+        "work": "Work"
       }
     },
     "skills": {

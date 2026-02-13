@@ -94,10 +94,33 @@ export default class CvEndpoint {
         configSchema: {},
       },
       {
-        id: "cv-projects",
-        label: "Projects",
-        description: "Personal and professional projects",
+        id: "cv-projects-personal",
+        label: "Personal Projects",
+        description: "Personal and side projects",
         icon: "folder",
+        dataEndpoint: "/cv/data.json",
+        defaultConfig: {
+          maxItems: 10,
+          showTechnologies: true,
+        },
+        configSchema: {
+          maxItems: {
+            type: "number",
+            label: "Max items",
+            min: 1,
+            max: 50,
+          },
+          showTechnologies: {
+            type: "boolean",
+            label: "Show technologies",
+          },
+        },
+      },
+      {
+        id: "cv-projects-work",
+        label: "Work Projects",
+        description: "Professional and work-related projects",
+        icon: "briefcase",
         dataEndpoint: "/cv/data.json",
         defaultConfig: {
           maxItems: 10,

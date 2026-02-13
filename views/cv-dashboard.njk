@@ -471,6 +471,7 @@
                 {% if item.url %}<a href="{{ item.url }}">{{ item.name }}</a>{% else %}{{ item.name }}{% endif %}
               </div>
               <div class="cv-item__sub">
+                {% if item.projectType %}<span class="cv-tag">{{ item.projectType }}</span>{% endif %}
                 {% if item.status %}<span class="cv-tag">{{ item.status }}</span>{% endif %}
                 {% if item.startDate %} &middot; {{ item.startDate }}{% if item.endDate %} – {{ item.endDate }}{% else %} – Present{% endif %}{% endif %}
                 {% if item.description %} {{ item.description }}{% endif %}
@@ -530,6 +531,13 @@
                       <option value="completed" {% if item.status == "completed" %}selected{% endif %}>Completed</option>
                     </select>
                   </div>
+                  <div class="field">
+                    <label class="label">{{ __("cv.projects.projectType") }}</label>
+                    <select class="select" name="projectType">
+                      <option value="personal" {% if item.projectType == "personal" or not item.projectType %}selected{% endif %}>Personal</option>
+                      <option value="work" {% if item.projectType == "work" %}selected{% endif %}>Work</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="cv-form__buttons">
                   <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
@@ -584,6 +592,13 @@
                 <option value="maintained">Maintained</option>
                 <option value="archived">Archived</option>
                 <option value="completed">Completed</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="proj-type">{{ __("cv.projects.projectType") }}</label>
+              <select class="select" id="proj-type" name="projectType">
+                <option value="personal">Personal</option>
+                <option value="work">Work</option>
               </select>
             </div>
           </div>
