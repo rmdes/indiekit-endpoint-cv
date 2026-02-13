@@ -1,0 +1,94 @@
+{
+  "cv": {
+    "title": "Lebenslauf-Editor",
+    "description": "Verwalten Sie Ihre Lebenslaufdaten. Diese Daten können über das Homepage Builder Plugin auf Ihrer Startseite angezeigt werden.",
+    "saved": "Lebenslaufdaten erfolgreich gespeichert.",
+    "save": "Änderungen speichern",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "noData": "Noch keine Daten. Beginnen Sie unten mit dem Hinzufügen von Einträgen.",
+    "experience": {
+      "title": "Berufserfahrung",
+      "description": "Beruflicher Werdegang und professionelle Tätigkeiten.",
+      "add": "Erfahrung hinzufügen",
+      "edit": "Bearbeiten",
+      "jobTitle": "Berufsbezeichnung",
+      "company": "Unternehmen",
+      "location": "Ort",
+      "startDate": "Beginn",
+      "endDate": "Ende",
+      "current": "Aktuelle Position",
+      "type": "Art",
+      "typeOptions": {
+        "full-time": "Vollzeit",
+        "part-time": "Teilzeit",
+        "contract": "Vertrag",
+        "freelance": "Freiberuflich",
+        "volunteer": "Ehrenamtlich",
+        "internship": "Praktikum"
+      },
+      "descriptionField": "Beschreibung",
+      "highlights": "Höhepunkte (einer pro Zeile)"
+    },
+    "projects": {
+      "title": "Projekte",
+      "description": "Persönliche und professionelle Projekte.",
+      "add": "Projekt hinzufügen",
+      "edit": "Bearbeiten",
+      "name": "Name",
+      "url": "URL",
+      "descriptionField": "Beschreibung",
+      "tags": "Tags (durch Komma getrennt)",
+      "status": "Status",
+      "statusOptions": {
+        "active": "Aktiv",
+        "maintained": "Gepflegt",
+        "archived": "Archiviert",
+        "completed": "Abgeschlossen"
+      },
+      "projectType": "Art",
+      "projectTypeOptions": {
+        "personal": "Privat",
+        "work": "Beruflich"
+      }
+    },
+    "skills": {
+      "title": "Fähigkeiten",
+      "description": "Technische und berufliche Fähigkeiten nach Kategorien gruppiert.",
+      "add": "Kategorie hinzufügen",
+      "category": "Kategoriename",
+      "items": "Fähigkeiten (durch Komma getrennt)"
+    },
+    "education": {
+      "title": "Bildung",
+      "description": "Akademischer Hintergrund und Zertifizierungen.",
+      "add": "Bildung hinzufügen",
+      "edit": "Bearbeiten",
+      "degree": "Abschluss / Zertifikat",
+      "institution": "Einrichtung",
+      "location": "Ort",
+      "year": "Jahr(e)",
+      "descriptionField": "Beschreibung"
+    },
+    "languages": {
+      "title": "Sprachen",
+      "description": "Sprachen, die Sie sprechen.",
+      "add": "Sprache hinzufügen",
+      "edit": "Bearbeiten",
+      "name": "Sprache",
+      "level": "Niveau",
+      "levelOptions": {
+        "native": "Muttersprache",
+        "fluent": "Fließend",
+        "advanced": "Fortgeschritten",
+        "intermediate": "Mittelstufe",
+        "basic": "Grundkenntnisse"
+      }
+    },
+    "interests": {
+      "title": "Interessen",
+      "description": "Themen und Hobbys, für die Sie sich begeistern.",
+      "add": "Interesse hinzufügen",
+      "placeholder": "Kommagetrennte Interessen"
+    }
+  }
+}

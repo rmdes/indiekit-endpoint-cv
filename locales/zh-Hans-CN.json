@@ -1,0 +1,94 @@
+{
+  "cv": {
+    "title": "简历编辑器",
+    "description": "管理您的简历数据。这些数据可以通过主页构建器插件显示在您的主页上。",
+    "saved": "简历数据已成功保存。",
+    "save": "保存更改",
+    "lastUpdated": "最后更新",
+    "noData": "暂无数据。开始在下方添加条目。",
+    "experience": {
+      "title": "工作经历",
+      "description": "工作历史和职业角色。",
+      "add": "添加工作经历",
+      "edit": "编辑",
+      "jobTitle": "职位",
+      "company": "公司",
+      "location": "地点",
+      "startDate": "开始日期",
+      "endDate": "结束日期",
+      "current": "当前职位",
+      "type": "类型",
+      "typeOptions": {
+        "full-time": "全职",
+        "part-time": "兼职",
+        "contract": "合同",
+        "freelance": "自由职业",
+        "volunteer": "志愿者",
+        "internship": "实习"
+      },
+      "descriptionField": "描述",
+      "highlights": "亮点(每行一个)"
+    },
+    "projects": {
+      "title": "项目",
+      "description": "个人和专业项目。",
+      "add": "添加项目",
+      "edit": "编辑",
+      "name": "名称",
+      "url": "URL",
+      "descriptionField": "描述",
+      "tags": "标签(逗号分隔)",
+      "status": "状态",
+      "statusOptions": {
+        "active": "活跃",
+        "maintained": "维护中",
+        "archived": "已归档",
+        "completed": "已完成"
+      },
+      "projectType": "类型",
+      "projectTypeOptions": {
+        "personal": "个人",
+        "work": "工作"
+      }
+    },
+    "skills": {
+      "title": "技能",
+      "description": "按类别分组的技术和专业技能。",
+      "add": "添加类别",
+      "category": "类别名称",
+      "items": "技能(逗号分隔)"
+    },
+    "education": {
+      "title": "教育",
+      "description": "学术背景和证书。",
+      "add": "添加教育经历",
+      "edit": "编辑",
+      "degree": "学位 / 证书",
+      "institution": "机构",
+      "location": "地点",
+      "year": "年份",
+      "descriptionField": "描述"
+    },
+    "languages": {
+      "title": "语言",
+      "description": "您会说的语言。",
+      "add": "添加语言",
+      "edit": "编辑",
+      "name": "语言",
+      "level": "水平",
+      "levelOptions": {
+        "native": "母语",
+        "fluent": "流利",
+        "advanced": "高级",
+        "intermediate": "中级",
+        "basic": "基础"
+      }
+    },
+    "interests": {
+      "title": "兴趣",
+      "description": "您热衷的主题和爱好。",
+      "add": "添加兴趣",
+      "placeholder": "逗号分隔的兴趣"
+    }
+  }
+}

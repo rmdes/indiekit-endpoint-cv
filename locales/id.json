@@ -1,0 +1,94 @@
+{
+  "cv": {
+    "title": "Editor CV",
+    "description": "Kelola data CV/resume Anda. Data ini dapat ditampilkan di halaman utama Anda melalui plugin Homepage Builder.",
+    "saved": "Data CV berhasil disimpan.",
+    "save": "Simpan Perubahan",
+    "lastUpdated": "Terakhir diperbarui",
+    "noData": "Belum ada data. Mulai tambahkan entri di bawah ini.",
+    "experience": {
+      "title": "Pengalaman",
+      "description": "Riwayat pekerjaan dan peran profesional.",
+      "add": "Tambah Pengalaman",
+      "edit": "Edit",
+      "jobTitle": "Jabatan",
+      "company": "Perusahaan",
+      "location": "Lokasi",
+      "startDate": "Tanggal Mulai",
+      "endDate": "Tanggal Selesai",
+      "current": "Posisi saat ini",
+      "type": "Jenis",
+      "typeOptions": {
+        "full-time": "Penuh waktu",
+        "part-time": "Paruh waktu",
+        "contract": "Kontrak",
+        "freelance": "Lepas",
+        "volunteer": "Sukarela",
+        "internship": "Magang"
+      },
+      "descriptionField": "Deskripsi",
+      "highlights": "Sorotan (satu per baris)"
+    },
+    "projects": {
+      "title": "Proyek",
+      "description": "Proyek pribadi dan profesional.",
+      "add": "Tambah Proyek",
+      "edit": "Edit",
+      "name": "Nama",
+      "url": "URL",
+      "descriptionField": "Deskripsi",
+      "tags": "Tag (dipisahkan koma)",
+      "status": "Status",
+      "statusOptions": {
+        "active": "Aktif",
+        "maintained": "Dipelihara",
+        "archived": "Diarsipkan",
+        "completed": "Selesai"
+      },
+      "projectType": "Jenis",
+      "projectTypeOptions": {
+        "personal": "Pribadi",
+        "work": "Pekerjaan"
+      }
+    },
+    "skills": {
+      "title": "Keterampilan",
+      "description": "Keterampilan teknis dan profesional yang dikelompokkan berdasarkan kategori.",
+      "add": "Tambah Kategori",
+      "category": "Nama Kategori",
+      "items": "Keterampilan (dipisahkan koma)"
+    },
+    "education": {
+      "title": "Pendidikan",
+      "description": "Latar belakang akademis dan sertifikasi.",
+      "add": "Tambah Pendidikan",
+      "edit": "Edit",
+      "degree": "Gelar / Sertifikat",
+      "institution": "Institusi",
+      "location": "Lokasi",
+      "year": "Tahun",
+      "descriptionField": "Deskripsi"
+    },
+    "languages": {
+      "title": "Bahasa",
+      "description": "Bahasa yang Anda kuasai.",
+      "add": "Tambah Bahasa",
+      "edit": "Edit",
+      "name": "Bahasa",
+      "level": "Tingkat",
+      "levelOptions": {
+        "native": "Asli",
+        "fluent": "Fasih",
+        "advanced": "Lanjutan",
+        "intermediate": "Menengah",
+        "basic": "Dasar"
+      }
+    },
+    "interests": {
+      "title": "Minat",
+      "description": "Topik dan hobi yang Anda gemari.",
+      "add": "Tambah Minat",
+      "placeholder": "Minat dipisahkan koma"
+    }
+  }
+}

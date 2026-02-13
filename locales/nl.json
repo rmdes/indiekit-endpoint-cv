@@ -1,0 +1,94 @@
+{
+  "cv": {
+    "title": "CV-editor",
+    "description": "Beheer je CV-gegevens. Deze gegevens kunnen worden weergegeven op je homepage via de Homepage Builder-plugin.",
+    "saved": "CV-gegevens succesvol opgeslagen.",
+    "save": "Wijzigingen opslaan",
+    "lastUpdated": "Laatst bijgewerkt",
+    "noData": "Nog geen gegevens. Begin hieronder met het toevoegen van items.",
+    "experience": {
+      "title": "Ervaring",
+      "description": "Werkgeschiedenis en professionele rollen.",
+      "add": "Ervaring toevoegen",
+      "edit": "Bewerken",
+      "jobTitle": "Functietitel",
+      "company": "Bedrijf",
+      "location": "Locatie",
+      "startDate": "Startdatum",
+      "endDate": "Einddatum",
+      "current": "Huidige functie",
+      "type": "Type",
+      "typeOptions": {
+        "full-time": "Voltijd",
+        "part-time": "Deeltijd",
+        "contract": "Contract",
+        "freelance": "Freelance",
+        "volunteer": "Vrijwilliger",
+        "internship": "Stage"
+      },
+      "descriptionField": "Beschrijving",
+      "highlights": "Hoogtepunten (één per regel)"
+    },
+    "projects": {
+      "title": "Projecten",
+      "description": "Persoonlijke en professionele projecten.",
+      "add": "Project toevoegen",
+      "edit": "Bewerken",
+      "name": "Naam",
+      "url": "URL",
+      "descriptionField": "Beschrijving",
+      "tags": "Tags (kommagescheiden)",
+      "status": "Status",
+      "statusOptions": {
+        "active": "Actief",
+        "maintained": "Onderhouden",
+        "archived": "Gearchiveerd",
+        "completed": "Voltooid"
+      },
+      "projectType": "Type",
+      "projectTypeOptions": {
+        "personal": "Persoonlijk",
+        "work": "Werk"
+      }
+    },
+    "skills": {
+      "title": "Vaardigheden",
+      "description": "Technische en professionele vaardigheden gegroepeerd per categorie.",
+      "add": "Categorie toevoegen",
+      "category": "Categorienaam",
+      "items": "Vaardigheden (kommagescheiden)"
+    },
+    "education": {
+      "title": "Opleiding",
+      "description": "Academische achtergrond en certificeringen.",
+      "add": "Opleiding toevoegen",
+      "edit": "Bewerken",
+      "degree": "Diploma / Certificaat",
+      "institution": "Instelling",
+      "location": "Locatie",
+      "year": "Jaar/jaren",
+      "descriptionField": "Beschrijving"
+    },
+    "languages": {
+      "title": "Talen",
+      "description": "Talen die je spreekt.",
+      "add": "Taal toevoegen",
+      "edit": "Bewerken",
+      "name": "Taal",
+      "level": "Niveau",
+      "levelOptions": {
+        "native": "Moedertaal",
+        "fluent": "Vloeiend",
+        "advanced": "Gevorderd",
+        "intermediate": "Gemiddeld",
+        "basic": "Basis"
+      }
+    },
+    "interests": {
+      "title": "Interesses",
+      "description": "Onderwerpen en hobby's waar je gepassioneerd over bent.",
+      "add": "Interesse toevoegen",
+      "placeholder": "Kommagescheiden interesses"
+    }
+  }
+}

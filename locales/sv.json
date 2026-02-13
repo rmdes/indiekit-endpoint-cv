@@ -1,0 +1,94 @@
+{
+  "cv": {
+    "title": "CV-redigerare",
+    "description": "Hantera dina CV-data. Dessa data kan visas på din hemsida via Homepage Builder-pluginet.",
+    "saved": "CV-data sparades framgångsrikt.",
+    "save": "Spara ändringar",
+    "lastUpdated": "Senast uppdaterad",
+    "noData": "Ingen data ännu. Börja lägga till poster nedan.",
+    "experience": {
+      "title": "Erfarenhet",
+      "description": "Arbetshistorik och professionella roller.",
+      "add": "Lägg till erfarenhet",
+      "edit": "Redigera",
+      "jobTitle": "Jobbtitel",
+      "company": "Företag",
+      "location": "Plats",
+      "startDate": "Startdatum",
+      "endDate": "Slutdatum",
+      "current": "Nuvarande position",
+      "type": "Typ",
+      "typeOptions": {
+        "full-time": "Heltid",
+        "part-time": "Deltid",
+        "contract": "Kontrakt",
+        "freelance": "Frilans",
+        "volunteer": "Volontär",
+        "internship": "Praktik"
+      },
+      "descriptionField": "Beskrivning",
+      "highlights": "Höjdpunkter (en per rad)"
+    },
+    "projects": {
+      "title": "Projekt",
+      "description": "Personliga och professionella projekt.",
+      "add": "Lägg till projekt",
+      "edit": "Redigera",
+      "name": "Namn",
+      "url": "URL",
+      "descriptionField": "Beskrivning",
+      "tags": "Taggar (kommaseparerade)",
+      "status": "Status",
+      "statusOptions": {
+        "active": "Aktiv",
+        "maintained": "Underhållen",
+        "archived": "Arkiverad",
+        "completed": "Slutförd"
+      },
+      "projectType": "Typ",
+      "projectTypeOptions": {
+        "personal": "Personligt",
+        "work": "Arbete"
+      }
+    },
+    "skills": {
+      "title": "Färdigheter",
+      "description": "Tekniska och professionella färdigheter grupperade efter kategori.",
+      "add": "Lägg till kategori",
+      "category": "Kategorinamn",
+      "items": "Färdigheter (kommaseparerade)"
+    },
+    "education": {
+      "title": "Utbildning",
+      "description": "Akademisk bakgrund och certifieringar.",
+      "add": "Lägg till utbildning",
+      "edit": "Redigera",
+      "degree": "Examen / Certifikat",
+      "institution": "Institution",
+      "location": "Plats",
+      "year": "År",
+      "descriptionField": "Beskrivning"
+    },
+    "languages": {
+      "title": "Språk",
+      "description": "Språk du talar.",
+      "add": "Lägg till språk",
+      "edit": "Redigera",
+      "name": "Språk",
+      "level": "Nivå",
+      "levelOptions": {
+        "native": "Modersmål",
+        "fluent": "Flytande",
+        "advanced": "Avancerad",
+        "intermediate": "Mellanliggande",
+        "basic": "Grundläggande"
+      }
+    },
+    "interests": {
+      "title": "Intressen",
+      "description": "Ämnen och hobbyer du brinner för.",
+      "add": "Lägg till intresse",
+      "placeholder": "Kommaseparerade intressen"
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "cv": {
+    "title": "Edytor CV",
+    "description": "Zarządzaj danymi swojego CV. Te dane mogą być wyświetlane na Twojej stronie głównej za pomocą wtyczki Homepage Builder.",
+    "saved": "Dane CV zostały pomyślnie zapisane.",
+    "save": "Zapisz zmiany",
+    "lastUpdated": "Ostatnia aktualizacja",
+    "noData": "Brak danych. Zacznij dodawać wpisy poniżej.",
+    "experience": {
+      "title": "Doświadczenie",
+      "description": "Historia zatrudnienia i role zawodowe.",
+      "add": "Dodaj doświadczenie",
+      "edit": "Edytuj",
+      "jobTitle": "Stanowisko",
+      "company": "Firma",
+      "location": "Lokalizacja",
+      "startDate": "Data rozpoczęcia",
+      "endDate": "Data zakończenia",
+      "current": "Obecne stanowisko",
+      "type": "Typ",
+      "typeOptions": {
+        "full-time": "Pełny etat",
+        "part-time": "Niepełny etat",
+        "contract": "Kontrakt",
+        "freelance": "Freelance",
+        "volunteer": "Wolontariat",
+        "internship": "Staż"
+      },
+      "descriptionField": "Opis",
+      "highlights": "Osiągnięcia (jedno na linię)"
+    },
+    "projects": {
+      "title": "Projekty",
+      "description": "Projekty osobiste i zawodowe.",
+      "add": "Dodaj projekt",
+      "edit": "Edytuj",
+      "name": "Nazwa",
+      "url": "URL",
+      "descriptionField": "Opis",
+      "tags": "Tagi (oddzielone przecinkami)",
+      "status": "Status",
+      "statusOptions": {
+        "active": "Aktywny",
+        "maintained": "Utrzymywany",
+        "archived": "Zarchiwizowany",
+        "completed": "Ukończony"
+      },
+      "projectType": "Typ",
+      "projectTypeOptions": {
+        "personal": "Osobisty",
+        "work": "Zawodowy"
+      }
+    },
+    "skills": {
+      "title": "Umiejętności",
+      "description": "Umiejętności techniczne i zawodowe pogrupowane według kategorii.",
+      "add": "Dodaj kategorię",
+      "category": "Nazwa kategorii",
+      "items": "Umiejętności (oddzielone przecinkami)"
+    },
+    "education": {
+      "title": "Wykształcenie",
+      "description": "Wykształcenie akademickie i certyfikaty.",
+      "add": "Dodaj wykształcenie",
+      "edit": "Edytuj",
+      "degree": "Stopień / Certyfikat",
+      "institution": "Instytucja",
+      "location": "Lokalizacja",
+      "year": "Rok(lata)",
+      "descriptionField": "Opis"
+    },
+    "languages": {
+      "title": "Języki",
+      "description": "Języki, którymi się posługujesz.",
+      "add": "Dodaj język",
+      "edit": "Edytuj",
+      "name": "Język",
+      "level": "Poziom",
+      "levelOptions": {
+        "native": "Ojczysty",
+        "fluent": "Biegły",
+        "advanced": "Zaawansowany",
+        "intermediate": "Średniozaawansowany",
+        "basic": "Podstawowy"
+      }
+    },
+    "interests": {
+      "title": "Zainteresowania",
+      "description": "Tematy i hobby, którymi się pasjenujesz.",
+      "add": "Dodaj zainteresowanie",
+      "placeholder": "Zainteresowania oddzielone przecinkami"
+    }
+  }
+}

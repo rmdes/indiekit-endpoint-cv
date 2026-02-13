@@ -1,0 +1,94 @@
+{
+  "cv": {
+    "title": "Editor CV",
+    "description": "Gestisci i dati del tuo curriculum. Questi dati possono essere visualizzati sulla tua homepage tramite il plugin Homepage Builder.",
+    "saved": "Dati del CV salvati con successo.",
+    "save": "Salva modifiche",
+    "lastUpdated": "Ultimo aggiornamento",
+    "noData": "Nessun dato ancora. Inizia ad aggiungere voci qui sotto.",
+    "experience": {
+      "title": "Esperienza",
+      "description": "Storia lavorativa e ruoli professionali.",
+      "add": "Aggiungi esperienza",
+      "edit": "Modifica",
+      "jobTitle": "Qualifica professionale",
+      "company": "Azienda",
+      "location": "Località",
+      "startDate": "Data di inizio",
+      "endDate": "Data di fine",
+      "current": "Posizione attuale",
+      "type": "Tipo",
+      "typeOptions": {
+        "full-time": "Tempo pieno",
+        "part-time": "Part-time",
+        "contract": "Contratto",
+        "freelance": "Libero professionista",
+        "volunteer": "Volontariato",
+        "internship": "Stage"
+      },
+      "descriptionField": "Descrizione",
+      "highlights": "Punti salienti (uno per riga)"
+    },
+    "projects": {
+      "title": "Progetti",
+      "description": "Progetti personali e professionali.",
+      "add": "Aggiungi progetto",
+      "edit": "Modifica",
+      "name": "Nome",
+      "url": "URL",
+      "descriptionField": "Descrizione",
+      "tags": "Tag (separati da virgole)",
+      "status": "Stato",
+      "statusOptions": {
+        "active": "Attivo",
+        "maintained": "Mantenuto",
+        "archived": "Archiviato",
+        "completed": "Completato"
+      },
+      "projectType": "Tipo",
+      "projectTypeOptions": {
+        "personal": "Personale",
+        "work": "Lavorativo"
+      }
+    },
+    "skills": {
+      "title": "Competenze",
+      "description": "Competenze tecniche e professionali raggruppate per categoria.",
+      "add": "Aggiungi categoria",
+      "category": "Nome della categoria",
+      "items": "Competenze (separate da virgole)"
+    },
+    "education": {
+      "title": "Istruzione",
+      "description": "Formazione accademica e certificazioni.",
+      "add": "Aggiungi istruzione",
+      "edit": "Modifica",
+      "degree": "Titolo di studio / Certificato",
+      "institution": "Istituzione",
+      "location": "Località",
+      "year": "Anno(i)",
+      "descriptionField": "Descrizione"
+    },
+    "languages": {
+      "title": "Lingue",
+      "description": "Lingue che parli.",
+      "add": "Aggiungi lingua",
+      "edit": "Modifica",
+      "name": "Lingua",
+      "level": "Livello",
+      "levelOptions": {
+        "native": "Madrelingua",
+        "fluent": "Fluente",
+        "advanced": "Avanzato",
+        "intermediate": "Intermedio",
+        "basic": "Base"
+      }
+    },
+    "interests": {
+      "title": "Interessi",
+      "description": "Argomenti e hobby che ti appassionano.",
+      "add": "Aggiungi interesse",
+      "placeholder": "Interessi separati da virgole"
+    }
+  }
+}

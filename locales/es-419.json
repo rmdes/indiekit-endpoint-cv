@@ -1,0 +1,94 @@
+{
+  "cv": {
+    "title": "Editor de CV",
+    "description": "Administra los datos de tu currículum. Estos datos se pueden mostrar en tu página principal a través del plugin Constructor de Página Principal.",
+    "saved": "Datos del CV guardados exitosamente.",
+    "save": "Guardar cambios",
+    "lastUpdated": "Última actualización",
+    "noData": "Aún no hay datos. Comienza agregando entradas a continuación.",
+    "experience": {
+      "title": "Experiencia",
+      "description": "Historial laboral y roles profesionales.",
+      "add": "Agregar experiencia",
+      "edit": "Editar",
+      "jobTitle": "Cargo",
+      "company": "Empresa",
+      "location": "Ubicación",
+      "startDate": "Fecha de inicio",
+      "endDate": "Fecha de finalización",
+      "current": "Posición actual",
+      "type": "Tipo",
+      "typeOptions": {
+        "full-time": "Tiempo completo",
+        "part-time": "Medio tiempo",
+        "contract": "Contrato",
+        "freelance": "Independiente",
+        "volunteer": "Voluntario",
+        "internship": "Pasantía"
+      },
+      "descriptionField": "Descripción",
+      "highlights": "Aspectos destacados (uno por línea)"
+    },
+    "projects": {
+      "title": "Proyectos",
+      "description": "Proyectos personales y profesionales.",
+      "add": "Agregar proyecto",
+      "edit": "Editar",
+      "name": "Nombre",
+      "url": "URL",
+      "descriptionField": "Descripción",
+      "tags": "Etiquetas (separadas por comas)",
+      "status": "Estado",
+      "statusOptions": {
+        "active": "Activo",
+        "maintained": "Mantenido",
+        "archived": "Archivado",
+        "completed": "Completado"
+      },
+      "projectType": "Tipo",
+      "projectTypeOptions": {
+        "personal": "Personal",
+        "work": "Laboral"
+      }
+    },
+    "skills": {
+      "title": "Habilidades",
+      "description": "Habilidades técnicas y profesionales agrupadas por categoría.",
+      "add": "Agregar categoría",
+      "category": "Nombre de la categoría",
+      "items": "Habilidades (separadas por comas)"
+    },
+    "education": {
+      "title": "Educación",
+      "description": "Formación académica y certificaciones.",
+      "add": "Agregar educación",
+      "edit": "Editar",
+      "degree": "Título / Certificado",
+      "institution": "Institución",
+      "location": "Ubicación",
+      "year": "Año(s)",
+      "descriptionField": "Descripción"
+    },
+    "languages": {
+      "title": "Idiomas",
+      "description": "Idiomas que hablas.",
+      "add": "Agregar idioma",
+      "edit": "Editar",
+      "name": "Idioma",
+      "level": "Nivel",
+      "levelOptions": {
+        "native": "Nativo",
+        "fluido": "Fluido",
+        "advanced": "Avanzado",
+        "intermediate": "Intermedio",
+        "basic": "Básico"
+      }
+    },
+    "interests": {
+      "title": "Intereses",
+      "description": "Temas y pasatiempos que te apasionan.",
+      "add": "Agregar interés",
+      "placeholder": "Intereses separados por comas"
+    }
+  }
+}
