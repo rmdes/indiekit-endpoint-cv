@@ -26,6 +26,11 @@
         "volunteer": "Ehrenamtlich",
         "internship": "Praktikum"
       },
+      "experienceType": "Bereich",
+      "experienceTypeOptions": {
+        "personal": "Privat",
+        "work": "Beruflich"
+      },
       "descriptionField": "Beschreibung",
       "highlights": "Höhepunkte (einer pro Zeile)"
     },
@@ -56,7 +61,12 @@
       "description": "Technische und berufliche Fähigkeiten nach Kategorien gruppiert.",
       "add": "Kategorie hinzufügen",
       "category": "Kategoriename",
-      "items": "Fähigkeiten (durch Komma getrennt)"
+      "items": "Fähigkeiten (durch Komma getrennt)",
+      "skillType": "Bereich",
+      "skillTypeOptions": {
+        "personal": "Privat",
+        "work": "Beruflich"
+      }
     },
     "education": {
       "title": "Bildung",
@@ -67,7 +77,12 @@
       "institution": "Einrichtung",
       "location": "Ort",
       "year": "Jahr(e)",
-      "descriptionField": "Beschreibung"
+      "descriptionField": "Beschreibung",
+      "educationType": "Bereich",
+      "educationTypeOptions": {
+        "personal": "Privat",
+        "work": "Beruflich"
+      }
     },
     "languages": {
       "title": "Sprachen",
@@ -88,7 +103,12 @@
       "title": "Interessen",
       "description": "Themen und Hobbys, für die Sie sich begeistern.",
       "add": "Interesse hinzufügen",
-      "placeholder": "Kommagetrennte Interessen"
+      "placeholder": "Kommagetrennte Interessen",
+      "interestType": "Bereich",
+      "interestTypeOptions": {
+        "personal": "Privat",
+        "work": "Beruflich"
+      }
     }
   }
 }

@@ -26,6 +26,11 @@
         "volunteer": "Volontär",
         "internship": "Praktik"
       },
+      "experienceType": "Omfång",
+      "experienceTypeOptions": {
+        "personal": "Personligt",
+        "work": "Arbete"
+      },
       "descriptionField": "Beskrivning",
       "highlights": "Höjdpunkter (en per rad)"
     },
@@ -56,7 +61,12 @@
       "description": "Tekniska och professionella färdigheter grupperade efter kategori.",
       "add": "Lägg till kategori",
       "category": "Kategorinamn",
-      "items": "Färdigheter (kommaseparerade)"
+      "items": "Färdigheter (kommaseparerade)",
+      "skillType": "Omfång",
+      "skillTypeOptions": {
+        "personal": "Personligt",
+        "work": "Arbete"
+      }
     },
     "education": {
       "title": "Utbildning",
@@ -67,7 +77,12 @@
       "institution": "Institution",
       "location": "Plats",
       "year": "År",
-      "descriptionField": "Beskrivning"
+      "descriptionField": "Beskrivning",
+      "educationType": "Omfång",
+      "educationTypeOptions": {
+        "personal": "Personligt",
+        "work": "Arbete"
+      }
     },
     "languages": {
       "title": "Språk",
@@ -88,7 +103,12 @@
       "title": "Intressen",
       "description": "Ämnen och hobbyer du brinner för.",
       "add": "Lägg till intresse",
-      "placeholder": "Kommaseparerade intressen"
+      "placeholder": "Kommaseparerade intressen",
+      "interestType": "Omfång",
+      "interestTypeOptions": {
+        "personal": "Personligt",
+        "work": "Arbete"
+      }
     }
   }
 }

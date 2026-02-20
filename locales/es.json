@@ -26,6 +26,11 @@
         "volunteer": "Voluntario",
         "internship": "Prácticas"
       },
+      "experienceType": "Ámbito",
+      "experienceTypeOptions": {
+        "personal": "Personal",
+        "work": "Laboral"
+      },
       "descriptionField": "Descripción",
       "highlights": "Aspectos destacados (uno por línea)"
     },
@@ -56,7 +61,12 @@
       "description": "Habilidades técnicas y profesionales agrupadas por categoría.",
       "add": "Añadir categoría",
       "category": "Nombre de la categoría",
-      "items": "Habilidades (separadas por comas)"
+      "items": "Habilidades (separadas por comas)",
+      "skillType": "Ámbito",
+      "skillTypeOptions": {
+        "personal": "Personal",
+        "work": "Laboral"
+      }
     },
     "education": {
       "title": "Formación",
@@ -67,7 +77,12 @@
       "institution": "Institución",
       "location": "Ubicación",
       "year": "Año(s)",
-      "descriptionField": "Descripción"
+      "descriptionField": "Descripción",
+      "educationType": "Ámbito",
+      "educationTypeOptions": {
+        "personal": "Personal",
+        "work": "Laboral"
+      }
     },
     "languages": {
       "title": "Idiomas",
@@ -88,7 +103,12 @@
       "title": "Intereses",
       "description": "Temas y aficiones que te apasionan.",
       "add": "Añadir interés",
-      "placeholder": "Intereses separados por comas"
+      "placeholder": "Intereses separados por comas",
+      "interestType": "Ámbito",
+      "interestTypeOptions": {
+        "personal": "Personal",
+        "work": "Laboral"
+      }
     }
   }
 }

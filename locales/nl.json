@@ -26,6 +26,11 @@
         "volunteer": "Vrijwilliger",
         "internship": "Stage"
       },
+      "experienceType": "Bereik",
+      "experienceTypeOptions": {
+        "personal": "Persoonlijk",
+        "work": "Werk"
+      },
       "descriptionField": "Beschrijving",
       "highlights": "Hoogtepunten (één per regel)"
     },
@@ -56,7 +61,12 @@
       "description": "Technische en professionele vaardigheden gegroepeerd per categorie.",
       "add": "Categorie toevoegen",
       "category": "Categorienaam",
-      "items": "Vaardigheden (kommagescheiden)"
+      "items": "Vaardigheden (kommagescheiden)",
+      "skillType": "Bereik",
+      "skillTypeOptions": {
+        "personal": "Persoonlijk",
+        "work": "Werk"
+      }
     },
     "education": {
       "title": "Opleiding",
@@ -67,7 +77,12 @@
       "institution": "Instelling",
       "location": "Locatie",
       "year": "Jaar/jaren",
-      "descriptionField": "Beschrijving"
+      "descriptionField": "Beschrijving",
+      "educationType": "Bereik",
+      "educationTypeOptions": {
+        "personal": "Persoonlijk",
+        "work": "Werk"
+      }
     },
     "languages": {
       "title": "Talen",
@@ -88,7 +103,12 @@
       "title": "Interesses",
       "description": "Onderwerpen en hobby's waar je gepassioneerd over bent.",
       "add": "Interesse toevoegen",
-      "placeholder": "Kommagescheiden interesses"
+      "placeholder": "Kommagescheiden interesses",
+      "interestType": "Bereik",
+      "interestTypeOptions": {
+        "personal": "Persoonlijk",
+        "work": "Werk"
+      }
     }
   }
 }

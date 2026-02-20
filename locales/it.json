@@ -26,6 +26,11 @@
         "volunteer": "Volontariato",
         "internship": "Stage"
       },
+      "experienceType": "Ambito",
+      "experienceTypeOptions": {
+        "personal": "Personale",
+        "work": "Lavorativo"
+      },
       "descriptionField": "Descrizione",
       "highlights": "Punti salienti (uno per riga)"
     },
@@ -56,7 +61,12 @@
       "description": "Competenze tecniche e professionali raggruppate per categoria.",
       "add": "Aggiungi categoria",
       "category": "Nome della categoria",
-      "items": "Competenze (separate da virgole)"
+      "items": "Competenze (separate da virgole)",
+      "skillType": "Ambito",
+      "skillTypeOptions": {
+        "personal": "Personale",
+        "work": "Lavorativo"
+      }
     },
     "education": {
       "title": "Istruzione",
@@ -67,7 +77,12 @@
       "institution": "Istituzione",
       "location": "Località",
       "year": "Anno(i)",
-      "descriptionField": "Descrizione"
+      "descriptionField": "Descrizione",
+      "educationType": "Ambito",
+      "educationTypeOptions": {
+        "personal": "Personale",
+        "work": "Lavorativo"
+      }
     },
     "languages": {
       "title": "Lingue",
@@ -88,7 +103,12 @@
       "title": "Interessi",
       "description": "Argomenti e hobby che ti appassionano.",
       "add": "Aggiungi interesse",
-      "placeholder": "Interessi separati da virgole"
+      "placeholder": "Interessi separati da virgole",
+      "interestType": "Ambito",
+      "interestTypeOptions": {
+        "personal": "Personale",
+        "work": "Lavorativo"
+      }
     }
   }
 }

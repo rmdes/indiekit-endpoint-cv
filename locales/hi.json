@@ -26,6 +26,11 @@
         "volunteer": "स्वयंसेवी",
         "internship": "इंटर्नशिप"
       },
+      "experienceType": "क्षेत्र",
+      "experienceTypeOptions": {
+        "personal": "व्यक्तिगत",
+        "work": "कार्य"
+      },
       "descriptionField": "विवरण",
       "highlights": "मुख्य बातें (प्रति पंक्ति एक)"
     },
@@ -56,7 +61,12 @@
       "description": "श्रेणी के अनुसार समूहीकृत तकनीकी और पेशेवर कौशल।",
       "add": "श्रेणी जोड़ें",
       "category": "श्रेणी का नाम",
-      "items": "कौशल (अल्पविराम से अलग किए गए)"
+      "items": "कौशल (अल्पविराम से अलग किए गए)",
+      "skillType": "क्षेत्र",
+      "skillTypeOptions": {
+        "personal": "व्यक्तिगत",
+        "work": "कार्य"
+      }
     },
     "education": {
       "title": "शिक्षा",
@@ -67,7 +77,12 @@
       "institution": "संस्था",
       "location": "स्थान",
       "year": "वर्ष",
-      "descriptionField": "विवरण"
+      "descriptionField": "विवरण",
+      "educationType": "क्षेत्र",
+      "educationTypeOptions": {
+        "personal": "व्यक्तिगत",
+        "work": "कार्य"
+      }
     },
     "languages": {
       "title": "भाषाएं",
@@ -88,7 +103,12 @@
       "title": "रुचियां",
       "description": "विषय और शौक जिनके बारे में आप भावुक हैं।",
       "add": "रुचि जोड़ें",
-      "placeholder": "अल्पविराम से अलग की गई रुचियां"
+      "placeholder": "अल्पविराम से अलग की गई रुचियां",
+      "interestType": "क्षेत्र",
+      "interestTypeOptions": {
+        "personal": "व्यक्तिगत",
+        "work": "कार्य"
+      }
     }
   }
 }

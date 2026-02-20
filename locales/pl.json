@@ -26,6 +26,11 @@
         "volunteer": "Wolontariat",
         "internship": "Staż"
       },
+      "experienceType": "Zakres",
+      "experienceTypeOptions": {
+        "personal": "Osobisty",
+        "work": "Zawodowy"
+      },
       "descriptionField": "Opis",
       "highlights": "Osiągnięcia (jedno na linię)"
     },
@@ -56,7 +61,12 @@
       "description": "Umiejętności techniczne i zawodowe pogrupowane według kategorii.",
       "add": "Dodaj kategorię",
       "category": "Nazwa kategorii",
-      "items": "Umiejętności (oddzielone przecinkami)"
+      "items": "Umiejętności (oddzielone przecinkami)",
+      "skillType": "Zakres",
+      "skillTypeOptions": {
+        "personal": "Osobisty",
+        "work": "Zawodowy"
+      }
     },
     "education": {
       "title": "Wykształcenie",
@@ -67,7 +77,12 @@
       "institution": "Instytucja",
       "location": "Lokalizacja",
       "year": "Rok(lata)",
-      "descriptionField": "Opis"
+      "descriptionField": "Opis",
+      "educationType": "Zakres",
+      "educationTypeOptions": {
+        "personal": "Osobisty",
+        "work": "Zawodowy"
+      }
     },
     "languages": {
       "title": "Języki",
@@ -88,7 +103,12 @@
       "title": "Zainteresowania",
       "description": "Tematy i hobby, którymi się pasjenujesz.",
       "add": "Dodaj zainteresowanie",
-      "placeholder": "Zainteresowania oddzielone przecinkami"
+      "placeholder": "Zainteresowania oddzielone przecinkami",
+      "interestType": "Zakres",
+      "interestTypeOptions": {
+        "personal": "Osobisty",
+        "work": "Zawodowy"
+      }
     }
   }
 }

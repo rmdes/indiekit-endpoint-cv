@@ -26,6 +26,11 @@
         "volunteer": "Voluntariado",
         "internship": "Estágio"
       },
+      "experienceType": "Âmbito",
+      "experienceTypeOptions": {
+        "personal": "Pessoal",
+        "work": "Profissional"
+      },
       "descriptionField": "Descrição",
       "highlights": "Destaques (um por linha)"
     },
@@ -56,7 +61,12 @@
       "description": "Habilidades técnicas e profissionais agrupadas por categoria.",
       "add": "Adicionar categoria",
       "category": "Nome da categoria",
-      "items": "Habilidades (separadas por vírgulas)"
+      "items": "Habilidades (separadas por vírgulas)",
+      "skillType": "Âmbito",
+      "skillTypeOptions": {
+        "personal": "Pessoal",
+        "work": "Profissional"
+      }
     },
     "education": {
       "title": "Formação",
@@ -67,7 +77,12 @@
       "institution": "Instituição",
       "location": "Localização",
       "year": "Ano(s)",
-      "descriptionField": "Descrição"
+      "descriptionField": "Descrição",
+      "educationType": "Âmbito",
+      "educationTypeOptions": {
+        "personal": "Pessoal",
+        "work": "Profissional"
+      }
     },
     "languages": {
       "title": "Idiomas",
@@ -88,7 +103,12 @@
       "title": "Interesses",
       "description": "Tópicos e hobbies pelos quais você é apaixonado.",
       "add": "Adicionar interesse",
-      "placeholder": "Interesses separados por vírgulas"
+      "placeholder": "Interesses separados por vírgulas",
+      "interestType": "Âmbito",
+      "interestTypeOptions": {
+        "personal": "Pessoal",
+        "work": "Profissional"
+      }
     }
   }
 }

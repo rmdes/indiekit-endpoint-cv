@@ -26,6 +26,11 @@
         "volunteer": "Sukarela",
         "internship": "Magang"
       },
+      "experienceType": "Cakupan",
+      "experienceTypeOptions": {
+        "personal": "Pribadi",
+        "work": "Pekerjaan"
+      },
       "descriptionField": "Deskripsi",
       "highlights": "Sorotan (satu per baris)"
     },
@@ -56,7 +61,12 @@
       "description": "Keterampilan teknis dan profesional yang dikelompokkan berdasarkan kategori.",
       "add": "Tambah Kategori",
       "category": "Nama Kategori",
-      "items": "Keterampilan (dipisahkan koma)"
+      "items": "Keterampilan (dipisahkan koma)",
+      "skillType": "Cakupan",
+      "skillTypeOptions": {
+        "personal": "Pribadi",
+        "work": "Pekerjaan"
+      }
     },
     "education": {
       "title": "Pendidikan",
@@ -67,7 +77,12 @@
       "institution": "Institusi",
       "location": "Lokasi",
       "year": "Tahun",
-      "descriptionField": "Deskripsi"
+      "descriptionField": "Deskripsi",
+      "educationType": "Cakupan",
+      "educationTypeOptions": {
+        "personal": "Pribadi",
+        "work": "Pekerjaan"
+      }
     },
     "languages": {
       "title": "Bahasa",
@@ -88,7 +103,12 @@
       "title": "Minat",
       "description": "Topik dan hobi yang Anda gemari.",
       "add": "Tambah Minat",
-      "placeholder": "Minat dipisahkan koma"
+      "placeholder": "Minat dipisahkan koma",
+      "interestType": "Cakupan",
+      "interestTypeOptions": {
+        "personal": "Pribadi",
+        "work": "Pekerjaan"
+      }
     }
   }
 }

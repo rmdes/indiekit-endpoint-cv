@@ -26,6 +26,11 @@
         "volunteer": "Bénévole",
         "internship": "Stage"
       },
+      "experienceType": "Portée",
+      "experienceTypeOptions": {
+        "personal": "Personnel",
+        "work": "Professionnel"
+      },
       "descriptionField": "Description",
       "highlights": "Points forts (un par ligne)"
     },
@@ -56,7 +61,12 @@
       "description": "Compétences techniques et professionnelles regroupées par catégorie.",
       "add": "Ajouter une catégorie",
       "category": "Nom de la catégorie",
-      "items": "Compétences (séparées par des virgules)"
+      "items": "Compétences (séparées par des virgules)",
+      "skillType": "Portée",
+      "skillTypeOptions": {
+        "personal": "Personnel",
+        "work": "Professionnel"
+      }
     },
     "education": {
       "title": "Formation",
@@ -67,7 +77,12 @@
       "institution": "Établissement",
       "location": "Localisation",
       "year": "Année(s)",
-      "descriptionField": "Description"
+      "descriptionField": "Description",
+      "educationType": "Portée",
+      "educationTypeOptions": {
+        "personal": "Personnel",
+        "work": "Professionnel"
+      }
     },
     "languages": {
       "title": "Langues",
@@ -88,7 +103,12 @@
       "title": "Centres d'intérêt",
       "description": "Sujets et loisirs qui vous passionnent.",
       "add": "Ajouter un centre d'intérêt",
-      "placeholder": "Centres d'intérêt séparés par des virgules"
+      "placeholder": "Centres d'intérêt séparés par des virgules",
+      "interestType": "Portée",
+      "interestTypeOptions": {
+        "personal": "Personnel",
+        "work": "Professionnel"
+      }
     }
   }
 }

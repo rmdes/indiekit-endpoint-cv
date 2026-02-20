@@ -26,6 +26,11 @@
         "volunteer": "Волонтер",
         "internship": "Пракса"
       },
+      "experienceType": "Опсег",
+      "experienceTypeOptions": {
+        "personal": "Лични",
+        "work": "Пословни"
+      },
       "descriptionField": "Опис",
       "highlights": "Истакнуто (једно по реду)"
     },
@@ -56,7 +61,12 @@
       "description": "Техничке и професионалне вештине груписане по категоријама.",
       "add": "Додај категорију",
       "category": "Назив категорије",
-      "items": "Вештине (одвојене зарезом)"
+      "items": "Вештине (одвојене зарезом)",
+      "skillType": "Опсег",
+      "skillTypeOptions": {
+        "personal": "Лични",
+        "work": "Пословни"
+      }
     },
     "education": {
       "title": "Образовање",
@@ -67,7 +77,12 @@
       "institution": "Институција",
       "location": "Локација",
       "year": "Година(е)",
-      "descriptionField": "Опис"
+      "descriptionField": "Опис",
+      "educationType": "Опсег",
+      "educationTypeOptions": {
+        "personal": "Лични",
+        "work": "Пословни"
+      }
     },
     "languages": {
       "title": "Језици",
@@ -88,7 +103,12 @@
       "title": "Интересовања",
       "description": "Теме и хобији који вас занимају.",
       "add": "Додај интересовање",
-      "placeholder": "Интересовања одвојена зарезом"
+      "placeholder": "Интересовања одвојена зарезом",
+      "interestType": "Опсег",
+      "interestTypeOptions": {
+        "personal": "Лични",
+        "work": "Пословни"
+      }
     }
   }
 }

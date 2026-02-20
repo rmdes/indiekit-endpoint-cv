@@ -26,6 +26,11 @@
         "volunteer": "Volunteer",
         "internship": "Internship"
       },
+      "experienceType": "Scope",
+      "experienceTypeOptions": {
+        "personal": "Personal",
+        "work": "Work"
+      },
       "descriptionField": "Description",
       "highlights": "Highlights (one per line)"
     },
@@ -56,7 +61,12 @@
       "description": "Technical and professional skills grouped by category.",
       "add": "Add Category",
       "category": "Category Name",
-      "items": "Skills (comma-separated)"
+      "items": "Skills (comma-separated)",
+      "skillType": "Scope",
+      "skillTypeOptions": {
+        "personal": "Personal",
+        "work": "Work"
+      }
     },
     "education": {
       "title": "Education",
@@ -67,7 +77,12 @@
       "institution": "Institution",
       "location": "Location",
       "year": "Year(s)",
-      "descriptionField": "Description"
+      "descriptionField": "Description",
+      "educationType": "Scope",
+      "educationTypeOptions": {
+        "personal": "Personal",
+        "work": "Work"
+      }
     },
     "languages": {
       "title": "Languages",
@@ -88,7 +103,12 @@
       "title": "Interests",
       "description": "Topics and hobbies you're passionate about.",
       "add": "Add Interest",
-      "placeholder": "Comma-separated interests"
+      "placeholder": "Comma-separated interests",
+      "interestType": "Scope",
+      "interestTypeOptions": {
+        "personal": "Personal",
+        "work": "Work"
+      }
     }
   }
 }

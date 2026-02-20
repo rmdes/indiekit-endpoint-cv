@@ -283,7 +283,13 @@
   {% for category, items in cv.skills | dictsort %}
   <input type="hidden" name="skills[{{ category }}]" value="{{ items | join(', ') }}">
   {% endfor %}
+  {% for category, type in cv.skillTypes | dictsort %}
+  <input type="hidden" name="skillTypes[{{ category }}]" value="{{ type }}">
+  {% endfor %}
   <input type="hidden" name="interests" value="{{ cv.interests | join(', ') }}">
+  {% for interest, type in cv.interestTypes | dictsort %}
+  <input type="hidden" name="interestTypes[{{ interest }}]" value="{{ type }}">
+  {% endfor %}
   <div class="cv-save-banner">
     <span class="cv-save-banner__text">Order changed — drag more or save now</span>
     <button type="submit" class="button button--primary">Save All Changes</button>
@@ -315,6 +321,7 @@
                 {{ item.company }}{% if item.location %} &middot; {{ item.location }}{% endif %}
                 {% if item.startDate %} &middot; {{ item.startDate }}{% if item.endDate %} – {{ item.endDate }}{% else %} – Present{% endif %}{% endif %}
                 {% if item.type %} &middot; {{ item.type }}{% endif %}
+                {% if item.experienceType %}<span class="cv-tag">{{ item.experienceType }}</span>{% endif %}
               </div>
               {% if item.description %}
               <div class="cv-item__sub" style="margin-top:0.25rem">{{ item.description }}</div>
@@ -360,6 +367,13 @@
                       <option value="freelance" {% if item.type == "freelance" %}selected{% endif %}>Freelance</option>
                       <option value="volunteer" {% if item.type == "volunteer" %}selected{% endif %}>Volunteer</option>
                       <option value="internship" {% if item.type == "internship" %}selected{% endif %}>Internship</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="label">{{ __("cv.experience.experienceType") }}</label>
+                    <select class="select" name="experienceType">
+                      <option value="personal" {% if item.experienceType == "personal" or not item.experienceType %}selected{% endif %}>{{ __("cv.experience.experienceTypeOptions.personal") }}</option>
+                      <option value="work" {% if item.experienceType == "work" %}selected{% endif %}>{{ __("cv.experience.experienceTypeOptions.work") }}</option>
                     </select>
                   </div>
                 </div>
@@ -422,6 +436,13 @@
                 <option value="freelance">Freelance</option>
                 <option value="volunteer">Volunteer</option>
                 <option value="internship">Internship</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="exp-scope">{{ __("cv.experience.experienceType") }}</label>
+              <select class="select" id="exp-scope" name="experienceType">
+                <option value="personal" selected>{{ __("cv.experience.experienceTypeOptions.personal") }}</option>
+                <option value="work">{{ __("cv.experience.experienceTypeOptions.work") }}</option>
               </select>
             </div>
           </div>
@@ -621,7 +642,7 @@
         {% for category, items in cv.skills | dictsort %}
         <div class="cv-item cv-item--has-edit">
           <div class="cv-item__info">
-            <div class="cv-item__title">{{ category }}</div>
+            <div class="cv-item__title">{{ category }}{% if cv.skillTypes and cv.skillTypes[category] %} <span class="cv-tag">{{ cv.skillTypes[category] }}</span>{% endif %}</div>
             <div class="cv-item__tags">
               {% for skill in items %}<span class="cv-tag">{{ skill }}</span>{% endfor %}
             </div>
@@ -645,6 +666,13 @@
                 <div class="field">
                   <label class="label">{{ __("cv.skills.items") }}</label>
                   <input class="input" type="text" name="items" value="{{ items | join(', ') }}" required placeholder="Python, JavaScript, Go">
+                </div>
+                <div class="field">
+                  <label class="label">{{ __("cv.skills.skillType") }}</label>
+                  <select class="select" name="skillType">
+                    <option value="personal" {% if (cv.skillTypes and cv.skillTypes[category] == "personal") or not (cv.skillTypes and cv.skillTypes[category]) %}selected{% endif %}>{{ __("cv.skills.skillTypeOptions.personal") }}</option>
+                    <option value="work" {% if cv.skillTypes and cv.skillTypes[category] == "work" %}selected{% endif %}>{{ __("cv.skills.skillTypeOptions.work") }}</option>
+                  </select>
                 </div>
               </div>
               <div class="cv-form__buttons">
@@ -670,6 +698,13 @@
             <div class="field">
               <label class="label" for="skill-items">{{ __("cv.skills.items") }}</label>
               <input class="input" type="text" id="skill-items" name="items" required placeholder="Python, JavaScript, Go">
+            </div>
+            <div class="field">
+              <label class="label" for="skill-scope">{{ __("cv.skills.skillType") }}</label>
+              <select class="select" id="skill-scope" name="skillType">
+                <option value="personal" selected>{{ __("cv.skills.skillTypeOptions.personal") }}</option>
+                <option value="work">{{ __("cv.skills.skillTypeOptions.work") }}</option>
+              </select>
             </div>
           </div>
           <button type="submit" class="button button--primary button--small">{{ __("cv.skills.add") }}</button>
@@ -700,6 +735,7 @@
               <div class="cv-item__sub">
                 {{ item.institution }}{% if item.location %} &middot; {{ item.location }}{% endif %}
                 {% if item.startDate %} &middot; {{ item.startDate }}{% if item.endDate %} – {{ item.endDate }}{% else %} – Present{% endif %}{% elif item.year %} &middot; {{ item.year }}{% endif %}
+                {% if item.educationType %}<span class="cv-tag">{{ item.educationType }}</span>{% endif %}
               </div>
               {% if item.description %}
               <div class="cv-item__sub" style="margin-top:0.25rem">{{ item.description }}</div>
@@ -730,6 +766,13 @@
                   <div class="field">
                     <label class="label">{{ __("cv.education.location") }}</label>
                     <input class="input" type="text" name="location" value="{{ item.location }}">
+                  </div>
+                  <div class="field">
+                    <label class="label">{{ __("cv.education.educationType") }}</label>
+                    <select class="select" name="educationType">
+                      <option value="personal" {% if item.educationType == "personal" or not item.educationType %}selected{% endif %}>{{ __("cv.education.educationTypeOptions.personal") }}</option>
+                      <option value="work" {% if item.educationType == "work" %}selected{% endif %}>{{ __("cv.education.educationTypeOptions.work") }}</option>
+                    </select>
                   </div>
                 </div>
                 <div class="field-row">
@@ -773,9 +816,18 @@
               <input class="input" type="text" id="edu-inst" name="institution" required>
             </div>
           </div>
-          <div class="field">
-            <label class="label" for="edu-location">{{ __("cv.education.location") }}</label>
-            <input class="input" type="text" id="edu-location" name="location">
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="edu-location">{{ __("cv.education.location") }}</label>
+              <input class="input" type="text" id="edu-location" name="location">
+            </div>
+            <div class="field">
+              <label class="label" for="edu-scope">{{ __("cv.education.educationType") }}</label>
+              <select class="select" id="edu-scope" name="educationType">
+                <option value="personal" selected>{{ __("cv.education.educationTypeOptions.personal") }}</option>
+                <option value="work">{{ __("cv.education.educationTypeOptions.work") }}</option>
+              </select>
+            </div>
           </div>
           <div class="field-row">
             <div class="field">
@@ -897,7 +949,7 @@
       <div class="cv-item">
         <div class="cv-item__info">
           <div class="cv-item__tags">
-            {% for interest in cv.interests %}<span class="cv-tag">{{ interest }}</span>{% endfor %}
+            {% for interest in cv.interests %}<span class="cv-tag">{{ interest }}{% if cv.interestTypes and cv.interestTypes[interest] %} ({{ cv.interestTypes[interest] }}){% endif %}</span>{% endfor %}
           </div>
         </div>
       </div>
@@ -915,11 +967,28 @@
           {% for category, items in cv.skills | dictsort %}
           <input type="hidden" name="skills[{{ category }}]" value="{{ items | join(', ') }}">
           {% endfor %}
+          {% for category, type in cv.skillTypes | dictsort %}
+          <input type="hidden" name="skillTypes[{{ category }}]" value="{{ type }}">
+          {% endfor %}
           <div class="field">
             <label class="label" for="interests-input">{{ __("cv.interests.placeholder") }}</label>
             <input class="input" type="text" id="interests-input" name="interests" value="{{ cv.interests | join(', ') }}" placeholder="Open Source, IndieWeb, Music">
           </div>
-          <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+          {% if cv.interests.length %}
+          <div style="margin-top:0.75rem">
+            <label class="label">{{ __("cv.interests.interestType") }}</label>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:0.25rem 0.5rem;align-items:center;margin-top:0.25rem">
+              {% for interest in cv.interests %}
+              <span style="font-size:0.875rem">{{ interest }}</span>
+              <select name="interestTypes[{{ interest }}]" class="input" style="width:auto;padding:0.25rem 0.5rem;font-size:0.8125rem">
+                <option value="personal"{% if not cv.interestTypes or not cv.interestTypes[interest] or cv.interestTypes[interest] == "personal" %} selected{% endif %}>{{ __("cv.interests.interestTypeOptions.personal") }}</option>
+                <option value="work"{% if cv.interestTypes and cv.interestTypes[interest] == "work" %} selected{% endif %}>{{ __("cv.interests.interestTypeOptions.work") }}</option>
+              </select>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+          <button type="submit" class="button button--primary button--small" style="margin-top:0.75rem">{{ __("cv.save") }}</button>
         </form>
       </div>
     </div>
