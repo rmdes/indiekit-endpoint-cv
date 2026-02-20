@@ -476,10 +476,10 @@
 <script>
   // Label lookup maps
   var sectionLabels = {
-    {% for section in sections %}{{ section.id | dump }}: {{ section.label | dump }}{% if not loop.last %}, {% endif %}{% endfor %}
+    {% for section in sections %}{{ section.id | dump | safe }}: {{ section.label | dump | safe }}{% if not loop.last %}, {% endif %}{% endfor %}
   };
   var widgetLabels = {
-    {% for widget in widgets %}{{ widget.id | dump }}: {{ widget.label | dump }}{% if not loop.last %}, {% endif %}{% endfor %}
+    {% for widget in widgets %}{{ widget.id | dump | safe }}: {{ widget.label | dump | safe }}{% if not loop.last %}, {% endif %}{% endfor %}
   };
   var allLabels = Object.assign({}, sectionLabels, widgetLabels);
 
