@@ -87,8 +87,8 @@ export default class CvEndpoint {
       },
       {
         id: "cv-education",
-        label: "Education & Languages (All)",
-        description: "All education items and languages",
+        label: "Education (All)",
+        description: "All education items",
         icon: "book",
         dataEndpoint: "/cv/data.json",
         defaultConfig: {},
