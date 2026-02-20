@@ -4,6 +4,7 @@ import path from "node:path";
 
 import { dashboardController } from "./lib/controllers/dashboard.js";
 import { apiController } from "./lib/controllers/api.js";
+import { pageBuilderController } from "./lib/controllers/pageBuilder.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -248,6 +249,15 @@ export default class CvEndpoint {
         defaultConfig: {},
         configSchema: {},
       },
+      {
+        id: "cv-languages",
+        label: "Languages",
+        description: "Language proficiency list",
+        icon: "globe",
+        dataEndpoint: "/cv/data.json",
+        defaultConfig: {},
+        configSchema: {},
+      },
     ];
   }
 
@@ -260,6 +270,11 @@ export default class CvEndpoint {
 
     // Save CV data
     protectedRouter.post("/save", dashboardController.save);
+
+    // CV Page Builder
+    protectedRouter.get("/page", pageBuilderController.get);
+    protectedRouter.post("/page/save", pageBuilderController.save);
+    protectedRouter.post("/page/preset", pageBuilderController.applyPreset);
 
     // CRUD for individual sections
     protectedRouter.post("/experience/add", dashboardController.addExperience);
@@ -295,6 +310,7 @@ export default class CvEndpoint {
   get routesPublic() {
     // Public JSON API for Eleventy and homepage plugin
     publicRouter.get("/data.json", apiController.getData);
+    publicRouter.get("/page.json", apiController.getPageConfig);
 
     return publicRouter;
   }
@@ -302,12 +318,16 @@ export default class CvEndpoint {
   init(Indiekit) {
     Indiekit.addEndpoint(this);
 
-    // Add MongoDB collection for CV data
+    // Add MongoDB collections for CV data and page config
     Indiekit.addCollection("cvData");
+    Indiekit.addCollection("cvPageConfig");
 
     // Store config in application for controller access
     Indiekit.config.application.cvConfig = this.options;
     Indiekit.config.application.cvEndpoint = this.mountPath;
+
+    // Store CV sections list for page builder
+    Indiekit.config.application.cvSections = this.homepageSections;
 
     // Store database getter for controller access
     Indiekit.config.application.getCvDb = () => Indiekit.database;
@@ -327,5 +347,19 @@ export default class CvEndpoint {
         console.log("[CV] Deferred file write:", error.message);
       }
     }, 2000);
+
+    // Write CV page config file for Eleventy on startup
+    setTimeout(async () => {
+      try {
+        const { getConfig, getDefaultConfig, writeConfigFile } = await import(
+          "./lib/storage/cvPageConfig.js"
+        );
+        const config = (await getConfig(app)) || getDefaultConfig();
+        writeConfigFile(app, config);
+        console.log("[CV Page] Initial config file written for Eleventy");
+      } catch (error) {
+        console.log("[CV Page] Deferred file write:", error.message);
+      }
+    }, 2500);
   }
 }

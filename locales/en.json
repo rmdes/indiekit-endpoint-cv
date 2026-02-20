@@ -110,5 +110,75 @@
         "work": "Work"
       }
     }
+  },
+  "cvPageBuilder": {
+    "title": "CV Page Builder",
+    "description": "Configure the layout and sections of your /cv/ page",
+    "save": "Save CV Page Layout",
+    "saved": "CV page layout saved",
+    "cancel": "Cancel",
+    "layout": {
+      "label": "Page Layout",
+      "description": "Choose how your CV page is organized",
+      "singleColumn": "Single Column",
+      "twoColumn": "Two Column (with Sidebar)",
+      "fullWidthHero": "Full Width Hero"
+    },
+    "hero": {
+      "label": "Hero Section",
+      "description": "The hero section is always shown at the top of your CV page",
+      "enabled": "Show Hero",
+      "showSocial": "Show Social Links"
+    },
+    "sections": {
+      "label": "Main Sections",
+      "description": "Drag to reorder sections. Click to configure.",
+      "addSection": "Add Section",
+      "noSections": "No sections yet. Add sections from the list below.",
+      "availableSections": "Available Sections",
+      "sectionType": "Section Type"
+    },
+    "sidebar": {
+      "label": "Sidebar Widgets",
+      "description": "Sidebar appears when using Two Column layout",
+      "addWidget": "Add Widget",
+      "noWidgets": "No widgets yet. Add widgets from the list below.",
+      "availableWidgets": "Available Widgets",
+      "widgetType": "Widget Type"
+    },
+    "footer": {
+      "label": "Footer Columns",
+      "description": "Add custom footer columns (max 3)",
+      "addColumn": "Add Column",
+      "noColumns": "No footer columns yet. Add columns below.",
+      "maxColumns": "Maximum 3 footer columns allowed"
+    },
+    "presets": {
+      "label": "Presets",
+      "description": "Apply pre-configured layouts",
+      "apply": "Apply Preset",
+      "professionalCv": {
+        "label": "Professional CV",
+        "description": "Clean single-column layout with work-only sections"
+      },
+      "fullPortfolio": {
+        "label": "Full Portfolio",
+        "description": "Two-column layout with all sections and widgets"
+      },
+      "minimal": {
+        "label": "Minimal",
+        "description": "Essential sections only in a clean single-column layout"
+      }
+    },
+    "designLink": "Design CV Page",
+    "backLink": "Back to CV Editor",
+    "customContent": {
+      "label": "Custom Content",
+      "title": "Section Title",
+      "content": "HTML Content",
+      "edit": "Edit Content",
+      "save": "Save Content",
+      "cancel": "Cancel"
+    }
   }
 }

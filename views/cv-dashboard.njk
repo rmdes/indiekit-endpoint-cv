@@ -258,6 +258,17 @@
   <p class="page-header__description">{{ __("cv.description") }}</p>
 </header>
 
+{# Link to CV Page Builder #}
+<div style="margin-block-end: var(--space-l, 1.5rem);">
+  <a href="{{ cvEndpoint }}/page" class="button button--secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      <polyline points="9 22 9 12 15 12 15 22"/>
+    </svg>
+    {{ __("cvPageBuilder.designLink") }}
+  </a>
+</div>
+
 {% if request.query.saved %}
 <div class="cv-success">
   <p>{{ __("cv.saved") }}</p>
