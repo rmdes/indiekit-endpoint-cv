@@ -280,14 +280,14 @@
   <input type="hidden" name="projects" id="projects-json" value="{{ cv.projects | dump | e }}">
   <input type="hidden" name="education" id="education-json" value="{{ cv.education | dump | e }}">
   <input type="hidden" name="languages" id="languages-json" value="{{ cv.languages | dump | e }}">
-  {% for category, items in cv.skills | dictsort %}
+  {% for category, items in (cv.skills or {}) | dictsort %}
   <input type="hidden" name="skills[{{ category }}]" value="{{ items | join(', ') }}">
   {% endfor %}
-  {% for category, type in cv.skillTypes | dictsort %}
+  {% for category, type in (cv.skillTypes or {}) | dictsort %}
   <input type="hidden" name="skillTypes[{{ category }}]" value="{{ type }}">
   {% endfor %}
   <input type="hidden" name="interests" value="{{ cv.interests | join(', ') }}">
-  {% for interest, type in cv.interestTypes | dictsort %}
+  {% for interest, type in (cv.interestTypes or {}) | dictsort %}
   <input type="hidden" name="interestTypes[{{ interest }}]" value="{{ type }}">
   {% endfor %}
   <div class="cv-save-banner">
@@ -632,14 +632,14 @@
   {# ===== SKILLS ===== #}
   <details class="cv-accordion" id="skills">
     <summary class="cv-accordion__header">
-      {{ __("cv.skills.title") }} ({{ cv.skills | dictsort | length if cv.skills else 0 }})
+      {{ __("cv.skills.title") }} ({{ (cv.skills or {}) | dictsort | length }})
       <svg class="cv-accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
     </summary>
     <div class="cv-accordion__body">
       <p class="cv-accordion__desc">{{ __("cv.skills.description") }}</p>
 
-      {% if cv.skills and (cv.skills | dictsort | length) %}
-        {% for category, items in cv.skills | dictsort %}
+      {% if cv.skills and ((cv.skills or {}) | dictsort | length) %}
+        {% for category, items in (cv.skills or {}) | dictsort %}
         <div class="cv-item cv-item--has-edit">
           <div class="cv-item__info">
             <div class="cv-item__title">{{ category }}{% if cv.skillTypes and cv.skillTypes[category] %} <span class="cv-tag">{{ cv.skillTypes[category] }}</span>{% endif %}</div>
@@ -964,10 +964,10 @@
           <input type="hidden" name="education" value="{{ cv.education | dump | e }}">
           <input type="hidden" name="languages" value="{{ cv.languages | dump | e }}">
           {# Skills need special handling - pass as JSON #}
-          {% for category, items in cv.skills | dictsort %}
+          {% for category, items in (cv.skills or {}) | dictsort %}
           <input type="hidden" name="skills[{{ category }}]" value="{{ items | join(', ') }}">
           {% endfor %}
-          {% for category, type in cv.skillTypes | dictsort %}
+          {% for category, type in (cv.skillTypes or {}) | dictsort %}
           <input type="hidden" name="skillTypes[{{ category }}]" value="{{ type }}">
           {% endfor %}
           <div class="field">
