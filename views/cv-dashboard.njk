@@ -291,16 +291,16 @@
   <input type="hidden" name="projects" id="projects-json" value="{{ cv.projects | dump | e }}">
   <input type="hidden" name="education" id="education-json" value="{{ cv.education | dump | e }}">
   <input type="hidden" name="languages" id="languages-json" value="{{ cv.languages | dump | e }}">
-  {% for category, items in (cv.skills or {}) | dictsort %}
+  {% for category, items in (cv.skills or {}) %}
   <input type="hidden" name="skills[{{ category }}]" value="{{ items | join(', ') }}">
   {% endfor %}
-  {% for category, type in (cv.skillTypes or {}) | dictsort %}
+  {% for category, type in (cv.skillTypes or {}) %}
   <input type="hidden" name="skillTypes[{{ category }}]" value="{{ type }}">
   {% endfor %}
-  {% for category, items in (cv.interests or {}) | dictsort %}
+  {% for category, items in (cv.interests or {}) %}
   <input type="hidden" name="interests[{{ category }}]" value="{{ items | join(', ') }}">
   {% endfor %}
-  {% for category, type in (cv.interestTypes or {}) | dictsort %}
+  {% for category, type in (cv.interestTypes or {}) %}
   <input type="hidden" name="interestTypes[{{ category }}]" value="{{ type }}">
   {% endfor %}
   <div class="cv-save-banner">
@@ -652,50 +652,57 @@
       <p class="cv-accordion__desc">{{ __("cv.skills.description") }}</p>
 
       {% if cv.skills and ((cv.skills or {}) | dictsort | length) %}
-        {% for category, items in (cv.skills or {}) | dictsort %}
-        <div class="cv-item cv-item--has-edit">
-          <div class="cv-item__info">
-            <div class="cv-item__title">{{ category }}{% if cv.skillTypes and cv.skillTypes[category] %} <span class="cv-tag">{{ cv.skillTypes[category] }}</span>{% endif %}</div>
-            <div class="cv-item__tags">
-              {% for skill in items %}<span class="cv-tag">{{ skill }}</span>{% endfor %}
+      <div class="cv-sortable-list" id="skills-sortable">
+        {% for category, items in (cv.skills or {}) %}
+        <div class="cv-sortable-item" data-category="{{ category }}" data-items="{{ items | join(', ') }}" data-type="{{ cv.skillTypes[category] if cv.skillTypes and cv.skillTypes[category] else 'personal' }}">
+          <div class="cv-item cv-item--has-edit">
+            <span class="drag-handle" title="Drag to reorder">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm8-16a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+            </span>
+            <div class="cv-item__info">
+              <div class="cv-item__title">{{ category }}{% if cv.skillTypes and cv.skillTypes[category] %} <span class="cv-tag">{{ cv.skillTypes[category] }}</span>{% endif %}</div>
+              <div class="cv-item__tags">
+                {% for skill in items %}<span class="cv-tag">{{ skill }}</span>{% endfor %}
+              </div>
+            </div>
+            <div class="cv-item__actions">
+              <button type="button" class="button button--small" onclick="var d=this.closest('.cv-sortable-item').querySelector('.cv-edit-details');d.open=!d.open">Edit</button>
+              <form method="post" action="{{ cvEndpoint }}/skills/{{ category | urlencode }}/delete" style="margin:0">
+                <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this category?')">Delete</button>
+              </form>
             </div>
           </div>
-          <div class="cv-item__actions">
-            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">Edit</button>
-            <form method="post" action="{{ cvEndpoint }}/skills/{{ category | urlencode }}/delete" style="margin:0">
-              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this category?')">Delete</button>
-            </form>
-          </div>
+          <details class="cv-edit-details">
+            <summary></summary>
+            <div class="cv-form">
+              <form method="post" action="{{ cvEndpoint }}/skills/{{ category | urlencode }}/edit">
+                <div class="field-row">
+                  <div class="field">
+                    <label class="label">{{ __("cv.skills.category") }}</label>
+                    <input class="input" type="text" name="category" value="{{ category }}" required>
+                  </div>
+                  <div class="field">
+                    <label class="label">{{ __("cv.skills.items") }}</label>
+                    <input class="input" type="text" name="items" value="{{ items | join(', ') }}" required placeholder="Python, JavaScript, Go">
+                  </div>
+                  <div class="field">
+                    <label class="label">{{ __("cv.skills.skillType") }}</label>
+                    <select class="select" name="skillType">
+                      <option value="personal" {% if (cv.skillTypes and cv.skillTypes[category] == "personal") or not (cv.skillTypes and cv.skillTypes[category]) %}selected{% endif %}>{{ __("cv.skills.skillTypeOptions.personal") }}</option>
+                      <option value="work" {% if cv.skillTypes and cv.skillTypes[category] == "work" %}selected{% endif %}>{{ __("cv.skills.skillTypeOptions.work") }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="cv-form__buttons">
+                  <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                  <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </details>
         </div>
-        <details class="cv-edit-details">
-          <summary></summary>
-          <div class="cv-form">
-            <form method="post" action="{{ cvEndpoint }}/skills/{{ category | urlencode }}/edit">
-              <div class="field-row">
-                <div class="field">
-                  <label class="label">{{ __("cv.skills.category") }}</label>
-                  <input class="input" type="text" name="category" value="{{ category }}" required>
-                </div>
-                <div class="field">
-                  <label class="label">{{ __("cv.skills.items") }}</label>
-                  <input class="input" type="text" name="items" value="{{ items | join(', ') }}" required placeholder="Python, JavaScript, Go">
-                </div>
-                <div class="field">
-                  <label class="label">{{ __("cv.skills.skillType") }}</label>
-                  <select class="select" name="skillType">
-                    <option value="personal" {% if (cv.skillTypes and cv.skillTypes[category] == "personal") or not (cv.skillTypes and cv.skillTypes[category]) %}selected{% endif %}>{{ __("cv.skills.skillTypeOptions.personal") }}</option>
-                    <option value="work" {% if cv.skillTypes and cv.skillTypes[category] == "work" %}selected{% endif %}>{{ __("cv.skills.skillTypeOptions.work") }}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="cv-form__buttons">
-                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
-                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
-              </div>
-            </form>
-          </div>
-        </details>
         {% endfor %}
+      </div>
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
       {% endif %}
@@ -959,50 +966,57 @@
       <p class="cv-accordion__desc">{{ __("cv.interests.description") }}</p>
 
       {% if cv.interests and ((cv.interests or {}) | dictsort | length) %}
-        {% for category, items in (cv.interests or {}) | dictsort %}
-        <div class="cv-item cv-item--has-edit">
-          <div class="cv-item__info">
-            <div class="cv-item__title">{{ category }}{% if cv.interestTypes and cv.interestTypes[category] %} <span class="cv-tag">{{ cv.interestTypes[category] }}</span>{% endif %}</div>
-            <div class="cv-item__tags">
-              {% for interest in items %}<span class="cv-tag">{{ interest }}</span>{% endfor %}
+      <div class="cv-sortable-list" id="interests-sortable">
+        {% for category, items in (cv.interests or {}) %}
+        <div class="cv-sortable-item" data-category="{{ category }}" data-items="{{ items | join(', ') }}" data-type="{{ cv.interestTypes[category] if cv.interestTypes and cv.interestTypes[category] else 'personal' }}">
+          <div class="cv-item cv-item--has-edit">
+            <span class="drag-handle" title="Drag to reorder">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm8-16a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+            </span>
+            <div class="cv-item__info">
+              <div class="cv-item__title">{{ category }}{% if cv.interestTypes and cv.interestTypes[category] %} <span class="cv-tag">{{ cv.interestTypes[category] }}</span>{% endif %}</div>
+              <div class="cv-item__tags">
+                {% for interest in items %}<span class="cv-tag">{{ interest }}</span>{% endfor %}
+              </div>
+            </div>
+            <div class="cv-item__actions">
+              <button type="button" class="button button--small" onclick="var d=this.closest('.cv-sortable-item').querySelector('.cv-edit-details');d.open=!d.open">Edit</button>
+              <form method="post" action="{{ cvEndpoint }}/interests/{{ category | urlencode }}/delete" style="margin:0">
+                <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this category?')">Delete</button>
+              </form>
             </div>
           </div>
-          <div class="cv-item__actions">
-            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">Edit</button>
-            <form method="post" action="{{ cvEndpoint }}/interests/{{ category | urlencode }}/delete" style="margin:0">
-              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this category?')">Delete</button>
-            </form>
-          </div>
+          <details class="cv-edit-details">
+            <summary></summary>
+            <div class="cv-form">
+              <form method="post" action="{{ cvEndpoint }}/interests/{{ category | urlencode }}/edit">
+                <div class="field-row">
+                  <div class="field">
+                    <label class="label">{{ __("cv.interests.category") }}</label>
+                    <input class="input" type="text" name="category" value="{{ category }}" required>
+                  </div>
+                  <div class="field">
+                    <label class="label">{{ __("cv.interests.items") }}</label>
+                    <input class="input" type="text" name="items" value="{{ items | join(', ') }}" required placeholder="Open Source, IndieWeb, Music">
+                  </div>
+                  <div class="field">
+                    <label class="label">{{ __("cv.interests.interestType") }}</label>
+                    <select class="select" name="interestType">
+                      <option value="personal" {% if (cv.interestTypes and cv.interestTypes[category] == "personal") or not (cv.interestTypes and cv.interestTypes[category]) %}selected{% endif %}>{{ __("cv.interests.interestTypeOptions.personal") }}</option>
+                      <option value="work" {% if cv.interestTypes and cv.interestTypes[category] == "work" %}selected{% endif %}>{{ __("cv.interests.interestTypeOptions.work") }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="cv-form__buttons">
+                  <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                  <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </details>
         </div>
-        <details class="cv-edit-details">
-          <summary></summary>
-          <div class="cv-form">
-            <form method="post" action="{{ cvEndpoint }}/interests/{{ category | urlencode }}/edit">
-              <div class="field-row">
-                <div class="field">
-                  <label class="label">{{ __("cv.interests.category") }}</label>
-                  <input class="input" type="text" name="category" value="{{ category }}" required>
-                </div>
-                <div class="field">
-                  <label class="label">{{ __("cv.interests.items") }}</label>
-                  <input class="input" type="text" name="items" value="{{ items | join(', ') }}" required placeholder="Open Source, IndieWeb, Music">
-                </div>
-                <div class="field">
-                  <label class="label">{{ __("cv.interests.interestType") }}</label>
-                  <select class="select" name="interestType">
-                    <option value="personal" {% if (cv.interestTypes and cv.interestTypes[category] == "personal") or not (cv.interestTypes and cv.interestTypes[category]) %}selected{% endif %}>{{ __("cv.interests.interestTypeOptions.personal") }}</option>
-                    <option value="work" {% if cv.interestTypes and cv.interestTypes[category] == "work" %}selected{% endif %}>{{ __("cv.interests.interestTypeOptions.work") }}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="cv-form__buttons">
-                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
-                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
-              </div>
-            </form>
-          </div>
-        </details>
         {% endfor %}
+      </div>
       {% else %}
         <p class="cv-empty">{{ __("cv.noData") }}</p>
       {% endif %}
@@ -1071,10 +1085,43 @@
     showSaveBanner();
   }
 
+  // Sync reordered object-based sections (skills, interests)
+  function syncObjectSection(sectionName, typesName) {
+    var list = document.getElementById(sectionName + '-sortable');
+    if (!list) return;
+    var items = list.querySelectorAll('.cv-sortable-item');
+
+    // Remove old hidden inputs for this section from save form
+    saveForm.querySelectorAll('input[name^="' + sectionName + '["]').forEach(function(el) { el.remove(); });
+    saveForm.querySelectorAll('input[name^="' + typesName + '["]').forEach(function(el) { el.remove(); });
+
+    // Re-add in new order from DOM
+    items.forEach(function(el) {
+      var cat = el.dataset.category;
+      var itemsStr = el.dataset.items;
+      var typeStr = el.dataset.type;
+
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = sectionName + '[' + cat + ']';
+      input.value = itemsStr;
+      saveForm.appendChild(input);
+
+      var typeInput = document.createElement('input');
+      typeInput.type = 'hidden';
+      typeInput.name = typesName + '[' + cat + ']';
+      typeInput.value = typeStr;
+      saveForm.appendChild(typeInput);
+    });
+
+    showSaveBanner();
+  }
+
   // Load SortableJS from CDN
   var script = document.createElement('script');
   script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js';
   script.onload = function() {
+    // Array-based sections
     ['experience', 'projects', 'education', 'languages'].forEach(function(section) {
       var el = document.getElementById(section + '-sortable');
       if (!el || !el.children.length) return;
@@ -1085,6 +1132,20 @@
         chosenClass: 'cv-sortable-chosen',
         draggable: '.cv-sortable-item',
         onEnd: function() { syncSection(section); }
+      });
+    });
+
+    // Object-based sections (skills, interests)
+    [{ name: 'skills', types: 'skillTypes' }, { name: 'interests', types: 'interestTypes' }].forEach(function(cfg) {
+      var el = document.getElementById(cfg.name + '-sortable');
+      if (!el || !el.children.length) return;
+      new Sortable(el, {
+        handle: '.drag-handle',
+        animation: 150,
+        ghostClass: 'cv-sortable-ghost',
+        chosenClass: 'cv-sortable-chosen',
+        draggable: '.cv-sortable-item',
+        onEnd: function() { syncObjectSection(cfg.name, cfg.types); }
       });
     });
   };
