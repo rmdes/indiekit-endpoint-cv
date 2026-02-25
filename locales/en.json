@@ -179,6 +179,43 @@
       "edit": "Edit Content",
       "save": "Save Content",
       "cancel": "Cancel"
+    },
+    "tabs": {
+      "builder": "Layout",
+      "identity": "Identity"
+    },
+    "identity": {
+      "saved": "CV identity saved successfully.",
+      "description": "Configure the professional identity shown in your CV hero section. Leave fields empty to use your site-wide defaults.",
+      "profile": {
+        "legend": "Professional Profile",
+        "name": { "label": "Full Name", "hint": "Your professional name (leave empty to use site default)" },
+        "title": { "label": "Job Title", "hint": "Your current role or professional title" },
+        "avatar": { "label": "Photo URL", "hint": "URL to a professional headshot or avatar" },
+        "pronoun": { "label": "Pronouns", "hint": "e.g. he/him, she/her, they/them" },
+        "bio": { "label": "Professional Summary", "hint": "A brief professional bio for your CV" },
+        "description": { "label": "Extended Description", "hint": "Longer description shown below the bio" }
+      },
+      "location": {
+        "legend": "Location & Organization",
+        "locality": { "label": "City", "hint": "Your city or locality" },
+        "country": { "label": "Country" },
+        "org": { "label": "Organization", "hint": "Current employer or company" }
+      },
+      "contact": {
+        "legend": "Contact",
+        "url": { "label": "Website URL", "hint": "Your professional website or portfolio" },
+        "email": { "label": "Email" },
+        "keyUrl": { "label": "PGP Key URL", "hint": "URL to your public PGP key" }
+      },
+      "social": {
+        "legend": "Professional Links",
+        "description": "Links shown in your CV hero section (e.g. LinkedIn, GitHub, portfolio).",
+        "name": { "label": "Name" },
+        "url": { "label": "URL" },
+        "rel": { "label": "Rel" },
+        "icon": { "label": "Icon" }
+      }
     }
   }
 }

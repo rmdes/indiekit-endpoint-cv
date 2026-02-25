@@ -276,6 +276,10 @@ export default class CvEndpoint {
     protectedRouter.post("/page/save", pageBuilderController.save);
     protectedRouter.post("/page/preset", pageBuilderController.applyPreset);
 
+    // CV Page Identity
+    protectedRouter.get("/page/identity", pageBuilderController.getIdentity);
+    protectedRouter.post("/page/save-identity", pageBuilderController.saveIdentity);
+
     // CRUD for individual sections
     protectedRouter.post("/experience/add", dashboardController.addExperience);
     protectedRouter.post("/experience/:index/edit", dashboardController.editExperience);

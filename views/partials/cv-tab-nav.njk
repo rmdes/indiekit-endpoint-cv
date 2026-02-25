@@ -1,0 +1,36 @@
+{# Tab navigation for CV page builder - server-rendered URL tabs #}
+<style>
+  .hp-tab-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--color-outline-variant, #ddd);
+    margin-block-end: var(--space-xl, 2rem);
+  }
+  .hp-tab-nav__item {
+    padding: var(--space-s, 0.75rem) var(--space-m, 1.25rem);
+    text-decoration: none;
+    color: var(--color-on-offset, #666);
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .hp-tab-nav__item:hover {
+    color: var(--color-primary, #0066cc);
+  }
+  .hp-tab-nav__item--active {
+    color: var(--color-primary, #0066cc);
+    border-bottom-color: var(--color-primary, #0066cc);
+    font-weight: 600;
+  }
+</style>
+<nav class="hp-tab-nav" aria-label="CV page settings">
+  <a href="{{ cvEndpoint }}/page"
+     class="hp-tab-nav__item{% if activeTab == 'builder' %} hp-tab-nav__item--active{% endif %}">
+    {{ __("cvPageBuilder.tabs.builder") }}
+  </a>
+  <a href="{{ cvEndpoint }}/page/identity"
+     class="hp-tab-nav__item{% if activeTab == 'identity' %} hp-tab-nav__item--active{% endif %}">
+    {{ __("cvPageBuilder.tabs.identity") }}
+  </a>
+</nav>

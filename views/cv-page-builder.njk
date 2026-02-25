@@ -311,6 +311,8 @@
   </a>
 </div>
 
+{% include "partials/cv-tab-nav.njk" %}
+
 {% if request.query.saved %}
 <div class="hp-success">
   <p>{{ __("cvPageBuilder.saved") }}</p>
