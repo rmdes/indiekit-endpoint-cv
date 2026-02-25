@@ -101,9 +101,10 @@
     },
     "interests": {
       "title": "Interests",
-      "description": "Topics and hobbies you're passionate about.",
-      "add": "Add Interest",
-      "placeholder": "Comma-separated interests",
+      "description": "Topics and hobbies grouped by category.",
+      "add": "Add Category",
+      "category": "Category Name",
+      "items": "Interests (comma-separated)",
       "interestType": "Scope",
       "interestTypeOptions": {
         "personal": "Personal",

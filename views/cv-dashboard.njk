@@ -950,56 +950,82 @@
   {# ===== INTERESTS ===== #}
   <details class="cv-accordion" id="interests">
     <summary class="cv-accordion__header">
-      {{ __("cv.interests.title") }} ({{ cv.interests.length or 0 }})
+      {{ __("cv.interests.title") }} ({{ (cv.interests or {}) | dictsort | length }})
       <svg class="cv-accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
     </summary>
     <div class="cv-accordion__body">
       <p class="cv-accordion__desc">{{ __("cv.interests.description") }}</p>
 
-      {% if cv.interests.length %}
-      <div class="cv-item">
-        <div class="cv-item__info">
-          <div class="cv-item__tags">
-            {% for interest in cv.interests %}<span class="cv-tag">{{ interest }}{% if cv.interestTypes and cv.interestTypes[interest] %} ({{ cv.interestTypes[interest] }}){% endif %}</span>{% endfor %}
+      {% if cv.interests and ((cv.interests or {}) | dictsort | length) %}
+        {% for category, items in (cv.interests or {}) | dictsort %}
+        <div class="cv-item cv-item--has-edit">
+          <div class="cv-item__info">
+            <div class="cv-item__title">{{ category }}{% if cv.interestTypes and cv.interestTypes[category] %} <span class="cv-tag">{{ cv.interestTypes[category] }}</span>{% endif %}</div>
+            <div class="cv-item__tags">
+              {% for interest in items %}<span class="cv-tag">{{ interest }}</span>{% endfor %}
+            </div>
+          </div>
+          <div class="cv-item__actions">
+            <button type="button" class="button button--small" onclick="var d=this.closest('.cv-item').nextElementSibling;d.open=!d.open">Edit</button>
+            <form method="post" action="{{ cvEndpoint }}/interests/{{ category | urlencode }}/delete" style="margin:0">
+              <button type="submit" class="button button--small button--secondary" onclick="return confirm('Delete this category?')">Delete</button>
+            </form>
           </div>
         </div>
-      </div>
+        <details class="cv-edit-details">
+          <summary></summary>
+          <div class="cv-form">
+            <form method="post" action="{{ cvEndpoint }}/interests/{{ category | urlencode }}/edit">
+              <div class="field-row">
+                <div class="field">
+                  <label class="label">{{ __("cv.interests.category") }}</label>
+                  <input class="input" type="text" name="category" value="{{ category }}" required>
+                </div>
+                <div class="field">
+                  <label class="label">{{ __("cv.interests.items") }}</label>
+                  <input class="input" type="text" name="items" value="{{ items | join(', ') }}" required placeholder="Open Source, IndieWeb, Music">
+                </div>
+                <div class="field">
+                  <label class="label">{{ __("cv.interests.interestType") }}</label>
+                  <select class="select" name="interestType">
+                    <option value="personal" {% if (cv.interestTypes and cv.interestTypes[category] == "personal") or not (cv.interestTypes and cv.interestTypes[category]) %}selected{% endif %}>{{ __("cv.interests.interestTypeOptions.personal") }}</option>
+                    <option value="work" {% if cv.interestTypes and cv.interestTypes[category] == "work" %}selected{% endif %}>{{ __("cv.interests.interestTypeOptions.work") }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="cv-form__buttons">
+                <button type="submit" class="button button--primary button--small">{{ __("cv.save") }}</button>
+                <button type="button" class="button button--small button--secondary" onclick="this.closest('details').open=false">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </details>
+        {% endfor %}
+      {% else %}
+        <p class="cv-empty">{{ __("cv.noData") }}</p>
       {% endif %}
 
       <div class="cv-form">
         <h4>{{ __("cv.interests.add") }}</h4>
-        <form method="post" action="{{ cvEndpoint }}/save">
-          {# Pass through all existing data to preserve it #}
-          <input type="hidden" name="experience" value="{{ cv.experience | dump | e }}">
-          <input type="hidden" name="projects" value="{{ cv.projects | dump | e }}">
-          <input type="hidden" name="education" value="{{ cv.education | dump | e }}">
-          <input type="hidden" name="languages" value="{{ cv.languages | dump | e }}">
-          {# Skills need special handling - pass as JSON #}
-          {% for category, items in (cv.skills or {}) | dictsort %}
-          <input type="hidden" name="skills[{{ category }}]" value="{{ items | join(', ') }}">
-          {% endfor %}
-          {% for category, type in (cv.skillTypes or {}) | dictsort %}
-          <input type="hidden" name="skillTypes[{{ category }}]" value="{{ type }}">
-          {% endfor %}
-          <div class="field">
-            <label class="label" for="interests-input">{{ __("cv.interests.placeholder") }}</label>
-            <input class="input" type="text" id="interests-input" name="interests" value="{{ cv.interests | join(', ') }}" placeholder="Open Source, IndieWeb, Music">
-          </div>
-          {% if cv.interests.length %}
-          <div style="margin-top:0.75rem">
-            <label class="label">{{ __("cv.interests.interestType") }}</label>
-            <div style="display:grid;grid-template-columns:1fr auto;gap:0.25rem 0.5rem;align-items:center;margin-top:0.25rem">
-              {% for interest in cv.interests %}
-              <span style="font-size:0.875rem">{{ interest }}</span>
-              <select name="interestTypes[{{ interest }}]" class="input" style="width:auto;padding:0.25rem 0.5rem;font-size:0.8125rem">
-                <option value="personal"{% if not cv.interestTypes or not cv.interestTypes[interest] or cv.interestTypes[interest] == "personal" %} selected{% endif %}>{{ __("cv.interests.interestTypeOptions.personal") }}</option>
-                <option value="work"{% if cv.interestTypes and cv.interestTypes[interest] == "work" %} selected{% endif %}>{{ __("cv.interests.interestTypeOptions.work") }}</option>
+        <form method="post" action="{{ cvEndpoint }}/interests/add">
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="interest-cat">{{ __("cv.interests.category") }}</label>
+              <input class="input" type="text" id="interest-cat" name="category" required placeholder="e.g. Technology, Hobbies">
+            </div>
+            <div class="field">
+              <label class="label" for="interest-items">{{ __("cv.interests.items") }}</label>
+              <input class="input" type="text" id="interest-items" name="items" required placeholder="Open Source, IndieWeb, Music">
+            </div>
+            <div class="field">
+              <label class="label" for="interest-scope">{{ __("cv.interests.interestType") }}</label>
+              <select class="select" id="interest-scope" name="interestType">
+                <option value="personal" selected>{{ __("cv.interests.interestTypeOptions.personal") }}</option>
+                <option value="work">{{ __("cv.interests.interestTypeOptions.work") }}</option>
               </select>
-              {% endfor %}
             </div>
           </div>
-          {% endif %}
-          <button type="submit" class="button button--primary button--small" style="margin-top:0.75rem">{{ __("cv.save") }}</button>
+          <button type="submit" class="button button--primary button--small">{{ __("cv.interests.add") }}</button>
         </form>
       </div>
     </div>
