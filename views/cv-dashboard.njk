@@ -297,9 +297,11 @@
   {% for category, type in (cv.skillTypes or {}) | dictsort %}
   <input type="hidden" name="skillTypes[{{ category }}]" value="{{ type }}">
   {% endfor %}
-  <input type="hidden" name="interests" value="{{ cv.interests | join(', ') }}">
-  {% for interest, type in (cv.interestTypes or {}) | dictsort %}
-  <input type="hidden" name="interestTypes[{{ interest }}]" value="{{ type }}">
+  {% for category, items in (cv.interests or {}) | dictsort %}
+  <input type="hidden" name="interests[{{ category }}]" value="{{ items | join(', ') }}">
+  {% endfor %}
+  {% for category, type in (cv.interestTypes or {}) | dictsort %}
+  <input type="hidden" name="interestTypes[{{ category }}]" value="{{ type }}">
   {% endfor %}
   <div class="cv-save-banner">
     <span class="cv-save-banner__text">Order changed — drag more or save now</span>
