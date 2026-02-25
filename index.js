@@ -342,14 +342,21 @@ export default class CvEndpoint {
 
     // Write CV data file for Eleventy on startup
     // Deferred so database connection is established first
+    // Uses saveCvData() to trigger interest migration if needed
     const app = Indiekit.config.application;
     setTimeout(async () => {
       try {
-        const { getCvData, getDefaultCvData, writeCvFile } = await import(
+        const { getCvData, getDefaultCvData, saveCvData, writeCvFile } = await import(
           "./lib/storage/cv.js"
         );
         const data = (await getCvData(app)) || getDefaultCvData();
-        writeCvFile(app, data);
+        // Migrate old flat interests array to category-based format on startup
+        if (Array.isArray(data.interests)) {
+          console.log("[CV] Migrating interests from flat array to categories");
+          await saveCvData(app, data);
+        } else {
+          writeCvFile(app, data);
+        }
         console.log("[CV] Initial data file written for Eleventy");
       } catch (error) {
         console.log("[CV] Deferred file write:", error.message);
