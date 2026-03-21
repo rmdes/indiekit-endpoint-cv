@@ -101,13 +101,163 @@
     },
     "interests": {
       "title": "Interesses",
-      "description": "Onderwerpen en hobby's waar je gepassioneerd over bent.",
+      "description": "Onderwerpen en hobby's gegroepeerd per categorie.",
       "add": "Interesse toevoegen",
-      "placeholder": "Kommagescheiden interesses",
       "interestType": "Bereik",
       "interestTypeOptions": {
         "personal": "Persoonlijk",
         "work": "Werk"
+      },
+      "category": "Categorienaam",
+      "items": "Interesses (gescheiden door komma's)"
+    }
+  },
+  "cvPageBuilder": {
+    "title": "CV-paginaontwerper",
+    "description": "Configureer de lay-out en secties van je /cv/-pagina",
+    "save": "CV-paginalay-out opslaan",
+    "saved": "CV-paginalay-out opgeslagen",
+    "cancel": "Annuleren",
+    "layout": {
+      "label": "Paginalay-out",
+      "description": "Kies hoe je CV-pagina is georganiseerd",
+      "singleColumn": "Enkele kolom",
+      "twoColumn": "Twee kolommen (met zijbalk)",
+      "fullWidthHero": "Volledige breedte hero"
+    },
+    "hero": {
+      "label": "Hero-sectie",
+      "description": "De hero-sectie wordt altijd boven aan je CV-pagina getoond",
+      "enabled": "Hero tonen",
+      "showSocial": "Sociale links tonen"
+    },
+    "sections": {
+      "label": "Hoofdsecties",
+      "description": "Sleep om te herschikken. Klik om te configureren.",
+      "addSection": "Sectie toevoegen",
+      "noSections": "Nog geen secties. Voeg secties toe vanuit de lijst hieronder.",
+      "availableSections": "Beschikbare secties",
+      "sectionType": "Sectietype"
+    },
+    "sidebar": {
+      "label": "Zijbalkwidgets",
+      "description": "Zijbalk verschijnt bij tweekolomlay-out",
+      "addWidget": "Widget toevoegen",
+      "noWidgets": "Nog geen widgets. Voeg widgets toe vanuit de lijst hieronder.",
+      "availableWidgets": "Beschikbare widgets",
+      "widgetType": "Widgettype"
+    },
+    "footer": {
+      "label": "Voettekstkolommen",
+      "description": "Voeg aangepaste voettekstkolommen toe (max 3)",
+      "addColumn": "Kolom toevoegen",
+      "noColumns": "Nog geen voettekstkolommen. Voeg kolommen toe hieronder.",
+      "maxColumns": "Maximaal 3 voettekstkolommen toegestaan"
+    },
+    "presets": {
+      "label": "Sjablonen",
+      "description": "Voorgeconfigureerde lay-outs toepassen",
+      "apply": "Sjabloon toepassen",
+      "professionalCv": {
+        "label": "Professioneel CV",
+        "description": "Strakke enkelvoudige kolom lay-out met werkgerelateerde secties"
+      },
+      "fullPortfolio": {
+        "label": "Volledig portfolio",
+        "description": "Tweekolomlay-out met alle secties en widgets"
+      },
+      "minimal": {
+        "label": "Minimaal",
+        "description": "Alleen essentiële secties in een strakke enkelvoudige kolom"
+      }
+    },
+    "designLink": "CV-pagina ontwerpen",
+    "backLink": "Terug naar CV-editor",
+    "customContent": {
+      "label": "Aangepaste inhoud",
+      "title": "Sectietitel",
+      "content": "HTML-inhoud",
+      "edit": "Inhoud bewerken",
+      "save": "Inhoud opslaan",
+      "cancel": "Annuleren"
+    },
+    "tabs": {
+      "builder": "Lay-out",
+      "identity": "Identiteit"
+    },
+    "identity": {
+      "saved": "CV-identiteit succesvol opgeslagen.",
+      "description": "Configureer de professionele identiteit die in de hero-sectie van je CV wordt getoond. Laat velden leeg om de sitestandaarden te gebruiken.",
+      "profile": {
+        "legend": "Professioneel profiel",
+        "name": {
+          "label": "Volledige naam",
+          "hint": "Je professionele naam (leeg laten voor sitestandaard)"
+        },
+        "title": {
+          "label": "Functietitel",
+          "hint": "Je huidige rol of professionele titel"
+        },
+        "avatar": {
+          "label": "Foto-URL",
+          "hint": "URL naar een professionele foto of avatar"
+        },
+        "pronoun": {
+          "label": "Voornaamwoorden",
+          "hint": "bijv. hij/hem, zij/haar, hen/hun"
+        },
+        "bio": {
+          "label": "Professionele samenvatting",
+          "hint": "Een korte professionele bio voor je CV"
+        },
+        "description": {
+          "label": "Uitgebreide beschrijving",
+          "hint": "Langere beschrijving onder de bio"
+        }
+      },
+      "location": {
+        "legend": "Locatie & organisatie",
+        "locality": {
+          "label": "Stad",
+          "hint": "Je stad of plaats"
+        },
+        "country": {
+          "label": "Land"
+        },
+        "org": {
+          "label": "Organisatie",
+          "hint": "Huidige werkgever of bedrijf"
+        }
+      },
+      "contact": {
+        "legend": "Contact",
+        "url": {
+          "label": "Website-URL",
+          "hint": "Je professionele website of portfolio"
+        },
+        "email": {
+          "label": "E-mail"
+        },
+        "keyUrl": {
+          "label": "PGP-sleutel-URL",
+          "hint": "URL naar je openbare PGP-sleutel"
+        }
+      },
+      "social": {
+        "legend": "Professionele links",
+        "description": "Links getoond in de hero-sectie van je CV (bijv. LinkedIn, GitHub, portfolio).",
+        "name": {
+          "label": "Naam"
+        },
+        "url": {
+          "label": "URL"
+        },
+        "rel": {
+          "label": "Rel"
+        },
+        "icon": {
+          "label": "Pictogram"
+        }
       }
     }
   }

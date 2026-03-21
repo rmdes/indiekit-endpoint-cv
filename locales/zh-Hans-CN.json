@@ -101,13 +101,163 @@
     },
     "interests": {
       "title": "兴趣",
-      "description": "您热衷的主题和爱好。",
+      "description": "按类别分组的主题和爱好。",
       "add": "添加兴趣",
-      "placeholder": "逗号分隔的兴趣",
       "interestType": "范围",
       "interestTypeOptions": {
         "personal": "个人",
         "work": "工作"
+      },
+      "category": "类别名称",
+      "items": "兴趣爱好（用逗号分隔）"
+    }
+  },
+  "cvPageBuilder": {
+    "title": "简历页面构建器",
+    "description": "配置您的 /cv/ 页面的布局和章节",
+    "save": "保存简历页面布局",
+    "saved": "简历页面布局已保存",
+    "cancel": "取消",
+    "layout": {
+      "label": "页面布局",
+      "description": "选择简历页面的组织方式",
+      "singleColumn": "单栏",
+      "twoColumn": "双栏（带侧边栏）",
+      "fullWidthHero": "全宽 Hero"
+    },
+    "hero": {
+      "label": "Hero 区域",
+      "description": "Hero 区域始终显示在简历页面顶部",
+      "enabled": "显示 Hero",
+      "showSocial": "显示社交链接"
+    },
+    "sections": {
+      "label": "主要章节",
+      "description": "拖动重新排序。点击配置。",
+      "addSection": "添加章节",
+      "noSections": "还没有章节。从下面的列表添加章节。",
+      "availableSections": "可用章节",
+      "sectionType": "章节类型"
+    },
+    "sidebar": {
+      "label": "侧边栏小部件",
+      "description": "侧边栏在双栏布局中显示",
+      "addWidget": "添加小部件",
+      "noWidgets": "还没有小部件。从下面的列表添加小部件。",
+      "availableWidgets": "可用小部件",
+      "widgetType": "小部件类型"
+    },
+    "footer": {
+      "label": "页脚列",
+      "description": "添加自定义页脚列（最多 3 列）",
+      "addColumn": "添加列",
+      "noColumns": "还没有页脚列。在下方添加列。",
+      "maxColumns": "最多允许 3 个页脚列"
+    },
+    "presets": {
+      "label": "预设",
+      "description": "应用预配置的布局",
+      "apply": "应用预设",
+      "professionalCv": {
+        "label": "专业简历",
+        "description": "简洁的单栏布局，包含工作相关章节"
+      },
+      "fullPortfolio": {
+        "label": "完整作品集",
+        "description": "双栏布局，包含所有章节和小部件"
+      },
+      "minimal": {
+        "label": "极简",
+        "description": "仅基本章节的简洁单栏布局"
+      }
+    },
+    "designLink": "设计简历页面",
+    "backLink": "返回简历编辑器",
+    "customContent": {
+      "label": "自定义内容",
+      "title": "章节标题",
+      "content": "HTML 内容",
+      "edit": "编辑内容",
+      "save": "保存内容",
+      "cancel": "取消"
+    },
+    "tabs": {
+      "builder": "布局",
+      "identity": "身份"
+    },
+    "identity": {
+      "saved": "简历身份信息保存成功。",
+      "description": "配置显示在简历 Hero 区域的专业身份。留空字段以使用网站默认值。",
+      "profile": {
+        "legend": "专业档案",
+        "name": {
+          "label": "全名",
+          "hint": "您的专业名称（留空使用网站默认值）"
+        },
+        "title": {
+          "label": "职位",
+          "hint": "您当前的角色或职业头衔"
+        },
+        "avatar": {
+          "label": "照片 URL",
+          "hint": "专业头像或照片的 URL"
+        },
+        "pronoun": {
+          "label": "代词",
+          "hint": "例如 他/他的、她/她的"
+        },
+        "bio": {
+          "label": "专业摘要",
+          "hint": "简历中的简短专业介绍"
+        },
+        "description": {
+          "label": "详细描述",
+          "hint": "显示在简介下方的较长描述"
+        }
+      },
+      "location": {
+        "legend": "位置和组织",
+        "locality": {
+          "label": "城市",
+          "hint": "您的城市或地区"
+        },
+        "country": {
+          "label": "国家"
+        },
+        "org": {
+          "label": "组织",
+          "hint": "当前雇主或公司"
+        }
+      },
+      "contact": {
+        "legend": "联系方式",
+        "url": {
+          "label": "网站 URL",
+          "hint": "您的专业网站或作品集"
+        },
+        "email": {
+          "label": "电子邮件"
+        },
+        "keyUrl": {
+          "label": "PGP 密钥 URL",
+          "hint": "您的公共 PGP 密钥 URL"
+        }
+      },
+      "social": {
+        "legend": "专业链接",
+        "description": "显示在简历 Hero 区域的链接（如 LinkedIn、GitHub、作品集）。",
+        "name": {
+          "label": "名称"
+        },
+        "url": {
+          "label": "URL"
+        },
+        "rel": {
+          "label": "Rel"
+        },
+        "icon": {
+          "label": "图标"
+        }
       }
     }
   }

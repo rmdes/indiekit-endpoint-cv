@@ -101,13 +101,163 @@
     },
     "interests": {
       "title": "Zainteresowania",
-      "description": "Tematy i hobby, którymi się pasjenujesz.",
+      "description": "Tematy i hobby pogrupowane według kategorii.",
       "add": "Dodaj zainteresowanie",
-      "placeholder": "Zainteresowania oddzielone przecinkami",
       "interestType": "Zakres",
       "interestTypeOptions": {
         "personal": "Osobisty",
         "work": "Zawodowy"
+      },
+      "category": "Nazwa kategorii",
+      "items": "Zainteresowania (oddzielone przecinkami)"
+    }
+  },
+  "cvPageBuilder": {
+    "title": "Projektant strony CV",
+    "description": "Skonfiguruj układ i sekcje strony /cv/",
+    "save": "Zapisz układ strony CV",
+    "saved": "Układ strony CV zapisany",
+    "cancel": "Anuluj",
+    "layout": {
+      "label": "Układ strony",
+      "description": "Wybierz organizację strony CV",
+      "singleColumn": "Jedna kolumna",
+      "twoColumn": "Dwie kolumny (z paskiem bocznym)",
+      "fullWidthHero": "Hero na pełną szerokość"
+    },
+    "hero": {
+      "label": "Sekcja hero",
+      "description": "Sekcja hero jest zawsze widoczna na górze strony CV",
+      "enabled": "Pokaż hero",
+      "showSocial": "Pokaż linki społecznościowe"
+    },
+    "sections": {
+      "label": "Główne sekcje",
+      "description": "Przeciągnij, aby zmienić kolejność. Kliknij, aby skonfigurować.",
+      "addSection": "Dodaj sekcję",
+      "noSections": "Brak sekcji. Dodaj sekcje z listy poniżej.",
+      "availableSections": "Dostępne sekcje",
+      "sectionType": "Typ sekcji"
+    },
+    "sidebar": {
+      "label": "Widgety paska bocznego",
+      "description": "Pasek boczny pojawia się przy układzie dwukolumnowym",
+      "addWidget": "Dodaj widget",
+      "noWidgets": "Brak widgetów. Dodaj widgety z listy poniżej.",
+      "availableWidgets": "Dostępne widgety",
+      "widgetType": "Typ widgetu"
+    },
+    "footer": {
+      "label": "Kolumny stopki",
+      "description": "Dodaj niestandardowe kolumny stopki (maks. 3)",
+      "addColumn": "Dodaj kolumnę",
+      "noColumns": "Brak kolumn stopki. Dodaj kolumny poniżej.",
+      "maxColumns": "Maksymalnie 3 kolumny stopki dozwolone"
+    },
+    "presets": {
+      "label": "Szablony",
+      "description": "Zastosuj wstępnie skonfigurowane układy",
+      "apply": "Zastosuj szablon",
+      "professionalCv": {
+        "label": "Profesjonalne CV",
+        "description": "Czysty jednokolumnowy układ z sekcjami zawodowymi"
+      },
+      "fullPortfolio": {
+        "label": "Pełne portfolio",
+        "description": "Dwukolumnowy układ ze wszystkimi sekcjami i widgetami"
+      },
+      "minimal": {
+        "label": "Minimalistyczny",
+        "description": "Tylko niezbędne sekcje w czystym jednokolumnowym układzie"
+      }
+    },
+    "designLink": "Projektuj stronę CV",
+    "backLink": "Powrót do edytora CV",
+    "customContent": {
+      "label": "Niestandardowa treść",
+      "title": "Tytuł sekcji",
+      "content": "Treść HTML",
+      "edit": "Edytuj treść",
+      "save": "Zapisz treść",
+      "cancel": "Anuluj"
+    },
+    "tabs": {
+      "builder": "Układ",
+      "identity": "Tożsamość"
+    },
+    "identity": {
+      "saved": "Tożsamość CV zapisana pomyślnie.",
+      "description": "Skonfiguruj tożsamość zawodową wyświetlaną w sekcji hero CV. Zostaw pola puste, aby użyć domyślnych ustawień strony.",
+      "profile": {
+        "legend": "Profil zawodowy",
+        "name": {
+          "label": "Pełne imię",
+          "hint": "Twoje imię zawodowe (zostaw puste dla domyślnego)"
+        },
+        "title": {
+          "label": "Stanowisko",
+          "hint": "Twoja aktualna rola lub tytuł zawodowy"
+        },
+        "avatar": {
+          "label": "URL zdjęcia",
+          "hint": "URL do profesjonalnego zdjęcia lub awatara"
+        },
+        "pronoun": {
+          "label": "Zaimki",
+          "hint": "np. on/jego, ona/jej, oni/ich"
+        },
+        "bio": {
+          "label": "Podsumowanie zawodowe",
+          "hint": "Krótka biografia zawodowa do CV"
+        },
+        "description": {
+          "label": "Rozszerzona opis",
+          "hint": "Dłuższy opis wyświetlany pod biografią"
+        }
+      },
+      "location": {
+        "legend": "Lokalizacja i organizacja",
+        "locality": {
+          "label": "Miasto",
+          "hint": "Twoje miasto lub miejscowość"
+        },
+        "country": {
+          "label": "Kraj"
+        },
+        "org": {
+          "label": "Organizacja",
+          "hint": "Aktualny pracodawca lub firma"
+        }
+      },
+      "contact": {
+        "legend": "Kontakt",
+        "url": {
+          "label": "URL strony",
+          "hint": "Twoja profesjonalna strona lub portfolio"
+        },
+        "email": {
+          "label": "E-mail"
+        },
+        "keyUrl": {
+          "label": "URL klucza PGP",
+          "hint": "URL do publicznego klucza PGP"
+        }
+      },
+      "social": {
+        "legend": "Linki zawodowe",
+        "description": "Linki wyświetlane w sekcji hero CV (np. LinkedIn, GitHub, portfolio).",
+        "name": {
+          "label": "Nazwa"
+        },
+        "url": {
+          "label": "URL"
+        },
+        "rel": {
+          "label": "Rel"
+        },
+        "icon": {
+          "label": "Ikona"
+        }
       }
     }
   }

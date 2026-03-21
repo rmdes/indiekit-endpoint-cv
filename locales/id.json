@@ -101,13 +101,163 @@
     },
     "interests": {
       "title": "Minat",
-      "description": "Topik dan hobi yang Anda gemari.",
+      "description": "Topik dan hobi yang dikelompokkan berdasarkan kategori.",
       "add": "Tambah Minat",
-      "placeholder": "Minat dipisahkan koma",
       "interestType": "Cakupan",
       "interestTypeOptions": {
         "personal": "Pribadi",
         "work": "Pekerjaan"
+      },
+      "category": "Nama Kategori",
+      "items": "Minat (dipisahkan koma)"
+    }
+  },
+  "cvPageBuilder": {
+    "title": "Pembuat Halaman CV",
+    "description": "Konfigurasikan tata letak dan bagian halaman /cv/ Anda",
+    "save": "Simpan Tata Letak Halaman CV",
+    "saved": "Tata letak halaman CV disimpan",
+    "cancel": "Batal",
+    "layout": {
+      "label": "Tata Letak Halaman",
+      "description": "Pilih cara halaman CV Anda diatur",
+      "singleColumn": "Satu Kolom",
+      "twoColumn": "Dua Kolom (dengan Bilah Sisi)",
+      "fullWidthHero": "Hero Lebar Penuh"
+    },
+    "hero": {
+      "label": "Bagian Hero",
+      "description": "Bagian hero selalu ditampilkan di atas halaman CV Anda",
+      "enabled": "Tampilkan Hero",
+      "showSocial": "Tampilkan Tautan Sosial"
+    },
+    "sections": {
+      "label": "Bagian Utama",
+      "description": "Seret untuk mengatur ulang. Klik untuk mengonfigurasi.",
+      "addSection": "Tambah Bagian",
+      "noSections": "Belum ada bagian. Tambahkan bagian dari daftar di bawah.",
+      "availableSections": "Bagian Tersedia",
+      "sectionType": "Jenis Bagian"
+    },
+    "sidebar": {
+      "label": "Widget Bilah Sisi",
+      "description": "Bilah sisi muncul saat menggunakan tata letak dua kolom",
+      "addWidget": "Tambah Widget",
+      "noWidgets": "Belum ada widget. Tambahkan widget dari daftar di bawah.",
+      "availableWidgets": "Widget Tersedia",
+      "widgetType": "Jenis Widget"
+    },
+    "footer": {
+      "label": "Kolom Footer",
+      "description": "Tambahkan kolom footer kustom (maks 3)",
+      "addColumn": "Tambah Kolom",
+      "noColumns": "Belum ada kolom footer. Tambahkan kolom di bawah.",
+      "maxColumns": "Maksimal 3 kolom footer diizinkan"
+    },
+    "presets": {
+      "label": "Preset",
+      "description": "Terapkan tata letak yang telah dikonfigurasi",
+      "apply": "Terapkan Preset",
+      "professionalCv": {
+        "label": "CV Profesional",
+        "description": "Tata letak satu kolom bersih dengan bagian pekerjaan"
+      },
+      "fullPortfolio": {
+        "label": "Portfolio Lengkap",
+        "description": "Tata letak dua kolom dengan semua bagian dan widget"
+      },
+      "minimal": {
+        "label": "Minimal",
+        "description": "Hanya bagian penting dalam tata letak satu kolom bersih"
+      }
+    },
+    "designLink": "Desain Halaman CV",
+    "backLink": "Kembali ke Editor CV",
+    "customContent": {
+      "label": "Konten Kustom",
+      "title": "Judul Bagian",
+      "content": "Konten HTML",
+      "edit": "Edit Konten",
+      "save": "Simpan Konten",
+      "cancel": "Batal"
+    },
+    "tabs": {
+      "builder": "Tata Letak",
+      "identity": "Identitas"
+    },
+    "identity": {
+      "saved": "Identitas CV berhasil disimpan.",
+      "description": "Konfigurasikan identitas profesional yang ditampilkan di bagian hero CV Anda. Biarkan bidang kosong untuk menggunakan default situs.",
+      "profile": {
+        "legend": "Profil Profesional",
+        "name": {
+          "label": "Nama Lengkap",
+          "hint": "Nama profesional Anda (biarkan kosong untuk default situs)"
+        },
+        "title": {
+          "label": "Jabatan",
+          "hint": "Peran atau gelar profesional Anda saat ini"
+        },
+        "avatar": {
+          "label": "URL Foto",
+          "hint": "URL foto profesional atau avatar"
+        },
+        "pronoun": {
+          "label": "Kata Ganti",
+          "hint": "mis. dia, mereka"
+        },
+        "bio": {
+          "label": "Ringkasan Profesional",
+          "hint": "Biografi profesional singkat untuk CV Anda"
+        },
+        "description": {
+          "label": "Deskripsi Diperluas",
+          "hint": "Deskripsi lebih panjang ditampilkan di bawah biografi"
+        }
+      },
+      "location": {
+        "legend": "Lokasi & Organisasi",
+        "locality": {
+          "label": "Kota",
+          "hint": "Kota atau lokalitas Anda"
+        },
+        "country": {
+          "label": "Negara"
+        },
+        "org": {
+          "label": "Organisasi",
+          "hint": "Pemberi kerja atau perusahaan saat ini"
+        }
+      },
+      "contact": {
+        "legend": "Kontak",
+        "url": {
+          "label": "URL Situs Web",
+          "hint": "Situs web profesional atau portfolio Anda"
+        },
+        "email": {
+          "label": "Email"
+        },
+        "keyUrl": {
+          "label": "URL Kunci PGP",
+          "hint": "URL ke kunci PGP publik Anda"
+        }
+      },
+      "social": {
+        "legend": "Tautan Profesional",
+        "description": "Tautan yang ditampilkan di bagian hero CV Anda (mis. LinkedIn, GitHub, portfolio).",
+        "name": {
+          "label": "Nama"
+        },
+        "url": {
+          "label": "URL"
+        },
+        "rel": {
+          "label": "Rel"
+        },
+        "icon": {
+          "label": "Ikon"
+        }
       }
     }
   }

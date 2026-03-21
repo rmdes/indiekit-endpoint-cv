@@ -101,13 +101,163 @@
     },
     "interests": {
       "title": "Interessen",
-      "description": "Themen und Hobbys, für die Sie sich begeistern.",
+      "description": "Themen und Hobbys nach Kategorien gruppiert.",
       "add": "Interesse hinzufügen",
-      "placeholder": "Kommagetrennte Interessen",
       "interestType": "Bereich",
       "interestTypeOptions": {
         "personal": "Privat",
         "work": "Beruflich"
+      },
+      "category": "Kategoriename",
+      "items": "Interessen (durch Komma getrennt)"
+    }
+  },
+  "cvPageBuilder": {
+    "title": "CV-Seitendesigner",
+    "description": "Konfigurieren Sie das Layout und die Abschnitte Ihrer /cv/-Seite",
+    "save": "CV-Seitenlayout speichern",
+    "saved": "CV-Seitenlayout gespeichert",
+    "cancel": "Abbrechen",
+    "layout": {
+      "label": "Seitenlayout",
+      "description": "Wählen Sie die Organisation Ihrer CV-Seite",
+      "singleColumn": "Einzelne Spalte",
+      "twoColumn": "Zwei Spalten (mit Seitenleiste)",
+      "fullWidthHero": "Volle Breite Hero"
+    },
+    "hero": {
+      "label": "Hero-Bereich",
+      "description": "Der Hero-Bereich wird immer oben auf Ihrer CV-Seite angezeigt",
+      "enabled": "Hero anzeigen",
+      "showSocial": "Soziale Links anzeigen"
+    },
+    "sections": {
+      "label": "Hauptabschnitte",
+      "description": "Zum Umordnen ziehen. Zum Konfigurieren klicken.",
+      "addSection": "Abschnitt hinzufügen",
+      "noSections": "Noch keine Abschnitte. Fügen Sie Abschnitte aus der Liste unten hinzu.",
+      "availableSections": "Verfügbare Abschnitte",
+      "sectionType": "Abschnittstyp"
+    },
+    "sidebar": {
+      "label": "Seitenleisten-Widgets",
+      "description": "Seitenleiste erscheint beim Zwei-Spalten-Layout",
+      "addWidget": "Widget hinzufügen",
+      "noWidgets": "Noch keine Widgets. Fügen Sie Widgets aus der Liste unten hinzu.",
+      "availableWidgets": "Verfügbare Widgets",
+      "widgetType": "Widget-Typ"
+    },
+    "footer": {
+      "label": "Fußzeilenspalten",
+      "description": "Benutzerdefinierte Fußzeilenspalten hinzufügen (max. 3)",
+      "addColumn": "Spalte hinzufügen",
+      "noColumns": "Noch keine Fußzeilenspalten. Spalten unten hinzufügen.",
+      "maxColumns": "Maximal 3 Fußzeilenspalten erlaubt"
+    },
+    "presets": {
+      "label": "Vorlagen",
+      "description": "Vorkonfigurierte Layouts anwenden",
+      "apply": "Vorlage anwenden",
+      "professionalCv": {
+        "label": "Professioneller Lebenslauf",
+        "description": "Sauberes einspaltiges Layout mit arbeitsbezogenen Abschnitten"
+      },
+      "fullPortfolio": {
+        "label": "Volles Portfolio",
+        "description": "Zweispaltiges Layout mit allen Abschnitten und Widgets"
+      },
+      "minimal": {
+        "label": "Minimal",
+        "description": "Nur wesentliche Abschnitte in einem sauberen einspaltigen Layout"
+      }
+    },
+    "designLink": "CV-Seite gestalten",
+    "backLink": "Zurück zum CV-Editor",
+    "customContent": {
+      "label": "Benutzerdefinierter Inhalt",
+      "title": "Abschnittstitel",
+      "content": "HTML-Inhalt",
+      "edit": "Inhalt bearbeiten",
+      "save": "Inhalt speichern",
+      "cancel": "Abbrechen"
+    },
+    "tabs": {
+      "builder": "Layout",
+      "identity": "Identität"
+    },
+    "identity": {
+      "saved": "CV-Identität erfolgreich gespeichert.",
+      "description": "Konfigurieren Sie die professionelle Identität in Ihrem CV-Hero-Bereich. Felder leer lassen, um die seitenweiten Standardwerte zu verwenden.",
+      "profile": {
+        "legend": "Professionelles Profil",
+        "name": {
+          "label": "Vollständiger Name",
+          "hint": "Ihr professioneller Name (leer lassen für Seitenstandard)"
+        },
+        "title": {
+          "label": "Berufsbezeichnung",
+          "hint": "Ihre aktuelle Rolle oder professionelle Bezeichnung"
+        },
+        "avatar": {
+          "label": "Foto-URL",
+          "hint": "URL zu einem professionellen Porträtfoto oder Avatar"
+        },
+        "pronoun": {
+          "label": "Pronomen",
+          "hint": "z.B. er/ihm, sie/ihr"
+        },
+        "bio": {
+          "label": "Professionelle Zusammenfassung",
+          "hint": "Eine kurze professionelle Biografie für Ihren Lebenslauf"
+        },
+        "description": {
+          "label": "Erweiterte Beschreibung",
+          "hint": "Längere Beschreibung unterhalb der Biografie"
+        }
+      },
+      "location": {
+        "legend": "Standort & Organisation",
+        "locality": {
+          "label": "Stadt",
+          "hint": "Ihre Stadt oder Ortschaft"
+        },
+        "country": {
+          "label": "Land"
+        },
+        "org": {
+          "label": "Organisation",
+          "hint": "Aktueller Arbeitgeber oder Unternehmen"
+        }
+      },
+      "contact": {
+        "legend": "Kontakt",
+        "url": {
+          "label": "Website-URL",
+          "hint": "Ihre professionelle Website oder Portfolio"
+        },
+        "email": {
+          "label": "E-Mail"
+        },
+        "keyUrl": {
+          "label": "PGP-Schlüssel-URL",
+          "hint": "URL zu Ihrem öffentlichen PGP-Schlüssel"
+        }
+      },
+      "social": {
+        "legend": "Professionelle Links",
+        "description": "Links in Ihrem CV-Hero-Bereich (z.B. LinkedIn, GitHub, Portfolio).",
+        "name": {
+          "label": "Name"
+        },
+        "url": {
+          "label": "URL"
+        },
+        "rel": {
+          "label": "Rel"
+        },
+        "icon": {
+          "label": "Symbol"
+        }
       }
     }
   }

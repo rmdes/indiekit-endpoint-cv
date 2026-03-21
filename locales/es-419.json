@@ -93,7 +93,7 @@
       "level": "Nivel",
       "levelOptions": {
         "native": "Nativo",
-        "fluido": "Fluido",
+        "fluent": "Fluido",
         "advanced": "Avanzado",
         "intermediate": "Intermedio",
         "basic": "Básico"
@@ -101,13 +101,163 @@
     },
     "interests": {
       "title": "Intereses",
-      "description": "Temas y pasatiempos que te apasionan.",
+      "description": "Temas y pasatiempos agrupados por categoría.",
       "add": "Agregar interés",
-      "placeholder": "Intereses separados por comas",
       "interestType": "Ámbito",
       "interestTypeOptions": {
         "personal": "Personal",
         "work": "Laboral"
+      },
+      "category": "Nombre de la categoría",
+      "items": "Intereses (separados por coma)"
+    }
+  },
+  "cvPageBuilder": {
+    "title": "Diseñador de página CV",
+    "description": "Configure la disposición y las secciones de su página /cv/",
+    "save": "Guardar diseño de la página CV",
+    "saved": "Diseño de la página CV guardado",
+    "cancel": "Cancelar",
+    "layout": {
+      "label": "Diseño de página",
+      "description": "Elija cómo se organiza su página CV",
+      "singleColumn": "Una columna",
+      "twoColumn": "Dos columnas (con barra lateral)",
+      "fullWidthHero": "Hero de ancho completo"
+    },
+    "hero": {
+      "label": "Sección hero",
+      "description": "La sección hero siempre se muestra en la parte superior de su página CV",
+      "enabled": "Mostrar hero",
+      "showSocial": "Mostrar enlaces sociales"
+    },
+    "sections": {
+      "label": "Secciones principales",
+      "description": "Arrastre para reordenar. Haga clic para configurar.",
+      "addSection": "Agregar sección",
+      "noSections": "Todavía no hay secciones. Agregue secciones de la lista de abajo.",
+      "availableSections": "Secciones disponibles",
+      "sectionType": "Tipo de sección"
+    },
+    "sidebar": {
+      "label": "Widgets de la barra lateral",
+      "description": "La barra lateral aparece al usar el diseño de dos columnas",
+      "addWidget": "Agregar widget",
+      "noWidgets": "Todavía no hay widgets. Agregue widgets de la lista de abajo.",
+      "availableWidgets": "Widgets disponibles",
+      "widgetType": "Tipo de widget"
+    },
+    "footer": {
+      "label": "Columnas del pie de página",
+      "description": "Agregue columnas personalizadas al pie de página (máx. 3)",
+      "addColumn": "Agregar columna",
+      "noColumns": "Todavía no hay columnas. Agregue columnas abajo.",
+      "maxColumns": "Máximo 3 columnas de pie de página permitidas"
+    },
+    "presets": {
+      "label": "Plantillas",
+      "description": "Aplicar diseños preconfigurados",
+      "apply": "Aplicar plantilla",
+      "professionalCv": {
+        "label": "CV profesional",
+        "description": "Diseño limpio de una columna con secciones laborales"
+      },
+      "fullPortfolio": {
+        "label": "Portfolio completo",
+        "description": "Diseño de dos columnas con todas las secciones y widgets"
+      },
+      "minimal": {
+        "label": "Mínimo",
+        "description": "Solo secciones esenciales en un diseño limpio de una columna"
+      }
+    },
+    "designLink": "Diseñar página CV",
+    "backLink": "Volver al editor de CV",
+    "customContent": {
+      "label": "Contenido personalizado",
+      "title": "Título de la sección",
+      "content": "Contenido HTML",
+      "edit": "Editar contenido",
+      "save": "Guardar contenido",
+      "cancel": "Cancelar"
+    },
+    "tabs": {
+      "builder": "Diseño",
+      "identity": "Identidad"
+    },
+    "identity": {
+      "saved": "Identidad del CV guardada correctamente.",
+      "description": "Configure la identidad profesional que se muestra en la sección hero de su CV. Deje los campos vacíos para usar los valores predeterminados del sitio.",
+      "profile": {
+        "legend": "Perfil profesional",
+        "name": {
+          "label": "Nombre completo",
+          "hint": "Su nombre profesional (deje vacío para usar el predeterminado del sitio)"
+        },
+        "title": {
+          "label": "Cargo",
+          "hint": "Su rol actual o título profesional"
+        },
+        "avatar": {
+          "label": "URL de la foto",
+          "hint": "URL de una foto profesional o avatar"
+        },
+        "pronoun": {
+          "label": "Pronombres",
+          "hint": "p. ej. él, ella, elle"
+        },
+        "bio": {
+          "label": "Resumen profesional",
+          "hint": "Una breve biografía profesional para su CV"
+        },
+        "description": {
+          "label": "Descripción extendida",
+          "hint": "Descripción más larga mostrada debajo de la biografía"
+        }
+      },
+      "location": {
+        "legend": "Ubicación y organización",
+        "locality": {
+          "label": "Ciudad",
+          "hint": "Su ciudad o localidad"
+        },
+        "country": {
+          "label": "País"
+        },
+        "org": {
+          "label": "Organización",
+          "hint": "Empleador actual o empresa"
+        }
+      },
+      "contact": {
+        "legend": "Contacto",
+        "url": {
+          "label": "URL del sitio web",
+          "hint": "Su sitio web profesional o portfolio"
+        },
+        "email": {
+          "label": "Correo electrónico"
+        },
+        "keyUrl": {
+          "label": "URL de clave PGP",
+          "hint": "URL de su clave PGP pública"
+        }
+      },
+      "social": {
+        "legend": "Enlaces profesionales",
+        "description": "Enlaces mostrados en la sección hero de su CV (p. ej. LinkedIn, GitHub, portfolio).",
+        "name": {
+          "label": "Nombre"
+        },
+        "url": {
+          "label": "URL"
+        },
+        "rel": {
+          "label": "Rel"
+        },
+        "icon": {
+          "label": "Icono"
+        }
       }
     }
   }

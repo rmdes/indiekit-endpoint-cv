@@ -101,13 +101,163 @@
     },
     "interests": {
       "title": "Intressen",
-      "description": "Ämnen och hobbyer du brinner för.",
+      "description": "Ämnen och hobbyer grupperade efter kategori.",
       "add": "Lägg till intresse",
-      "placeholder": "Kommaseparerade intressen",
       "interestType": "Omfång",
       "interestTypeOptions": {
         "personal": "Personligt",
         "work": "Arbete"
+      },
+      "category": "Kategorinamn",
+      "items": "Intressen (separerade med komma)"
+    }
+  },
+  "cvPageBuilder": {
+    "title": "CV-siddesigner",
+    "description": "Konfigurera layouten och sektionerna på din /cv/-sida",
+    "save": "Spara CV-sidlayout",
+    "saved": "CV-sidlayout sparad",
+    "cancel": "Avbryt",
+    "layout": {
+      "label": "Sidlayout",
+      "description": "Välj hur din CV-sida är organiserad",
+      "singleColumn": "En kolumn",
+      "twoColumn": "Två kolumner (med sidofält)",
+      "fullWidthHero": "Hero i full bredd"
+    },
+    "hero": {
+      "label": "Hero-sektion",
+      "description": "Hero-sektionen visas alltid högst upp på din CV-sida",
+      "enabled": "Visa hero",
+      "showSocial": "Visa sociala länkar"
+    },
+    "sections": {
+      "label": "Huvudsektioner",
+      "description": "Dra för att ordna om. Klicka för att konfigurera.",
+      "addSection": "Lägg till sektion",
+      "noSections": "Inga sektioner ännu. Lägg till sektioner från listan nedan.",
+      "availableSections": "Tillgängliga sektioner",
+      "sectionType": "Sektionstyp"
+    },
+    "sidebar": {
+      "label": "Sidofältswidgets",
+      "description": "Sidofältet visas med tvåkolumnslayout",
+      "addWidget": "Lägg till widget",
+      "noWidgets": "Inga widgets ännu. Lägg till widgets från listan nedan.",
+      "availableWidgets": "Tillgängliga widgets",
+      "widgetType": "Widgettyp"
+    },
+    "footer": {
+      "label": "Sidfotskolumner",
+      "description": "Lägg till anpassade sidfotskolumner (max 3)",
+      "addColumn": "Lägg till kolumn",
+      "noColumns": "Inga sidfotskolumner ännu. Lägg till kolumner nedan.",
+      "maxColumns": "Maximalt 3 sidfotskolumner tillåtna"
+    },
+    "presets": {
+      "label": "Mallar",
+      "description": "Tillämpa förkonfigurerade layouter",
+      "apply": "Tillämpa mall",
+      "professionalCv": {
+        "label": "Professionellt CV",
+        "description": "Ren enkolumnslayout med arbetsrelaterade sektioner"
+      },
+      "fullPortfolio": {
+        "label": "Fullständig portfolio",
+        "description": "Tvåkolumnslayout med alla sektioner och widgets"
+      },
+      "minimal": {
+        "label": "Minimalt",
+        "description": "Bara nödvändiga sektioner i en ren enkolumnslayout"
+      }
+    },
+    "designLink": "Designa CV-sida",
+    "backLink": "Tillbaka till CV-redigerare",
+    "customContent": {
+      "label": "Anpassat innehåll",
+      "title": "Sektionstitel",
+      "content": "HTML-innehåll",
+      "edit": "Redigera innehåll",
+      "save": "Spara innehåll",
+      "cancel": "Avbryt"
+    },
+    "tabs": {
+      "builder": "Layout",
+      "identity": "Identitet"
+    },
+    "identity": {
+      "saved": "CV-identitet sparad.",
+      "description": "Konfigurera den professionella identiteten som visas i hero-sektionen på ditt CV. Lämna fält tomma för att använda webbplatsens standardvärden.",
+      "profile": {
+        "legend": "Professionell profil",
+        "name": {
+          "label": "Fullständigt namn",
+          "hint": "Ditt professionella namn (lämna tomt för standardvärde)"
+        },
+        "title": {
+          "label": "Jobbtitel",
+          "hint": "Din nuvarande roll eller professionella titel"
+        },
+        "avatar": {
+          "label": "Foto-URL",
+          "hint": "URL till ett professionellt foto eller avatar"
+        },
+        "pronoun": {
+          "label": "Pronomen",
+          "hint": "t.ex. han/honom, hon/henne, hen"
+        },
+        "bio": {
+          "label": "Professionell sammanfattning",
+          "hint": "En kort professionell biografi för ditt CV"
+        },
+        "description": {
+          "label": "Utökad beskrivning",
+          "hint": "Längre beskrivning som visas under biografin"
+        }
+      },
+      "location": {
+        "legend": "Plats & organisation",
+        "locality": {
+          "label": "Stad",
+          "hint": "Din stad eller ort"
+        },
+        "country": {
+          "label": "Land"
+        },
+        "org": {
+          "label": "Organisation",
+          "hint": "Nuvarande arbetsgivare eller företag"
+        }
+      },
+      "contact": {
+        "legend": "Kontakt",
+        "url": {
+          "label": "Webbplats-URL",
+          "hint": "Din professionella webbplats eller portfolio"
+        },
+        "email": {
+          "label": "E-post"
+        },
+        "keyUrl": {
+          "label": "PGP-nyckel-URL",
+          "hint": "URL till din offentliga PGP-nyckel"
+        }
+      },
+      "social": {
+        "legend": "Professionella länkar",
+        "description": "Länkar som visas i hero-sektionen på ditt CV (t.ex. LinkedIn, GitHub, portfolio).",
+        "name": {
+          "label": "Namn"
+        },
+        "url": {
+          "label": "URL"
+        },
+        "rel": {
+          "label": "Rel"
+        },
+        "icon": {
+          "label": "Ikon"
+        }
       }
     }
   }
