@@ -363,6 +363,15 @@ The plugin adds itself to Indiekit's navigation:
 - **Menu Item:** "CV" (requires database)
 - **Shortcut:** Briefcase icon in admin dashboard
 
+## Startup Gate
+
+This plugin uses `@rmdes/indiekit-startup-gate` to defer background tasks until the host signals readiness (after Eleventy build completes). This prevents resource contention during the build.
+
+**Deferred:** CV data file write + page config file write (for Eleventy)
+**Immediate:** Routes, indexes, collection registration
+
+See workspace CLAUDE.md for the full startup-gate pattern. Any new background tasks added to this plugin MUST be wrapped in `waitForReady()`.
+
 ## Security
 
 - **Protected Routes:** All admin UI and CRUD endpoints require authentication
