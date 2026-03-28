@@ -2,6 +2,8 @@ import express from "express";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
+import { waitForReady } from "@rmdes/indiekit-startup-gate";
+
 import { dashboardController } from "./lib/controllers/dashboard.js";
 import { apiController } from "./lib/controllers/api.js";
 import { pageBuilderController } from "./lib/controllers/pageBuilder.js";
@@ -344,41 +346,46 @@ export default class CvEndpoint {
     // Store database getter for controller access
     Indiekit.config.application.getCvDb = () => Indiekit.database;
 
-    // Write CV data file for Eleventy on startup
+    // Write CV data and page config files for Eleventy on startup
     // Deferred so database connection is established first
-    // Uses saveCvData() to trigger interest migration if needed
     const app = Indiekit.config.application;
-    setTimeout(async () => {
-      try {
-        const { getCvData, getDefaultCvData, saveCvData, writeCvFile } = await import(
-          "./lib/storage/cv.js"
-        );
-        const data = (await getCvData(app)) || getDefaultCvData();
-        // Migrate old flat interests array to category-based format on startup
-        if (Array.isArray(data.interests)) {
-          console.log("[CV] Migrating interests from flat array to categories");
-          await saveCvData(app, data);
-        } else {
-          writeCvFile(app, data);
+    this._stopGate = waitForReady(
+      async () => {
+        // Write CV data file
+        try {
+          const { getCvData, getDefaultCvData, saveCvData, writeCvFile } = await import(
+            "./lib/storage/cv.js"
+          );
+          const data = (await getCvData(app)) || getDefaultCvData();
+          // Migrate old flat interests array to category-based format on startup
+          if (Array.isArray(data.interests)) {
+            console.log("[CV] Migrating interests from flat array to categories");
+            await saveCvData(app, data);
+          } else {
+            writeCvFile(app, data);
+          }
+          console.log("[CV] Initial data file written for Eleventy");
+        } catch (error) {
+          console.log("[CV] Deferred file write:", error.message);
         }
-        console.log("[CV] Initial data file written for Eleventy");
-      } catch (error) {
-        console.log("[CV] Deferred file write:", error.message);
-      }
-    }, 2000);
 
-    // Write CV page config file for Eleventy on startup
-    setTimeout(async () => {
-      try {
-        const { getConfig, getDefaultConfig, writeConfigFile } = await import(
-          "./lib/storage/cvPageConfig.js"
-        );
-        const config = (await getConfig(app)) || getDefaultConfig();
-        writeConfigFile(app, config);
-        console.log("[CV Page] Initial config file written for Eleventy");
-      } catch (error) {
-        console.log("[CV Page] Deferred file write:", error.message);
-      }
-    }, 2500);
+        // Write CV page config file
+        try {
+          const { getConfig, getDefaultConfig, writeConfigFile } = await import(
+            "./lib/storage/cvPageConfig.js"
+          );
+          const config = (await getConfig(app)) || getDefaultConfig();
+          writeConfigFile(app, config);
+          console.log("[CV Page] Initial config file written for Eleventy");
+        } catch (error) {
+          console.log("[CV Page] Deferred file write:", error.message);
+        }
+      },
+      { label: "CV" },
+    );
+  }
+
+  destroy() {
+    this._stopGate?.();
   }
 }
