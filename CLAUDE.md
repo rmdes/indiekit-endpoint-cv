@@ -12,8 +12,29 @@
 - Public JSON API for frontend consumption
 
 **npm Package:** `@rmdes/indiekit-endpoint-cv`
-**Version:** 1.0.12
+**Version:** see package.json
 **Mount Path:** `/cv` (default, configurable)
+**Type:** Original Indiekit plugin (not a fork)
+
+## Critical Breaking Change (May 30, 2026)
+
+**BREAKING:** The CV plugin no longer stores or manages identity information. The canonical source of identity moved to `@rmdes/indiekit-endpoint-site-config`.
+
+### What Changed
+
+**Removed:**
+- `/cv/page/identity` admin tab (GET) and `/cv/page/save-identity` POST endpoint
+- `identity` field from CV page builder configuration schema
+- `cv-page-identity.njk` view (365 lines)
+- `getIdentity()` and `saveIdentity()` controller methods
+
+**Why:** The site identity (name, photo, bio, social links) is now canonical in the site-config plugin. Having identity editors in multiple places caused data consistency issues. The CV page builder now reads `site.identity.X` with `site.author.X` env-var fallback.
+
+**Migration:** Operators who relied on the CV plugin's identity admin tab should use the site-config Identity tab instead. The REST of the CV functionality (experience, skills, education, etc.) is unchanged.
+
+### Commit
+
+**Commit:** a98943a — "feat!: remove CV-specific identity (canonical source is site-config)"
 
 ## Architecture
 
@@ -29,6 +50,7 @@ Admin UI → MongoDB (cvData) → JSON File (/data/content/.indiekit/cv.json) �
 3. On save, plugin writes JSON file to Eleventy content directory
 4. Eleventy file watcher detects change and rebuilds site
 5. Homepage plugin reads `/cv/data.json` to render CV sections
+6. Identity data reads from site-config (not CV plugin)
 
 ### MongoDB Schema
 
