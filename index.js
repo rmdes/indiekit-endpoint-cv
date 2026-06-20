@@ -6,7 +6,6 @@ import { waitForReady } from "@rmdes/indiekit-startup-gate";
 
 import { dashboardController } from "./lib/controllers/dashboard.js";
 import { apiController } from "./lib/controllers/api.js";
-import { pageBuilderController } from "./lib/controllers/pageBuilder.js";
 import { CV_BLOCKS } from "./lib/blocks.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -54,225 +53,12 @@ export default class CvEndpoint {
   /**
    * v2 block declarations (Phase 7). Real `get blocks()` contract — makes CV
    * sections placeable on the `standalone` surface (page:cv) as well as the
-   * homepage. Same ids as `homepageSections`; per scan-plugins precedence these
-   * REAL blocks override the legacy synthesis of the same ids. `homepageSections`
-   * is retained for now (removed in Task 2 with its pageBuilder consumer).
+   * homepage. Ids are the same as the (now-removed) legacy `homepageSections`,
+   * preserving the contract with stored compositions + theme `sections/cv-*.njk`
+   * partials. This is now CV's SOLE plugin-discovery contract.
    */
   get blocks() {
     return CV_BLOCKS;
-  }
-
-  /**
-   * Register CV section types for homepage plugin discovery
-   */
-  get homepageSections() {
-    return [
-      {
-        id: "cv-experience",
-        label: "Experience (All)",
-        description: "All experience items (personal and work)",
-        icon: "briefcase",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {
-          maxItems: 10,
-          showHighlights: true,
-        },
-        configSchema: {
-          maxItems: {
-            type: "number",
-            label: "Max items",
-            min: 1,
-            max: 50,
-          },
-          showHighlights: {
-            type: "boolean",
-            label: "Show highlights",
-          },
-        },
-      },
-      {
-        id: "cv-skills",
-        label: "Skills (All)",
-        description: "All skills grouped by category",
-        icon: "zap",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {},
-        configSchema: {},
-      },
-      {
-        id: "cv-education",
-        label: "Education (All)",
-        description: "All education items",
-        icon: "book",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {},
-        configSchema: {},
-      },
-      {
-        id: "cv-projects-personal",
-        label: "Personal Projects",
-        description: "Personal and side projects",
-        icon: "folder",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {
-          maxItems: 10,
-          showTechnologies: true,
-        },
-        configSchema: {
-          maxItems: {
-            type: "number",
-            label: "Max items",
-            min: 1,
-            max: 50,
-          },
-          showTechnologies: {
-            type: "boolean",
-            label: "Show technologies",
-          },
-        },
-      },
-      {
-        id: "cv-projects-work",
-        label: "Work Projects",
-        description: "Professional and work-related projects",
-        icon: "briefcase",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {
-          maxItems: 10,
-          showTechnologies: true,
-        },
-        configSchema: {
-          maxItems: {
-            type: "number",
-            label: "Max items",
-            min: 1,
-            max: 50,
-          },
-          showTechnologies: {
-            type: "boolean",
-            label: "Show technologies",
-          },
-        },
-      },
-      {
-        id: "cv-interests",
-        label: "Interests (All)",
-        description: "All interests and hobbies",
-        icon: "heart",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {},
-        configSchema: {},
-      },
-      {
-        id: "cv-experience-personal",
-        label: "Personal Experience",
-        description: "Volunteer work and side projects",
-        icon: "heart",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {
-          maxItems: 10,
-          showHighlights: true,
-        },
-        configSchema: {
-          maxItems: {
-            type: "number",
-            label: "Max items",
-            min: 1,
-            max: 50,
-          },
-          showHighlights: {
-            type: "boolean",
-            label: "Show highlights",
-          },
-        },
-      },
-      {
-        id: "cv-experience-work",
-        label: "Work Experience",
-        description: "Professional experience timeline",
-        icon: "briefcase",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {
-          maxItems: 10,
-          showHighlights: true,
-        },
-        configSchema: {
-          maxItems: {
-            type: "number",
-            label: "Max items",
-            min: 1,
-            max: 50,
-          },
-          showHighlights: {
-            type: "boolean",
-            label: "Show highlights",
-          },
-        },
-      },
-      {
-        id: "cv-education-personal",
-        label: "Personal Education",
-        description: "Self-study and online courses",
-        icon: "heart",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {},
-        configSchema: {},
-      },
-      {
-        id: "cv-education-work",
-        label: "Work Education",
-        description: "Degrees and certifications",
-        icon: "book",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {},
-        configSchema: {},
-      },
-      {
-        id: "cv-skills-personal",
-        label: "Personal Skills",
-        description: "Personal and hobby-related skills",
-        icon: "heart",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {},
-        configSchema: {},
-      },
-      {
-        id: "cv-skills-work",
-        label: "Professional Skills",
-        description: "Work-related technical skills",
-        icon: "zap",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {},
-        configSchema: {},
-      },
-      {
-        id: "cv-interests-personal",
-        label: "Personal Interests",
-        description: "Personal hobbies and interests",
-        icon: "heart",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {},
-        configSchema: {},
-      },
-      {
-        id: "cv-interests-work",
-        label: "Professional Interests",
-        description: "Work-related interests and topics",
-        icon: "briefcase",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {},
-        configSchema: {},
-      },
-      {
-        id: "cv-languages",
-        label: "Languages",
-        description: "Language proficiency list",
-        icon: "globe",
-        dataEndpoint: "/cv/data.json",
-        defaultConfig: {},
-        configSchema: {},
-      },
-    ];
   }
 
   /**
@@ -284,11 +70,6 @@ export default class CvEndpoint {
 
     // Save CV data
     protectedRouter.post("/save", dashboardController.save);
-
-    // CV Page Builder
-    protectedRouter.get("/page", pageBuilderController.get);
-    protectedRouter.post("/page/save", pageBuilderController.save);
-    protectedRouter.post("/page/preset", pageBuilderController.applyPreset);
 
     // CRUD for individual sections
     protectedRouter.post("/experience/add", dashboardController.addExperience);
@@ -332,7 +113,6 @@ export default class CvEndpoint {
   get routesPublic() {
     // Public JSON API for Eleventy and homepage plugin
     publicRouter.get("/data.json", apiController.getData);
-    publicRouter.get("/page.json", apiController.getPageConfig);
 
     return publicRouter;
   }
@@ -340,22 +120,21 @@ export default class CvEndpoint {
   init(Indiekit) {
     Indiekit.addEndpoint(this);
 
-    // Add MongoDB collections for CV data and page config
+    // Add MongoDB collection for CV data. (cvPageConfig is no longer written by
+    // this plugin — Phase 7 retired the bespoke page-builder; /cv now renders via
+    // a site-config page:cv composition. The legacy cvPageConfig Mongo data
+    // persists for the one-time site-config migration that seeds page:cv.)
     Indiekit.addCollection("cvData");
-    Indiekit.addCollection("cvPageConfig");
 
     // Store config in application for controller access
     Indiekit.config.application.cvConfig = this.options;
     Indiekit.config.application.cvEndpoint = this.mountPath;
 
-    // Store CV sections list for page builder
-    Indiekit.config.application.cvSections = this.homepageSections;
-
     // Store database getter for controller access
     Indiekit.config.application.getCvDb = () => Indiekit.database;
 
-    // Write CV data and page config files for Eleventy on startup
-    // Deferred so database connection is established first
+    // Write the CV data file for Eleventy on startup (deferred so the database
+    // connection is established first).
     const app = Indiekit.config.application;
     this._stopGate = waitForReady(
       async () => {
@@ -375,18 +154,6 @@ export default class CvEndpoint {
           console.log("[CV] Initial data file written for Eleventy");
         } catch (error) {
           console.log("[CV] Deferred file write:", error.message);
-        }
-
-        // Write CV page config file
-        try {
-          const { getConfig, getDefaultConfig, writeConfigFile } = await import(
-            "./lib/storage/cvPageConfig.js"
-          );
-          const config = (await getConfig(app)) || getDefaultConfig();
-          writeConfigFile(app, config);
-          console.log("[CV Page] Initial config file written for Eleventy");
-        } catch (error) {
-          console.log("[CV Page] Deferred file write:", error.message);
         }
       },
       { label: "CV" },
