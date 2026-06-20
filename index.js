@@ -7,6 +7,7 @@ import { waitForReady } from "@rmdes/indiekit-startup-gate";
 import { dashboardController } from "./lib/controllers/dashboard.js";
 import { apiController } from "./lib/controllers/api.js";
 import { pageBuilderController } from "./lib/controllers/pageBuilder.js";
+import { CV_BLOCKS } from "./lib/blocks.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -48,6 +49,17 @@ export default class CvEndpoint {
       iconName: "briefcase",
       requiresDatabase: true,
     };
+  }
+
+  /**
+   * v2 block declarations (Phase 7). Real `get blocks()` contract — makes CV
+   * sections placeable on the `standalone` surface (page:cv) as well as the
+   * homepage. Same ids as `homepageSections`; per scan-plugins precedence these
+   * REAL blocks override the legacy synthesis of the same ids. `homepageSections`
+   * is retained for now (removed in Task 2 with its pageBuilder consumer).
+   */
+  get blocks() {
+    return CV_BLOCKS;
   }
 
   /**
