@@ -41,7 +41,7 @@
 ### Data Flow
 
 ```
-Admin UI → MongoDB (cvData) → JSON File (/data/content/.indiekit/cv.json) → Eleventy
+Admin UI → MongoDB (cvData) → JSON File (/data/content/_data/cv.json) → Eleventy
                             → Public API (/cv/data.json) → Homepage Plugin
 ```
 
@@ -239,7 +239,7 @@ The homepage plugin scans all loaded Indiekit plugins for a `homepageSections` g
 ### JSON File Writing
 On every save, the plugin writes CV data to:
 ```
-{contentDir}/.indiekit/cv.json
+{contentDir}/_data/cv.json
 ```
 
 This triggers Eleventy's file watcher to rebuild the site. Eleventy templates can read this file via `_data/cv.js`:
@@ -247,7 +247,7 @@ This triggers Eleventy's file watcher to rebuild the site. Eleventy templates ca
 ```javascript
 // In Eleventy: _data/cv.js
 import { readFileSync } from "fs";
-export default JSON.parse(readFileSync("content/.indiekit/cv.json"));
+export default JSON.parse(readFileSync("content/_data/cv.json"));
 ```
 
 ## Form Handling Patterns
@@ -325,14 +325,14 @@ URL encoding is required for category names with special characters.
 - **Discovery:** Homepage plugin scans `plugin.homepageSections` for all loaded plugins
 
 ### Eleventy
-- **Integration:** Writes JSON file to `{contentDir}/.indiekit/cv.json`
+- **Integration:** Writes JSON file to `{contentDir}/_data/cv.json`
 - **Trigger:** Eleventy file watcher detects changes and rebuilds
 - **Usage:** Eleventy `_data/cv.js` reads JSON file for template rendering
 
 ### Data Dependencies
 - **Requires:** MongoDB connection via Indiekit
 - **Creates Collection:** `cvData`
-- **Writes File:** `{contentDir}/.indiekit/cv.json`
+- **Writes File:** `{contentDir}/_data/cv.json`
 
 ## Dependencies
 
@@ -350,7 +350,7 @@ No external dependencies for parsing - all form handling is native Express.
 
 - **No test suite configured** (manual testing only)
 - Test CRUD for all sections (add, edit, delete, reorder)
-- Test JSON file writing (check `{contentDir}/.indiekit/cv.json`)
+- Test JSON file writing (check `{contentDir}/_data/cv.json`)
 - Test public API endpoint (`/cv/data.json`)
 - Test homepage plugin integration (sections appear in homepage builder)
 
