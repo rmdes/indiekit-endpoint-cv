@@ -36,7 +36,7 @@ export default {
 
 - **Indiekit:** `>=1.0.0-beta.25`
 - **MongoDB:** Required for data storage
-- **Optional:** `@rmdes/indiekit-endpoint-homepage` for homepage builder integration
+- **Optional:** `@rmdes/indiekit-endpoint-site-config` for homepage builder integration
 
 ## Usage
 
@@ -101,7 +101,7 @@ Returns:
 
 ### Homepage Integration
 
-If you have `@rmdes/indiekit-endpoint-homepage` installed, the CV plugin registers 5 homepage sections:
+If you have `@rmdes/indiekit-endpoint-site-config` installed, the CV plugin registers 5 homepage sections:
 
 1. **Work Experience** (`cv-experience`)
    - Config: Max items, show highlights toggle
@@ -289,8 +289,8 @@ Use the public API endpoint to generate a JSON Resume compatible format (may req
 
 ### Homepage Sections Not Appearing
 
-- Confirm `@rmdes/indiekit-endpoint-homepage` is installed and loaded
-- Check plugin load order (CV plugin should load before homepage plugin uses it)
+- Confirm `@rmdes/indiekit-endpoint-site-config` is installed and loaded
+- Check plugin load order (CV plugin should load before site-config renders the homepage)
 - Verify `/cv/data.json` is accessible
 
 ## Contributing
